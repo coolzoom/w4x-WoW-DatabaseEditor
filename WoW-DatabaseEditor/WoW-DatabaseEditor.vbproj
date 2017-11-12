@@ -121,6 +121,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\MySqlConnectionDialog\ClassLibMySqlConnectionManager\ClassLibMySqlConnectionManager.vbproj">
+      <Project>{6c99189e-746c-46e8-9c9c-76ee825e0660}</Project>
+      <Name>ClassLibMySqlConnectionManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\WoWCreatureItem\ClassLibWoWCreatureItem\ClassLibWoWCreatureItem.vbproj">
       <Project>{563ffc44-3493-4d67-a1a9-5e542553bb97}</Project>
       <Name>ClassLibWoWCreatureItem</Name>

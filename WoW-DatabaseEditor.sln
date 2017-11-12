@@ -9,6 +9,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ClassLibWoWDatabaseManager"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ClassLibWoWCreatureItem", "..\WoWCreatureItem\ClassLibWoWCreatureItem\ClassLibWoWCreatureItem.vbproj", "{563FFC44-3493-4D67-A1A9-5E542553BB97}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ClassLibMySqlConnectionManager", "..\MySqlConnectionDialog\ClassLibMySqlConnectionManager\ClassLibMySqlConnectionManager.vbproj", "{6C99189E-746C-46E8-9C9C-76EE825E0660}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{563FFC44-3493-4D67-A1A9-5E542553BB97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{563FFC44-3493-4D67-A1A9-5E542553BB97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{563FFC44-3493-4D67-A1A9-5E542553BB97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C99189E-746C-46E8-9C9C-76EE825E0660}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C99189E-746C-46E8-9C9C-76EE825E0660}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C99189E-746C-46E8-9C9C-76EE825E0660}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C99189E-746C-46E8-9C9C-76EE825E0660}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

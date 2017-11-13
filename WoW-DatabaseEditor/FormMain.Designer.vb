@@ -26,52 +26,62 @@ Partial Class FormMain
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PropertiesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LocaleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
         Me.QuitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ListView2 = New System.Windows.Forms.ListView()
-        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ListView3 = New System.Windows.Forms.ListView()
-        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader9 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ListView4 = New System.Windows.Forms.ListView()
-        Me.ColumnHeader10 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader11 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader12 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ListView5 = New System.Windows.Forms.ListView()
-        Me.ColumnHeader13 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader14 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader15 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ListView1 = New System.Windows.Forms.ListView()
-        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ListView6 = New System.Windows.Forms.ListView()
-        Me.ColumnHeader16 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader17 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader18 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ListViewGameObject = New System.Windows.Forms.ListView()
+        Me.ColumnHeaderGameObjectGuid = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderGameObjectEntry = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderGameObjectName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ListViewItem = New System.Windows.Forms.ListView()
+        Me.ColumnHeaderItemEntry = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderItemName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderItemSubName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ListViewGossipMenuNpcText = New System.Windows.Forms.ListView()
+        Me.ColumnHeaderGossipId = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderNpcTextId = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderNpcText = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderNpcBroadcastId = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ListViewGossipMenuOption = New System.Windows.Forms.ListView()
+        Me.ColumnHeaderGossipOptionId = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderGossipOptionIndex = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderGossipOptionText = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ListViewCreature = New System.Windows.Forms.ListView()
+        Me.ColumnHeaderCreatureGuid = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderCreatureEntry = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderCreatureName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ListViewQuest = New System.Windows.Forms.ListView()
+        Me.ColumnHeaderQuestId = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderQuestTitle = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderQuestInvolvedObjects = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPageQuest = New System.Windows.Forms.TabPage()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.TextBoxSearchQuest = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TabPageCreature = New System.Windows.Forms.TabPage()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.TextBoxSearchCreature = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.TabPageGameObject = New System.Windows.Forms.TabPage()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.TextBoxSearchGameObject = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.TabPageItem = New System.Windows.Forms.TabPage()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.TextBoxSearchItem = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TabPageGossip = New System.Windows.Forms.TabPage()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.TextBoxSearchGossip = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.LocaleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.WorkToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CreatureToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GameObjectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ColumnHeaderCreatureSubName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderGameObjectSubName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderGossipOptionIcon = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderGossipOptionNpcFlag = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderNpcSound = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderNpcEmote = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -84,7 +94,7 @@ Partial Class FormMain
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.WorkToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(735, 24)
@@ -101,18 +111,24 @@ Partial Class FormMain
         'PropertiesToolStripMenuItem
         '
         Me.PropertiesToolStripMenuItem.Name = "PropertiesToolStripMenuItem"
-        Me.PropertiesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.PropertiesToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
         Me.PropertiesToolStripMenuItem.Text = "Properties"
+        '
+        'LocaleToolStripMenuItem
+        '
+        Me.LocaleToolStripMenuItem.Name = "LocaleToolStripMenuItem"
+        Me.LocaleToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
+        Me.LocaleToolStripMenuItem.Text = "Locale"
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(124, 6)
         '
         'QuitToolStripMenuItem
         '
         Me.QuitToolStripMenuItem.Name = "QuitToolStripMenuItem"
-        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
         Me.QuitToolStripMenuItem.Text = "Quit"
         '
         'StatusStrip1
@@ -130,203 +146,201 @@ Partial Class FormMain
         Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(120, 17)
         Me.ToolStripStatusLabel1.Text = "ToolStripStatusLabel1"
         '
-        'ListView2
+        'ListViewGameObject
         '
-        Me.ListView2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.ListViewGameObject.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ListView2.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6})
-        Me.ListView2.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListView2.FullRowSelect = True
-        Me.ListView2.GridLines = True
-        Me.ListView2.Location = New System.Drawing.Point(3, 33)
-        Me.ListView2.MultiSelect = False
-        Me.ListView2.Name = "ListView2"
-        Me.ListView2.Size = New System.Drawing.Size(721, 318)
-        Me.ListView2.TabIndex = 9
-        Me.ToolTip1.SetToolTip(Me.ListView2, "Hit's on table quest_template")
-        Me.ListView2.UseCompatibleStateImageBehavior = False
-        Me.ListView2.View = System.Windows.Forms.View.Details
+        Me.ListViewGameObject.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderGameObjectGuid, Me.ColumnHeaderGameObjectEntry, Me.ColumnHeaderGameObjectName, Me.ColumnHeaderGameObjectSubName})
+        Me.ListViewGameObject.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListViewGameObject.FullRowSelect = True
+        Me.ListViewGameObject.GridLines = True
+        Me.ListViewGameObject.Location = New System.Drawing.Point(3, 33)
+        Me.ListViewGameObject.MultiSelect = False
+        Me.ListViewGameObject.Name = "ListViewGameObject"
+        Me.ListViewGameObject.Size = New System.Drawing.Size(721, 318)
+        Me.ListViewGameObject.TabIndex = 9
+        Me.ToolTip1.SetToolTip(Me.ListViewGameObject, "Hit's on table quest_template")
+        Me.ListViewGameObject.UseCompatibleStateImageBehavior = False
+        Me.ListViewGameObject.View = System.Windows.Forms.View.Details
         '
-        'ColumnHeader4
+        'ColumnHeaderGameObjectGuid
         '
-        Me.ColumnHeader4.Text = "QuestID"
-        Me.ColumnHeader4.Width = 80
+        Me.ColumnHeaderGameObjectGuid.Text = "Guid"
         '
-        'ColumnHeader5
+        'ColumnHeaderGameObjectEntry
         '
-        Me.ColumnHeader5.Text = "Title"
-        Me.ColumnHeader5.Width = 250
+        Me.ColumnHeaderGameObjectEntry.Text = "Entry"
         '
-        'ColumnHeader6
+        'ColumnHeaderGameObjectName
         '
-        Me.ColumnHeader6.Text = "Locale"
-        Me.ColumnHeader6.Width = 250
+        Me.ColumnHeaderGameObjectName.Text = "Name"
+        Me.ColumnHeaderGameObjectName.Width = 250
         '
-        'ListView3
+        'ListViewItem
         '
-        Me.ListView3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.ListViewItem.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ListView3.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader7, Me.ColumnHeader8, Me.ColumnHeader9})
-        Me.ListView3.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListView3.FullRowSelect = True
-        Me.ListView3.GridLines = True
-        Me.ListView3.Location = New System.Drawing.Point(3, 33)
-        Me.ListView3.MultiSelect = False
-        Me.ListView3.Name = "ListView3"
-        Me.ListView3.Size = New System.Drawing.Size(721, 318)
-        Me.ListView3.TabIndex = 9
-        Me.ToolTip1.SetToolTip(Me.ListView3, "Hit's on table quest_template")
-        Me.ListView3.UseCompatibleStateImageBehavior = False
-        Me.ListView3.View = System.Windows.Forms.View.Details
+        Me.ListViewItem.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderItemEntry, Me.ColumnHeaderItemName, Me.ColumnHeaderItemSubName})
+        Me.ListViewItem.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListViewItem.FullRowSelect = True
+        Me.ListViewItem.GridLines = True
+        Me.ListViewItem.Location = New System.Drawing.Point(3, 33)
+        Me.ListViewItem.MultiSelect = False
+        Me.ListViewItem.Name = "ListViewItem"
+        Me.ListViewItem.Size = New System.Drawing.Size(721, 318)
+        Me.ListViewItem.TabIndex = 9
+        Me.ToolTip1.SetToolTip(Me.ListViewItem, "Hit's on table quest_template")
+        Me.ListViewItem.UseCompatibleStateImageBehavior = False
+        Me.ListViewItem.View = System.Windows.Forms.View.Details
         '
-        'ColumnHeader7
+        'ColumnHeaderItemEntry
         '
-        Me.ColumnHeader7.Text = "QuestID"
-        Me.ColumnHeader7.Width = 80
+        Me.ColumnHeaderItemEntry.Text = "Entry"
         '
-        'ColumnHeader8
+        'ColumnHeaderItemName
         '
-        Me.ColumnHeader8.Text = "Title"
-        Me.ColumnHeader8.Width = 250
+        Me.ColumnHeaderItemName.Text = "Name"
+        Me.ColumnHeaderItemName.Width = 250
         '
-        'ColumnHeader9
+        'ColumnHeaderItemSubName
         '
-        Me.ColumnHeader9.Text = "Locale"
-        Me.ColumnHeader9.Width = 250
+        Me.ColumnHeaderItemSubName.Text = "SubName"
+        Me.ColumnHeaderItemSubName.Width = 250
         '
-        'ListView4
+        'ListViewGossipMenuNpcText
         '
-        Me.ListView4.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.ListViewGossipMenuNpcText.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ListView4.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader10, Me.ColumnHeader11, Me.ColumnHeader12})
-        Me.ListView4.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListView4.FullRowSelect = True
-        Me.ListView4.GridLines = True
-        Me.ListView4.Location = New System.Drawing.Point(3, 33)
-        Me.ListView4.MultiSelect = False
-        Me.ListView4.Name = "ListView4"
-        Me.ListView4.Size = New System.Drawing.Size(721, 135)
-        Me.ListView4.TabIndex = 9
-        Me.ToolTip1.SetToolTip(Me.ListView4, "Hit's on table quest_template")
-        Me.ListView4.UseCompatibleStateImageBehavior = False
-        Me.ListView4.View = System.Windows.Forms.View.Details
+        Me.ListViewGossipMenuNpcText.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderGossipId, Me.ColumnHeaderNpcTextId, Me.ColumnHeaderNpcText, Me.ColumnHeaderNpcBroadcastId, Me.ColumnHeaderNpcSound, Me.ColumnHeaderNpcEmote})
+        Me.ListViewGossipMenuNpcText.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListViewGossipMenuNpcText.FullRowSelect = True
+        Me.ListViewGossipMenuNpcText.GridLines = True
+        Me.ListViewGossipMenuNpcText.Location = New System.Drawing.Point(3, 33)
+        Me.ListViewGossipMenuNpcText.MultiSelect = False
+        Me.ListViewGossipMenuNpcText.Name = "ListViewGossipMenuNpcText"
+        Me.ListViewGossipMenuNpcText.Size = New System.Drawing.Size(721, 135)
+        Me.ListViewGossipMenuNpcText.TabIndex = 9
+        Me.ToolTip1.SetToolTip(Me.ListViewGossipMenuNpcText, "Hit's on table quest_template")
+        Me.ListViewGossipMenuNpcText.UseCompatibleStateImageBehavior = False
+        Me.ListViewGossipMenuNpcText.View = System.Windows.Forms.View.Details
         '
-        'ColumnHeader10
+        'ColumnHeaderGossipId
         '
-        Me.ColumnHeader10.Text = "QuestID"
-        Me.ColumnHeader10.Width = 80
+        Me.ColumnHeaderGossipId.Text = "GossipID"
+        Me.ColumnHeaderGossipId.Width = 80
         '
-        'ColumnHeader11
+        'ColumnHeaderNpcTextId
         '
-        Me.ColumnHeader11.Text = "Title"
-        Me.ColumnHeader11.Width = 250
+        Me.ColumnHeaderNpcTextId.Text = "NpcTextID"
+        Me.ColumnHeaderNpcTextId.Width = 80
         '
-        'ColumnHeader12
+        'ColumnHeaderNpcText
         '
-        Me.ColumnHeader12.Text = "Locale"
-        Me.ColumnHeader12.Width = 250
+        Me.ColumnHeaderNpcText.Text = "Npc Text"
+        Me.ColumnHeaderNpcText.Width = 250
         '
-        'ListView5
+        'ColumnHeaderNpcBroadcastId
         '
-        Me.ListView5.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.ColumnHeaderNpcBroadcastId.Text = "NpcBroadcastId"
+        Me.ColumnHeaderNpcBroadcastId.Width = 100
+        '
+        'ListViewGossipMenuOption
+        '
+        Me.ListViewGossipMenuOption.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ListView5.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader13, Me.ColumnHeader14, Me.ColumnHeader15})
-        Me.ListView5.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListView5.FullRowSelect = True
-        Me.ListView5.GridLines = True
-        Me.ListView5.Location = New System.Drawing.Point(3, 174)
-        Me.ListView5.MultiSelect = False
-        Me.ListView5.Name = "ListView5"
-        Me.ListView5.Size = New System.Drawing.Size(721, 181)
-        Me.ListView5.TabIndex = 12
-        Me.ToolTip1.SetToolTip(Me.ListView5, "Hit's on table quest_template")
-        Me.ListView5.UseCompatibleStateImageBehavior = False
-        Me.ListView5.View = System.Windows.Forms.View.Details
+        Me.ListViewGossipMenuOption.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderGossipOptionId, Me.ColumnHeaderGossipOptionIndex, Me.ColumnHeaderGossipOptionText, Me.ColumnHeaderGossipOptionIcon, Me.ColumnHeaderGossipOptionNpcFlag})
+        Me.ListViewGossipMenuOption.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListViewGossipMenuOption.FullRowSelect = True
+        Me.ListViewGossipMenuOption.GridLines = True
+        Me.ListViewGossipMenuOption.Location = New System.Drawing.Point(3, 174)
+        Me.ListViewGossipMenuOption.MultiSelect = False
+        Me.ListViewGossipMenuOption.Name = "ListViewGossipMenuOption"
+        Me.ListViewGossipMenuOption.Size = New System.Drawing.Size(721, 181)
+        Me.ListViewGossipMenuOption.TabIndex = 12
+        Me.ToolTip1.SetToolTip(Me.ListViewGossipMenuOption, "Hit's on table quest_template")
+        Me.ListViewGossipMenuOption.UseCompatibleStateImageBehavior = False
+        Me.ListViewGossipMenuOption.View = System.Windows.Forms.View.Details
         '
-        'ColumnHeader13
+        'ColumnHeaderGossipOptionId
         '
-        Me.ColumnHeader13.Text = "QuestID"
-        Me.ColumnHeader13.Width = 80
+        Me.ColumnHeaderGossipOptionId.Text = "GossipID"
         '
-        'ColumnHeader14
+        'ColumnHeaderGossipOptionIndex
         '
-        Me.ColumnHeader14.Text = "Title"
-        Me.ColumnHeader14.Width = 250
+        Me.ColumnHeaderGossipOptionIndex.Text = "Index"
         '
-        'ColumnHeader15
+        'ColumnHeaderGossipOptionText
         '
-        Me.ColumnHeader15.Text = "Locale"
-        Me.ColumnHeader15.Width = 250
+        Me.ColumnHeaderGossipOptionText.Text = "Text"
+        Me.ColumnHeaderGossipOptionText.Width = 250
         '
-        'ListView1
+        'ListViewCreature
         '
-        Me.ListView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.ListViewCreature.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3})
-        Me.ListView1.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListView1.FullRowSelect = True
-        Me.ListView1.GridLines = True
-        Me.ListView1.Location = New System.Drawing.Point(3, 33)
-        Me.ListView1.MultiSelect = False
-        Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(721, 318)
-        Me.ListView1.TabIndex = 12
-        Me.ToolTip1.SetToolTip(Me.ListView1, "Hit's on table quest_template")
-        Me.ListView1.UseCompatibleStateImageBehavior = False
-        Me.ListView1.View = System.Windows.Forms.View.Details
+        Me.ListViewCreature.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderCreatureGuid, Me.ColumnHeaderCreatureEntry, Me.ColumnHeaderCreatureName, Me.ColumnHeaderCreatureSubName})
+        Me.ListViewCreature.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListViewCreature.FullRowSelect = True
+        Me.ListViewCreature.GridLines = True
+        Me.ListViewCreature.Location = New System.Drawing.Point(3, 33)
+        Me.ListViewCreature.MultiSelect = False
+        Me.ListViewCreature.Name = "ListViewCreature"
+        Me.ListViewCreature.Size = New System.Drawing.Size(721, 318)
+        Me.ListViewCreature.TabIndex = 12
+        Me.ToolTip1.SetToolTip(Me.ListViewCreature, "Hit's on table quest_template")
+        Me.ListViewCreature.UseCompatibleStateImageBehavior = False
+        Me.ListViewCreature.View = System.Windows.Forms.View.Details
         '
-        'ColumnHeader1
+        'ColumnHeaderCreatureGuid
         '
-        Me.ColumnHeader1.Text = "QuestID"
-        Me.ColumnHeader1.Width = 80
+        Me.ColumnHeaderCreatureGuid.Text = "Guid"
         '
-        'ColumnHeader2
+        'ColumnHeaderCreatureEntry
         '
-        Me.ColumnHeader2.Text = "Title"
-        Me.ColumnHeader2.Width = 250
+        Me.ColumnHeaderCreatureEntry.Text = "Entry"
         '
-        'ColumnHeader3
+        'ColumnHeaderCreatureName
         '
-        Me.ColumnHeader3.Text = "Locale"
-        Me.ColumnHeader3.Width = 250
+        Me.ColumnHeaderCreatureName.Text = "Name"
+        Me.ColumnHeaderCreatureName.Width = 250
         '
-        'ListView6
+        'ListViewQuest
         '
-        Me.ListView6.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.ListViewQuest.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ListView6.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader16, Me.ColumnHeader17, Me.ColumnHeader18})
-        Me.ListView6.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListView6.FullRowSelect = True
-        Me.ListView6.GridLines = True
-        Me.ListView6.Location = New System.Drawing.Point(3, 33)
-        Me.ListView6.MultiSelect = False
-        Me.ListView6.Name = "ListView6"
-        Me.ListView6.Size = New System.Drawing.Size(721, 318)
-        Me.ListView6.TabIndex = 12
-        Me.ToolTip1.SetToolTip(Me.ListView6, "Hit's on table quest_template")
-        Me.ListView6.UseCompatibleStateImageBehavior = False
-        Me.ListView6.View = System.Windows.Forms.View.Details
+        Me.ListViewQuest.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderQuestId, Me.ColumnHeaderQuestTitle, Me.ColumnHeaderQuestInvolvedObjects})
+        Me.ListViewQuest.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListViewQuest.FullRowSelect = True
+        Me.ListViewQuest.GridLines = True
+        Me.ListViewQuest.Location = New System.Drawing.Point(3, 33)
+        Me.ListViewQuest.MultiSelect = False
+        Me.ListViewQuest.Name = "ListViewQuest"
+        Me.ListViewQuest.Size = New System.Drawing.Size(721, 318)
+        Me.ListViewQuest.TabIndex = 12
+        Me.ToolTip1.SetToolTip(Me.ListViewQuest, "Hit's on table quest_template")
+        Me.ListViewQuest.UseCompatibleStateImageBehavior = False
+        Me.ListViewQuest.View = System.Windows.Forms.View.Details
         '
-        'ColumnHeader16
+        'ColumnHeaderQuestId
         '
-        Me.ColumnHeader16.Text = "QuestID"
-        Me.ColumnHeader16.Width = 80
+        Me.ColumnHeaderQuestId.Text = "QuestID"
+        Me.ColumnHeaderQuestId.Width = 80
         '
-        'ColumnHeader17
+        'ColumnHeaderQuestTitle
         '
-        Me.ColumnHeader17.Text = "Title"
-        Me.ColumnHeader17.Width = 250
+        Me.ColumnHeaderQuestTitle.Text = "Title"
+        Me.ColumnHeaderQuestTitle.Width = 250
         '
-        'ColumnHeader18
+        'ColumnHeaderQuestInvolvedObjects
         '
-        Me.ColumnHeader18.Text = "Locale"
-        Me.ColumnHeader18.Width = 250
+        Me.ColumnHeaderQuestInvolvedObjects.Text = "Involved Objects"
+        Me.ColumnHeaderQuestInvolvedObjects.Width = 250
         '
         'TabControl1
         '
@@ -344,9 +358,9 @@ Partial Class FormMain
         '
         'TabPageQuest
         '
-        Me.TabPageQuest.Controls.Add(Me.TextBox5)
+        Me.TabPageQuest.Controls.Add(Me.TextBoxSearchQuest)
         Me.TabPageQuest.Controls.Add(Me.Label1)
-        Me.TabPageQuest.Controls.Add(Me.ListView6)
+        Me.TabPageQuest.Controls.Add(Me.ListViewQuest)
         Me.TabPageQuest.Location = New System.Drawing.Point(4, 22)
         Me.TabPageQuest.Name = "TabPageQuest"
         Me.TabPageQuest.Size = New System.Drawing.Size(727, 358)
@@ -354,15 +368,15 @@ Partial Class FormMain
         Me.TabPageQuest.Text = "Quest"
         Me.TabPageQuest.UseVisualStyleBackColor = True
         '
-        'TextBox5
+        'TextBoxSearchQuest
         '
-        Me.TextBox5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.TextBoxSearchQuest.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.TextBox5.Location = New System.Drawing.Point(115, 7)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(604, 20)
-        Me.TextBox5.TabIndex = 14
+        Me.TextBoxSearchQuest.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.TextBoxSearchQuest.Location = New System.Drawing.Point(115, 7)
+        Me.TextBoxSearchQuest.Name = "TextBoxSearchQuest"
+        Me.TextBoxSearchQuest.Size = New System.Drawing.Size(604, 20)
+        Me.TextBoxSearchQuest.TabIndex = 14
         '
         'Label1
         '
@@ -375,9 +389,9 @@ Partial Class FormMain
         '
         'TabPageCreature
         '
-        Me.TabPageCreature.Controls.Add(Me.TextBox1)
+        Me.TabPageCreature.Controls.Add(Me.TextBoxSearchCreature)
         Me.TabPageCreature.Controls.Add(Me.Label2)
-        Me.TabPageCreature.Controls.Add(Me.ListView1)
+        Me.TabPageCreature.Controls.Add(Me.ListViewCreature)
         Me.TabPageCreature.Location = New System.Drawing.Point(4, 22)
         Me.TabPageCreature.Name = "TabPageCreature"
         Me.TabPageCreature.Padding = New System.Windows.Forms.Padding(3)
@@ -386,15 +400,15 @@ Partial Class FormMain
         Me.TabPageCreature.Text = "Creature"
         Me.TabPageCreature.UseVisualStyleBackColor = True
         '
-        'TextBox1
+        'TextBoxSearchCreature
         '
-        Me.TextBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.TextBoxSearchCreature.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.TextBox1.Location = New System.Drawing.Point(121, 7)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(598, 20)
-        Me.TextBox1.TabIndex = 14
+        Me.TextBoxSearchCreature.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.TextBoxSearchCreature.Location = New System.Drawing.Point(121, 7)
+        Me.TextBoxSearchCreature.Name = "TextBoxSearchCreature"
+        Me.TextBoxSearchCreature.Size = New System.Drawing.Size(598, 20)
+        Me.TextBoxSearchCreature.TabIndex = 14
         '
         'Label2
         '
@@ -407,9 +421,9 @@ Partial Class FormMain
         '
         'TabPageGameObject
         '
-        Me.TabPageGameObject.Controls.Add(Me.TextBox2)
+        Me.TabPageGameObject.Controls.Add(Me.TextBoxSearchGameObject)
         Me.TabPageGameObject.Controls.Add(Me.Label3)
-        Me.TabPageGameObject.Controls.Add(Me.ListView2)
+        Me.TabPageGameObject.Controls.Add(Me.ListViewGameObject)
         Me.TabPageGameObject.Location = New System.Drawing.Point(4, 22)
         Me.TabPageGameObject.Name = "TabPageGameObject"
         Me.TabPageGameObject.Padding = New System.Windows.Forms.Padding(3)
@@ -418,15 +432,15 @@ Partial Class FormMain
         Me.TabPageGameObject.Text = "GameObject"
         Me.TabPageGameObject.UseVisualStyleBackColor = True
         '
-        'TextBox2
+        'TextBoxSearchGameObject
         '
-        Me.TextBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.TextBoxSearchGameObject.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.TextBox2.Location = New System.Drawing.Point(146, 7)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(573, 20)
-        Me.TextBox2.TabIndex = 11
+        Me.TextBoxSearchGameObject.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.TextBoxSearchGameObject.Location = New System.Drawing.Point(146, 7)
+        Me.TextBoxSearchGameObject.Name = "TextBoxSearchGameObject"
+        Me.TextBoxSearchGameObject.Size = New System.Drawing.Size(573, 20)
+        Me.TextBoxSearchGameObject.TabIndex = 11
         '
         'Label3
         '
@@ -439,9 +453,9 @@ Partial Class FormMain
         '
         'TabPageItem
         '
-        Me.TabPageItem.Controls.Add(Me.TextBox3)
+        Me.TabPageItem.Controls.Add(Me.TextBoxSearchItem)
         Me.TabPageItem.Controls.Add(Me.Label4)
-        Me.TabPageItem.Controls.Add(Me.ListView3)
+        Me.TabPageItem.Controls.Add(Me.ListViewItem)
         Me.TabPageItem.Location = New System.Drawing.Point(4, 22)
         Me.TabPageItem.Name = "TabPageItem"
         Me.TabPageItem.Size = New System.Drawing.Size(727, 358)
@@ -449,15 +463,15 @@ Partial Class FormMain
         Me.TabPageItem.Text = "Item"
         Me.TabPageItem.UseVisualStyleBackColor = True
         '
-        'TextBox3
+        'TextBoxSearchItem
         '
-        Me.TextBox3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.TextBoxSearchItem.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.TextBox3.Location = New System.Drawing.Point(107, 7)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(612, 20)
-        Me.TextBox3.TabIndex = 11
+        Me.TextBoxSearchItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.TextBoxSearchItem.Location = New System.Drawing.Point(107, 7)
+        Me.TextBoxSearchItem.Name = "TextBoxSearchItem"
+        Me.TextBoxSearchItem.Size = New System.Drawing.Size(612, 20)
+        Me.TextBoxSearchItem.TabIndex = 11
         '
         'Label4
         '
@@ -470,10 +484,10 @@ Partial Class FormMain
         '
         'TabPageGossip
         '
-        Me.TabPageGossip.Controls.Add(Me.ListView5)
-        Me.TabPageGossip.Controls.Add(Me.TextBox4)
+        Me.TabPageGossip.Controls.Add(Me.ListViewGossipMenuOption)
+        Me.TabPageGossip.Controls.Add(Me.TextBoxSearchGossip)
         Me.TabPageGossip.Controls.Add(Me.Label5)
-        Me.TabPageGossip.Controls.Add(Me.ListView4)
+        Me.TabPageGossip.Controls.Add(Me.ListViewGossipMenuNpcText)
         Me.TabPageGossip.Location = New System.Drawing.Point(4, 22)
         Me.TabPageGossip.Name = "TabPageGossip"
         Me.TabPageGossip.Size = New System.Drawing.Size(727, 358)
@@ -481,15 +495,15 @@ Partial Class FormMain
         Me.TabPageGossip.Text = "Gossip"
         Me.TabPageGossip.UseVisualStyleBackColor = True
         '
-        'TextBox4
+        'TextBoxSearchGossip
         '
-        Me.TextBox4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.TextBoxSearchGossip.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.TextBox4.Location = New System.Drawing.Point(114, 7)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(605, 20)
-        Me.TextBox4.TabIndex = 11
+        Me.TextBoxSearchGossip.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.TextBoxSearchGossip.Location = New System.Drawing.Point(114, 7)
+        Me.TextBoxSearchGossip.Name = "TextBoxSearchGossip"
+        Me.TextBoxSearchGossip.Size = New System.Drawing.Size(605, 20)
+        Me.TextBoxSearchGossip.TabIndex = 11
         '
         'Label5
         '
@@ -500,11 +514,50 @@ Partial Class FormMain
         Me.Label5.TabIndex = 10
         Me.Label5.Text = "Gosip search string "
         '
-        'LocaleToolStripMenuItem
+        'WorkToolStripMenuItem
         '
-        Me.LocaleToolStripMenuItem.Name = "LocaleToolStripMenuItem"
-        Me.LocaleToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.LocaleToolStripMenuItem.Text = "Locale"
+        Me.WorkToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreatureToolStripMenuItem, Me.GameObjectToolStripMenuItem})
+        Me.WorkToolStripMenuItem.Name = "WorkToolStripMenuItem"
+        Me.WorkToolStripMenuItem.Size = New System.Drawing.Size(47, 20)
+        Me.WorkToolStripMenuItem.Text = "Work"
+        '
+        'CreatureToolStripMenuItem
+        '
+        Me.CreatureToolStripMenuItem.Name = "CreatureToolStripMenuItem"
+        Me.CreatureToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CreatureToolStripMenuItem.Text = "Creature"
+        '
+        'GameObjectToolStripMenuItem
+        '
+        Me.GameObjectToolStripMenuItem.Name = "GameObjectToolStripMenuItem"
+        Me.GameObjectToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.GameObjectToolStripMenuItem.Text = "GameObject"
+        '
+        'ColumnHeaderCreatureSubName
+        '
+        Me.ColumnHeaderCreatureSubName.Text = "SubName"
+        Me.ColumnHeaderCreatureSubName.Width = 250
+        '
+        'ColumnHeaderGameObjectSubName
+        '
+        Me.ColumnHeaderGameObjectSubName.Text = "SubName"
+        Me.ColumnHeaderGameObjectSubName.Width = 250
+        '
+        'ColumnHeaderGossipOptionIcon
+        '
+        Me.ColumnHeaderGossipOptionIcon.Text = "Icon"
+        '
+        'ColumnHeaderGossipOptionNpcFlag
+        '
+        Me.ColumnHeaderGossipOptionNpcFlag.Text = "NpcFlag"
+        '
+        'ColumnHeaderNpcSound
+        '
+        Me.ColumnHeaderNpcSound.Text = "SoundID"
+        '
+        'ColumnHeaderNpcEmote
+        '
+        Me.ColumnHeaderNpcEmote.Text = "EmoteID"
         '
         'FormMain
         '
@@ -547,43 +600,53 @@ Partial Class FormMain
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPageQuest As TabPage
-    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents TextBoxSearchQuest As TextBox
     Friend WithEvents Label1 As Label
-    Friend WithEvents ListView6 As ListView
-    Friend WithEvents ColumnHeader16 As ColumnHeader
-    Friend WithEvents ColumnHeader17 As ColumnHeader
-    Friend WithEvents ColumnHeader18 As ColumnHeader
+    Friend WithEvents ListViewQuest As ListView
+    Friend WithEvents ColumnHeaderQuestId As ColumnHeader
+    Friend WithEvents ColumnHeaderQuestTitle As ColumnHeader
+    Friend WithEvents ColumnHeaderQuestInvolvedObjects As ColumnHeader
     Friend WithEvents TabPageCreature As TabPage
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents TextBoxSearchCreature As TextBox
     Friend WithEvents Label2 As Label
-    Friend WithEvents ListView1 As ListView
-    Friend WithEvents ColumnHeader1 As ColumnHeader
-    Friend WithEvents ColumnHeader2 As ColumnHeader
-    Friend WithEvents ColumnHeader3 As ColumnHeader
+    Friend WithEvents ListViewCreature As ListView
+    Friend WithEvents ColumnHeaderCreatureGuid As ColumnHeader
+    Friend WithEvents ColumnHeaderCreatureEntry As ColumnHeader
+    Friend WithEvents ColumnHeaderCreatureName As ColumnHeader
     Friend WithEvents TabPageGameObject As TabPage
-    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents TextBoxSearchGameObject As TextBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents ListView2 As ListView
-    Friend WithEvents ColumnHeader4 As ColumnHeader
-    Friend WithEvents ColumnHeader5 As ColumnHeader
-    Friend WithEvents ColumnHeader6 As ColumnHeader
+    Friend WithEvents ListViewGameObject As ListView
+    Friend WithEvents ColumnHeaderGameObjectGuid As ColumnHeader
+    Friend WithEvents ColumnHeaderGameObjectEntry As ColumnHeader
+    Friend WithEvents ColumnHeaderGameObjectName As ColumnHeader
     Friend WithEvents TabPageItem As TabPage
-    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents TextBoxSearchItem As TextBox
     Friend WithEvents Label4 As Label
-    Friend WithEvents ListView3 As ListView
-    Friend WithEvents ColumnHeader7 As ColumnHeader
-    Friend WithEvents ColumnHeader8 As ColumnHeader
-    Friend WithEvents ColumnHeader9 As ColumnHeader
+    Friend WithEvents ListViewItem As ListView
+    Friend WithEvents ColumnHeaderItemEntry As ColumnHeader
+    Friend WithEvents ColumnHeaderItemName As ColumnHeader
+    Friend WithEvents ColumnHeaderItemSubName As ColumnHeader
     Friend WithEvents TabPageGossip As TabPage
-    Friend WithEvents ListView5 As ListView
-    Friend WithEvents ColumnHeader13 As ColumnHeader
-    Friend WithEvents ColumnHeader14 As ColumnHeader
-    Friend WithEvents ColumnHeader15 As ColumnHeader
-    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents ListViewGossipMenuOption As ListView
+    Friend WithEvents ColumnHeaderGossipOptionId As ColumnHeader
+    Friend WithEvents ColumnHeaderGossipOptionIndex As ColumnHeader
+    Friend WithEvents ColumnHeaderGossipOptionText As ColumnHeader
+    Friend WithEvents TextBoxSearchGossip As TextBox
     Friend WithEvents Label5 As Label
-    Friend WithEvents ListView4 As ListView
-    Friend WithEvents ColumnHeader10 As ColumnHeader
-    Friend WithEvents ColumnHeader11 As ColumnHeader
-    Friend WithEvents ColumnHeader12 As ColumnHeader
+    Friend WithEvents ListViewGossipMenuNpcText As ListView
+    Friend WithEvents ColumnHeaderGossipId As ColumnHeader
+    Friend WithEvents ColumnHeaderNpcTextId As ColumnHeader
+    Friend WithEvents ColumnHeaderNpcText As ColumnHeader
     Friend WithEvents LocaleToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ColumnHeaderNpcBroadcastId As ColumnHeader
+    Friend WithEvents WorkToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CreatureToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GameObjectToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ColumnHeaderCreatureSubName As ColumnHeader
+    Friend WithEvents ColumnHeaderGameObjectSubName As ColumnHeader
+    Friend WithEvents ColumnHeaderNpcSound As ColumnHeader
+    Friend WithEvents ColumnHeaderNpcEmote As ColumnHeader
+    Friend WithEvents ColumnHeaderGossipOptionIcon As ColumnHeader
+    Friend WithEvents ColumnHeaderGossipOptionNpcFlag As ColumnHeader
 End Class

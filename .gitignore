@@ -32,3 +32,6 @@ WoW-DatabaseEditor/obj/Debug/WoW-DatabaseEditor.xml
 .vs/WoW-DatabaseEditor/v15/Server/sqlite3/storage.ide
 .vs/WoW-DatabaseEditor/v15/Server/sqlite3/storage.ide-shm
 .vs/WoW-DatabaseEditor/v15/Server/sqlite3/storage.ide-wal
+WoW-DatabaseEditor/bin/Debug/ClassLibWoWTableManager.dll
+WoW-DatabaseEditor/bin/Debug/ClassLibWoWTableManager.pdb
+WoW-DatabaseEditor/bin/Debug/ClassLibWoWTableManager.xml

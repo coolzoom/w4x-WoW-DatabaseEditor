@@ -18,9 +18,24 @@ Public Class FormMain
         _creatureManager = New WoWCreatureManager
         _defaultDatabaseItem = _databaseManager.GetDefaultWoWDatabaseItem
         _compareDatabaseItem = _databaseManager.GetCompareWoWDatabaseItem
-        _tableManager = New WoWTableManager(_defaultDatabaseItem)
+        _tableManager = New WoWTableManager(_defaultDatabaseItem, _locale)
         ResizeGossip()
         ShowStatusBar()
+        MenuStrip1.Enabled = False
+        StatusStrip1.Enabled = False
+        Timer1.Interval = 5000
+        Timer1.Start()
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Timer1.Stop()
+        If _tableManager.CheckForFinishLoadAllTables() Then
+            MenuStrip1.Enabled = True
+            StatusStrip1.Enabled = True
+        Else
+            Timer1.Interval = 500
+            Timer1.Start()
+        End If
     End Sub
 
     Private Sub QuitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuitToolStripMenuItem.Click
@@ -98,7 +113,9 @@ Public Class FormMain
         End If
     End Sub
 
+    Private Sub ShowListViewSearchQuest(ids() As UInteger)
 
+    End Sub
 
 #End Region
 
@@ -112,12 +129,65 @@ Public Class FormMain
         If e.KeyChar = Chr(13) Then
             If IsNumeric(TextBoxSearchCreature.Text) Then
                 Dim id As Integer = TextBoxSearchCreature.Text
-                'Dim cr1 As tablec _databaseManager.SearchCreatureGuid(id)
-                '_databaseManager.SearchCreatureId(id)
-                '_databaseManager.SearchCreatureEntry(id)
+                Dim cr1 As TableCreatureItem = _tableManager.StorageCreature.SearchCreatureGuid(id)
+                Dim cr2() As TableCreatureItem = _tableManager.StorageCreature.SearchCreatureId(id)
+                Dim idList As New List(Of UInteger)
+                If IsNothing(cr1) = False Then
+                    idList.Add(cr1.id)
+                End If
+                If IsNothing(cr2) = False Then
+                    For Each cr As TableCreatureItem In cr2
+                        If idList.Count > 100 Then Exit For
+                        If idList.Contains(cr.id) = False Then
+                            idList.Add(cr.id)
+                        End If
+                    Next
+                End If
+                Dim ct1 As TableCreatureTemplateItem = _tableManager.StorageCreatureTemplate.SearchCreatureTemplateEntry(id)
+                If IsNothing(ct1) = False Then
+                    If idList.Contains(ct1.entry) = False Then
+                        idList.Add(ct1.entry)
+                    End If
+                End If
+                ShowListViewSearchCreature(idList.ToArray)
             Else
-
+                Dim c1() As TableCreatureTemplateItem = _tableManager.StorageCreatureTemplate.SearchCreatureTemplateFromNamePart(TextBoxSearchCreature.Text)
+                Dim c2() As TableLocalesCreatureItem = _tableManager.StorageLocalesCreature.SearchLocalesCreaturesFromNamePart(TextBoxSearchCreature.Text)                
+                Dim idList As New List(Of UInteger)
+                If IsNothing(c1) = False Then
+                    For Each ct As TableCreatureTemplateItem In c1
+                        idList.Add(ct.entry)
+                    Next
+                End If
+                If IsNothing(c2) = False Then
+                    For Each ct As TableLocalesCreatureItem In c2
+                        idList.Add(ct.entry)
+                    Next
+                End If
+                ShowListViewSearchCreature(idList.ToArray)
             End If
+        End If
+    End Sub
+
+    Private Sub ShowListViewSearchCreature(ids() As UInteger)
+        ListViewCreature.Items.Clear()
+        For Each entry As UInteger In ids
+            Dim cti As TableCreatureTemplateItem = _tableManager.StorageCreatureTemplate.GetItem(entry)
+            If IsNothing(cti) = False Then
+                Dim lvi As ListViewItem = cti.GetListViewForCreatureSearch
+                ListViewCreature.Items.Add(lvi)
+            End If
+        Next
+    End Sub
+
+    Private Sub ListViewCreature_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ListViewCreature.MouseDoubleClick
+        Dim lv As ListView = sender
+        Dim slvic As ListView.SelectedListViewItemCollection = lv.SelectedItems
+        If slvic.Count = 0 Then Exit Sub
+        Dim entry As UInteger
+        If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
+            Dim frm As New WoWCreatureDialog_434(_databaseManager, entry)
+            frm.Show()
         End If
     End Sub
 
@@ -140,6 +210,9 @@ Public Class FormMain
         End If
     End Sub
 
+    Private Sub ShowListViewSearchGameObject(ids() As UInteger)
+
+    End Sub
 
 #End Region
 
@@ -159,7 +232,9 @@ Public Class FormMain
         End If
     End Sub
 
+    Private Sub ShowListViewSearchItem(ids() As UInteger)
 
+    End Sub
 #End Region
 
 #Region " Gossip Search"
@@ -178,6 +253,13 @@ Public Class FormMain
         End If
     End Sub
 
+    Private Sub ShowListViewSearchGossipMenu(gossipIds() As UInteger)
+
+    End Sub
+
+    Private Sub ShowListViewSearchGossipMenuOption(gossipIds() As UInteger)
+
+    End Sub
 
 #End Region
 

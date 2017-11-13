@@ -29,6 +29,9 @@ Partial Class FormMain
         Me.LocaleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
         Me.QuitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.WorkToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CreatureToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GameObjectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
@@ -36,6 +39,7 @@ Partial Class FormMain
         Me.ColumnHeaderGameObjectGuid = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderGameObjectEntry = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderGameObjectName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderGameObjectSubName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ListViewItem = New System.Windows.Forms.ListView()
         Me.ColumnHeaderItemEntry = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderItemName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -45,14 +49,18 @@ Partial Class FormMain
         Me.ColumnHeaderNpcTextId = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderNpcText = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderNpcBroadcastId = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderNpcSound = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderNpcEmote = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ListViewGossipMenuOption = New System.Windows.Forms.ListView()
         Me.ColumnHeaderGossipOptionId = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderGossipOptionIndex = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderGossipOptionText = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderGossipOptionIcon = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderGossipOptionNpcFlag = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ListViewCreature = New System.Windows.Forms.ListView()
-        Me.ColumnHeaderCreatureGuid = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderCreatureEntry = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderCreatureName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderCreatureSubName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ListViewQuest = New System.Windows.Forms.ListView()
         Me.ColumnHeaderQuestId = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderQuestTitle = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -73,15 +81,9 @@ Partial Class FormMain
         Me.TabPageGossip = New System.Windows.Forms.TabPage()
         Me.TextBoxSearchGossip = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.WorkToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CreatureToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GameObjectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ColumnHeaderCreatureSubName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderGameObjectSubName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderGossipOptionIcon = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderGossipOptionNpcFlag = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderNpcSound = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderNpcEmote = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.ColumnHeaderCreatureLevel = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderCreatureGossip = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -131,6 +133,25 @@ Partial Class FormMain
         Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
         Me.QuitToolStripMenuItem.Text = "Quit"
         '
+        'WorkToolStripMenuItem
+        '
+        Me.WorkToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreatureToolStripMenuItem, Me.GameObjectToolStripMenuItem})
+        Me.WorkToolStripMenuItem.Name = "WorkToolStripMenuItem"
+        Me.WorkToolStripMenuItem.Size = New System.Drawing.Size(47, 20)
+        Me.WorkToolStripMenuItem.Text = "Work"
+        '
+        'CreatureToolStripMenuItem
+        '
+        Me.CreatureToolStripMenuItem.Name = "CreatureToolStripMenuItem"
+        Me.CreatureToolStripMenuItem.Size = New System.Drawing.Size(140, 22)
+        Me.CreatureToolStripMenuItem.Text = "Creature"
+        '
+        'GameObjectToolStripMenuItem
+        '
+        Me.GameObjectToolStripMenuItem.Name = "GameObjectToolStripMenuItem"
+        Me.GameObjectToolStripMenuItem.Size = New System.Drawing.Size(140, 22)
+        Me.GameObjectToolStripMenuItem.Text = "GameObject"
+        '
         'StatusStrip1
         '
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
@@ -176,6 +197,11 @@ Partial Class FormMain
         '
         Me.ColumnHeaderGameObjectName.Text = "Name"
         Me.ColumnHeaderGameObjectName.Width = 250
+        '
+        'ColumnHeaderGameObjectSubName
+        '
+        Me.ColumnHeaderGameObjectSubName.Text = "SubName"
+        Me.ColumnHeaderGameObjectSubName.Width = 250
         '
         'ListViewItem
         '
@@ -247,6 +273,14 @@ Partial Class FormMain
         Me.ColumnHeaderNpcBroadcastId.Text = "NpcBroadcastId"
         Me.ColumnHeaderNpcBroadcastId.Width = 100
         '
+        'ColumnHeaderNpcSound
+        '
+        Me.ColumnHeaderNpcSound.Text = "SoundID"
+        '
+        'ColumnHeaderNpcEmote
+        '
+        Me.ColumnHeaderNpcEmote.Text = "EmoteID"
+        '
         'ListViewGossipMenuOption
         '
         Me.ListViewGossipMenuOption.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -278,12 +312,20 @@ Partial Class FormMain
         Me.ColumnHeaderGossipOptionText.Text = "Text"
         Me.ColumnHeaderGossipOptionText.Width = 250
         '
+        'ColumnHeaderGossipOptionIcon
+        '
+        Me.ColumnHeaderGossipOptionIcon.Text = "Icon"
+        '
+        'ColumnHeaderGossipOptionNpcFlag
+        '
+        Me.ColumnHeaderGossipOptionNpcFlag.Text = "NpcFlag"
+        '
         'ListViewCreature
         '
         Me.ListViewCreature.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ListViewCreature.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderCreatureGuid, Me.ColumnHeaderCreatureEntry, Me.ColumnHeaderCreatureName, Me.ColumnHeaderCreatureSubName})
+        Me.ListViewCreature.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderCreatureEntry, Me.ColumnHeaderCreatureName, Me.ColumnHeaderCreatureSubName, Me.ColumnHeaderCreatureLevel, Me.ColumnHeaderCreatureGossip})
         Me.ListViewCreature.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ListViewCreature.FullRowSelect = True
         Me.ListViewCreature.GridLines = True
@@ -296,10 +338,6 @@ Partial Class FormMain
         Me.ListViewCreature.UseCompatibleStateImageBehavior = False
         Me.ListViewCreature.View = System.Windows.Forms.View.Details
         '
-        'ColumnHeaderCreatureGuid
-        '
-        Me.ColumnHeaderCreatureGuid.Text = "Guid"
-        '
         'ColumnHeaderCreatureEntry
         '
         Me.ColumnHeaderCreatureEntry.Text = "Entry"
@@ -308,6 +346,11 @@ Partial Class FormMain
         '
         Me.ColumnHeaderCreatureName.Text = "Name"
         Me.ColumnHeaderCreatureName.Width = 250
+        '
+        'ColumnHeaderCreatureSubName
+        '
+        Me.ColumnHeaderCreatureSubName.Text = "SubName"
+        Me.ColumnHeaderCreatureSubName.Width = 250
         '
         'ListViewQuest
         '
@@ -514,50 +557,16 @@ Partial Class FormMain
         Me.Label5.TabIndex = 10
         Me.Label5.Text = "Gosip search string "
         '
-        'WorkToolStripMenuItem
+        'Timer1
         '
-        Me.WorkToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreatureToolStripMenuItem, Me.GameObjectToolStripMenuItem})
-        Me.WorkToolStripMenuItem.Name = "WorkToolStripMenuItem"
-        Me.WorkToolStripMenuItem.Size = New System.Drawing.Size(47, 20)
-        Me.WorkToolStripMenuItem.Text = "Work"
         '
-        'CreatureToolStripMenuItem
+        'ColumnHeaderCreatureLevel
         '
-        Me.CreatureToolStripMenuItem.Name = "CreatureToolStripMenuItem"
-        Me.CreatureToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.CreatureToolStripMenuItem.Text = "Creature"
+        Me.ColumnHeaderCreatureLevel.Text = "Level"
         '
-        'GameObjectToolStripMenuItem
+        'ColumnHeaderCreatureGossip
         '
-        Me.GameObjectToolStripMenuItem.Name = "GameObjectToolStripMenuItem"
-        Me.GameObjectToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.GameObjectToolStripMenuItem.Text = "GameObject"
-        '
-        'ColumnHeaderCreatureSubName
-        '
-        Me.ColumnHeaderCreatureSubName.Text = "SubName"
-        Me.ColumnHeaderCreatureSubName.Width = 250
-        '
-        'ColumnHeaderGameObjectSubName
-        '
-        Me.ColumnHeaderGameObjectSubName.Text = "SubName"
-        Me.ColumnHeaderGameObjectSubName.Width = 250
-        '
-        'ColumnHeaderGossipOptionIcon
-        '
-        Me.ColumnHeaderGossipOptionIcon.Text = "Icon"
-        '
-        'ColumnHeaderGossipOptionNpcFlag
-        '
-        Me.ColumnHeaderGossipOptionNpcFlag.Text = "NpcFlag"
-        '
-        'ColumnHeaderNpcSound
-        '
-        Me.ColumnHeaderNpcSound.Text = "SoundID"
-        '
-        'ColumnHeaderNpcEmote
-        '
-        Me.ColumnHeaderNpcEmote.Text = "EmoteID"
+        Me.ColumnHeaderCreatureGossip.Text = "Gossip"
         '
         'FormMain
         '
@@ -610,7 +619,6 @@ Partial Class FormMain
     Friend WithEvents TextBoxSearchCreature As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents ListViewCreature As ListView
-    Friend WithEvents ColumnHeaderCreatureGuid As ColumnHeader
     Friend WithEvents ColumnHeaderCreatureEntry As ColumnHeader
     Friend WithEvents ColumnHeaderCreatureName As ColumnHeader
     Friend WithEvents TabPageGameObject As TabPage
@@ -649,4 +657,7 @@ Partial Class FormMain
     Friend WithEvents ColumnHeaderNpcEmote As ColumnHeader
     Friend WithEvents ColumnHeaderGossipOptionIcon As ColumnHeader
     Friend WithEvents ColumnHeaderGossipOptionNpcFlag As ColumnHeader
+    Friend WithEvents Timer1 As Timer
+    Friend WithEvents ColumnHeaderCreatureLevel As ColumnHeader
+    Friend WithEvents ColumnHeaderCreatureGossip As ColumnHeader
 End Class

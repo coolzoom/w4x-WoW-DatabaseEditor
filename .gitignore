@@ -35,3 +35,6 @@ WoW-DatabaseEditor/obj/Debug/WoW-DatabaseEditor.xml
 WoW-DatabaseEditor/bin/Debug/ClassLibWoWTableManager.dll
 WoW-DatabaseEditor/bin/Debug/ClassLibWoWTableManager.pdb
 WoW-DatabaseEditor/bin/Debug/ClassLibWoWTableManager.xml
+WoW-DatabaseEditor/bin/Debug/ClassLibWoWTableDialog.dll
+WoW-DatabaseEditor/bin/Debug/ClassLibWoWTableDialog.pdb
+WoW-DatabaseEditor/bin/Debug/ClassLibWoWTableDialog.xml

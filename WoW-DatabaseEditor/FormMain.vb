@@ -1,6 +1,6 @@
 ﻿
 Imports ClassLibWoWDatabaseManager
-Imports ClassLibWoWCreatureItem
+Imports ClassLibWoWTableDialog
 Imports ClassLibWoWTableManager
 
 Public Class FormMain
@@ -8,14 +8,12 @@ Public Class FormMain
     Private _databaseManager As WoWDatabaseManager ' hold the store of all database properties
     Private _defaultDatabaseItem As WoWDatabaseItem
     Private _compareDatabaseItem As WoWDatabaseItem
-    Private _creatureManager As WoWCreatureManager ' hold the part of all creature dialog
     Private _tableManager As WoWTableManager ' holds all table data
 
 #Region " Main Form"
 
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         _databaseManager = New WoWDatabaseManager
-        _creatureManager = New WoWCreatureManager
         _defaultDatabaseItem = _databaseManager.GetDefaultWoWDatabaseItem
         _compareDatabaseItem = _databaseManager.GetCompareWoWDatabaseItem
         _tableManager = New WoWTableManager(_defaultDatabaseItem, _locale)
@@ -121,16 +119,12 @@ Public Class FormMain
 
 #Region " Creature Search"
 
-    Private Sub TextBoxSearchCreature_TextChanged(sender As Object, e As EventArgs) Handles TextBoxSearchCreature.TextChanged
-
-    End Sub
-
     Private Sub TextBoxSearchCreature_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TextBoxSearchCreature.KeyPress
         If e.KeyChar = Chr(13) Then
             If IsNumeric(TextBoxSearchCreature.Text) Then
                 Dim id As Integer = TextBoxSearchCreature.Text
-                Dim cr1 As TableCreatureItem = _tableManager.StorageCreature.SearchCreatureGuid(id)
-                Dim cr2() As TableCreatureItem = _tableManager.StorageCreature.SearchCreatureId(id)
+                Dim cr1 As TableCreatureItem = _tableManager.StorageCreature.SearchGuid(id)
+                Dim cr2() As TableCreatureItem = _tableManager.StorageCreature.SearchWithId(id)
                 Dim idList As New List(Of UInteger)
                 If IsNothing(cr1) = False Then
                     idList.Add(cr1.id)
@@ -143,7 +137,7 @@ Public Class FormMain
                         End If
                     Next
                 End If
-                Dim ct1 As TableCreatureTemplateItem = _tableManager.StorageCreatureTemplate.SearchCreatureTemplateEntry(id)
+                Dim ct1 As TableCreatureTemplateItem = _tableManager.StorageCreatureTemplate.SearchEntry(id)
                 If IsNothing(ct1) = False Then
                     If idList.Contains(ct1.entry) = False Then
                         idList.Add(ct1.entry)
@@ -151,8 +145,8 @@ Public Class FormMain
                 End If
                 ShowListViewSearchCreature(idList.ToArray)
             Else
-                Dim c1() As TableCreatureTemplateItem = _tableManager.StorageCreatureTemplate.SearchCreatureTemplateFromNamePart(TextBoxSearchCreature.Text)
-                Dim c2() As TableLocalesCreatureItem = _tableManager.StorageLocalesCreature.SearchLocalesCreaturesFromNamePart(TextBoxSearchCreature.Text)                
+                Dim c1() As TableCreatureTemplateItem = _tableManager.StorageCreatureTemplate.SearchFromNamePart(TextBoxSearchCreature.Text)
+                Dim c2() As TableLocalesCreatureItem = _tableManager.StorageLocalesCreature.SearchFromNamePart(TextBoxSearchCreature.Text)
                 Dim idList As New List(Of UInteger)
                 If IsNothing(c1) = False Then
                     For Each ct As TableCreatureTemplateItem In c1
@@ -174,7 +168,7 @@ Public Class FormMain
         For Each entry As UInteger In ids
             Dim cti As TableCreatureTemplateItem = _tableManager.StorageCreatureTemplate.GetItem(entry)
             If IsNothing(cti) = False Then
-                Dim lvi As ListViewItem = cti.GetListViewForCreatureSearch
+                Dim lvi As ListViewItem = cti.GetGetListViewForCreatureTemplateSearch
                 ListViewCreature.Items.Add(lvi)
             End If
         Next
@@ -186,11 +180,10 @@ Public Class FormMain
         If slvic.Count = 0 Then Exit Sub
         Dim entry As UInteger
         If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
-            Dim frm As New WoWCreatureDialog_434(_databaseManager, entry)
+            Dim frm As New WoWCreatureDialog_434(_databaseManager, _tableManager, entry, _locale)
             frm.Show()
         End If
     End Sub
-
 
 #End Region
 

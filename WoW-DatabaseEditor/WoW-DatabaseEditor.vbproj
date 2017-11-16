@@ -121,13 +121,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\WoWCreatureItem\ClassLibWoWCreatureItem\ClassLibWoWCreatureItem.vbproj">
-      <Project>{563ffc44-3493-4d67-a1a9-5e542553bb97}</Project>
-      <Name>ClassLibWoWCreatureItem</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\WoWDatabaseManager\ClassLibWoWDatabaseManager\ClassLibWoWDatabaseManager.vbproj">
       <Project>{5ef517d8-4882-4845-9f79-385c7db34495}</Project>
       <Name>ClassLibWoWDatabaseManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WoWTableDialog\ClassLibWoWTableDialog\ClassLibWoWTableDialog.vbproj">
+      <Project>{e23d3b37-5c8d-4376-8042-bc3b9b9ba92f}</Project>
+      <Name>ClassLibWoWTableDialog</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\WoWTableManager\ClassLibWoWTableManager\ClassLibWoWTableManager.vbproj">
       <Project>{0b2efa15-00a3-4148-a014-bef0be31c3fd}</Project>

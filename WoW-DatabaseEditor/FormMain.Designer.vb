@@ -39,6 +39,7 @@ Partial Class FormMain
         Me.ColumnHeaderGameObjectEntry = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderGameObjectName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderGameObjectSubName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderGameObjectData = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ListViewItem = New System.Windows.Forms.ListView()
         Me.ColumnHeaderItemEntry = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderItemName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -84,7 +85,8 @@ Partial Class FormMain
         Me.TextBoxSearchGossip = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.ColumnHeaderGameObjectData = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderCreatureNameLoc = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderGameOvjectNameLocale = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -100,7 +102,7 @@ Partial Class FormMain
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.WorkToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(989, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1031, 24)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -158,7 +160,7 @@ Partial Class FormMain
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 416)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(989, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(1031, 22)
         Me.StatusStrip1.TabIndex = 1
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -173,14 +175,14 @@ Partial Class FormMain
         Me.ListViewGameObject.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ListViewGameObject.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderGameObjectEntry, Me.ColumnHeaderGameObjectName, Me.ColumnHeaderGameObjectSubName, Me.ColumnHeaderGameObjectData})
+        Me.ListViewGameObject.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderGameObjectEntry, Me.ColumnHeaderGameObjectName, Me.ColumnHeaderGameOvjectNameLocale, Me.ColumnHeaderGameObjectSubName, Me.ColumnHeaderGameObjectData})
         Me.ListViewGameObject.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ListViewGameObject.FullRowSelect = True
         Me.ListViewGameObject.GridLines = True
         Me.ListViewGameObject.Location = New System.Drawing.Point(3, 33)
         Me.ListViewGameObject.MultiSelect = False
         Me.ListViewGameObject.Name = "ListViewGameObject"
-        Me.ListViewGameObject.Size = New System.Drawing.Size(975, 318)
+        Me.ListViewGameObject.Size = New System.Drawing.Size(1017, 318)
         Me.ListViewGameObject.TabIndex = 9
         Me.ToolTip1.SetToolTip(Me.ListViewGameObject, "Hit's on table quest_template")
         Me.ListViewGameObject.UseCompatibleStateImageBehavior = False
@@ -199,6 +201,11 @@ Partial Class FormMain
         '
         Me.ColumnHeaderGameObjectSubName.Text = "SubName"
         Me.ColumnHeaderGameObjectSubName.Width = 250
+        '
+        'ColumnHeaderGameObjectData
+        '
+        Me.ColumnHeaderGameObjectData.Text = "Data0, Data1, Data(n...)"
+        Me.ColumnHeaderGameObjectData.Width = 250
         '
         'ListViewItem
         '
@@ -322,7 +329,7 @@ Partial Class FormMain
         Me.ListViewCreature.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ListViewCreature.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderCreatureEntry, Me.ColumnHeaderCreatureName, Me.ColumnHeaderCreatureSubName, Me.ColumnHeaderCreatureLevel, Me.ColumnHeaderCreatureGossip})
+        Me.ListViewCreature.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderCreatureEntry, Me.ColumnHeaderCreatureName, Me.ColumnHeaderCreatureNameLoc, Me.ColumnHeaderCreatureSubName, Me.ColumnHeaderCreatureLevel, Me.ColumnHeaderCreatureGossip})
         Me.ListViewCreature.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ListViewCreature.FullRowSelect = True
         Me.ListViewCreature.GridLines = True
@@ -406,7 +413,7 @@ Partial Class FormMain
         Me.TabControl1.Location = New System.Drawing.Point(0, 24)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(989, 392)
+        Me.TabControl1.Size = New System.Drawing.Size(1031, 392)
         Me.TabControl1.TabIndex = 2
         '
         'TabPageQuest
@@ -416,7 +423,7 @@ Partial Class FormMain
         Me.TabPageQuest.Controls.Add(Me.ListViewQuest)
         Me.TabPageQuest.Location = New System.Drawing.Point(4, 22)
         Me.TabPageQuest.Name = "TabPageQuest"
-        Me.TabPageQuest.Size = New System.Drawing.Size(976, 366)
+        Me.TabPageQuest.Size = New System.Drawing.Size(981, 366)
         Me.TabPageQuest.TabIndex = 2
         Me.TabPageQuest.Text = "Quest"
         Me.TabPageQuest.UseVisualStyleBackColor = True
@@ -480,7 +487,7 @@ Partial Class FormMain
         Me.TabPageGameObject.Location = New System.Drawing.Point(4, 22)
         Me.TabPageGameObject.Name = "TabPageGameObject"
         Me.TabPageGameObject.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPageGameObject.Size = New System.Drawing.Size(981, 366)
+        Me.TabPageGameObject.Size = New System.Drawing.Size(1023, 366)
         Me.TabPageGameObject.TabIndex = 1
         Me.TabPageGameObject.Text = "GameObject"
         Me.TabPageGameObject.UseVisualStyleBackColor = True
@@ -492,7 +499,7 @@ Partial Class FormMain
         Me.TextBoxSearchGameObject.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.TextBoxSearchGameObject.Location = New System.Drawing.Point(146, 7)
         Me.TextBoxSearchGameObject.Name = "TextBoxSearchGameObject"
-        Me.TextBoxSearchGameObject.Size = New System.Drawing.Size(827, 20)
+        Me.TextBoxSearchGameObject.Size = New System.Drawing.Size(869, 20)
         Me.TextBoxSearchGameObject.TabIndex = 11
         '
         'Label3
@@ -570,16 +577,21 @@ Partial Class FormMain
         'Timer1
         '
         '
-        'ColumnHeaderGameObjectData
+        'ColumnHeaderCreatureNameLoc
         '
-        Me.ColumnHeaderGameObjectData.Text = "Data0, Data1, Data(n...)"
-        Me.ColumnHeaderGameObjectData.Width = 250
+        Me.ColumnHeaderCreatureNameLoc.Text = "Locale Name"
+        Me.ColumnHeaderCreatureNameLoc.Width = 250
+        '
+        'ColumnHeaderGameOvjectNameLocale
+        '
+        Me.ColumnHeaderGameOvjectNameLocale.Text = "Name Locale"
+        Me.ColumnHeaderGameOvjectNameLocale.Width = 250
         '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(989, 438)
+        Me.ClientSize = New System.Drawing.Size(1031, 438)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.MenuStrip1)
@@ -668,4 +680,6 @@ Partial Class FormMain
     Friend WithEvents ColumnHeaderCreatureGossip As ColumnHeader
     Friend WithEvents ColumnHeaderQuestLitleLoc As ColumnHeader
     Friend WithEvents ColumnHeaderGameObjectData As ColumnHeader
+    Friend WithEvents ColumnHeaderGameOvjectNameLocale As ColumnHeader
+    Friend WithEvents ColumnHeaderCreatureNameLoc As ColumnHeader
 End Class

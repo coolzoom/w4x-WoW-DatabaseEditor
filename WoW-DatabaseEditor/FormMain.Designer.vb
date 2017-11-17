@@ -36,7 +36,6 @@ Partial Class FormMain
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.ListViewGameObject = New System.Windows.Forms.ListView()
-        Me.ColumnHeaderGameObjectGuid = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderGameObjectEntry = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderGameObjectName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderGameObjectSubName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -61,9 +60,12 @@ Partial Class FormMain
         Me.ColumnHeaderCreatureEntry = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderCreatureName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderCreatureSubName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderCreatureLevel = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderCreatureGossip = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ListViewQuest = New System.Windows.Forms.ListView()
         Me.ColumnHeaderQuestId = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderQuestTitle = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderQuestLitleLoc = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderQuestInvolvedObjects = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPageQuest = New System.Windows.Forms.TabPage()
@@ -82,8 +84,7 @@ Partial Class FormMain
         Me.TextBoxSearchGossip = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.ColumnHeaderCreatureLevel = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderCreatureGossip = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderGameObjectData = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -99,7 +100,7 @@ Partial Class FormMain
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.WorkToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(735, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(989, 24)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -155,9 +156,9 @@ Partial Class FormMain
         'StatusStrip1
         '
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 408)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 416)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(735, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(989, 22)
         Me.StatusStrip1.TabIndex = 1
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -172,22 +173,18 @@ Partial Class FormMain
         Me.ListViewGameObject.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ListViewGameObject.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderGameObjectGuid, Me.ColumnHeaderGameObjectEntry, Me.ColumnHeaderGameObjectName, Me.ColumnHeaderGameObjectSubName})
+        Me.ListViewGameObject.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderGameObjectEntry, Me.ColumnHeaderGameObjectName, Me.ColumnHeaderGameObjectSubName, Me.ColumnHeaderGameObjectData})
         Me.ListViewGameObject.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ListViewGameObject.FullRowSelect = True
         Me.ListViewGameObject.GridLines = True
         Me.ListViewGameObject.Location = New System.Drawing.Point(3, 33)
         Me.ListViewGameObject.MultiSelect = False
         Me.ListViewGameObject.Name = "ListViewGameObject"
-        Me.ListViewGameObject.Size = New System.Drawing.Size(721, 318)
+        Me.ListViewGameObject.Size = New System.Drawing.Size(975, 318)
         Me.ListViewGameObject.TabIndex = 9
         Me.ToolTip1.SetToolTip(Me.ListViewGameObject, "Hit's on table quest_template")
         Me.ListViewGameObject.UseCompatibleStateImageBehavior = False
         Me.ListViewGameObject.View = System.Windows.Forms.View.Details
-        '
-        'ColumnHeaderGameObjectGuid
-        '
-        Me.ColumnHeaderGameObjectGuid.Text = "Guid"
         '
         'ColumnHeaderGameObjectEntry
         '
@@ -215,7 +212,7 @@ Partial Class FormMain
         Me.ListViewItem.Location = New System.Drawing.Point(3, 33)
         Me.ListViewItem.MultiSelect = False
         Me.ListViewItem.Name = "ListViewItem"
-        Me.ListViewItem.Size = New System.Drawing.Size(721, 318)
+        Me.ListViewItem.Size = New System.Drawing.Size(975, 318)
         Me.ListViewItem.TabIndex = 9
         Me.ToolTip1.SetToolTip(Me.ListViewItem, "Hit's on table quest_template")
         Me.ListViewItem.UseCompatibleStateImageBehavior = False
@@ -247,7 +244,7 @@ Partial Class FormMain
         Me.ListViewGossipMenuNpcText.Location = New System.Drawing.Point(3, 33)
         Me.ListViewGossipMenuNpcText.MultiSelect = False
         Me.ListViewGossipMenuNpcText.Name = "ListViewGossipMenuNpcText"
-        Me.ListViewGossipMenuNpcText.Size = New System.Drawing.Size(721, 135)
+        Me.ListViewGossipMenuNpcText.Size = New System.Drawing.Size(975, 135)
         Me.ListViewGossipMenuNpcText.TabIndex = 9
         Me.ToolTip1.SetToolTip(Me.ListViewGossipMenuNpcText, "Hit's on table quest_template")
         Me.ListViewGossipMenuNpcText.UseCompatibleStateImageBehavior = False
@@ -293,7 +290,7 @@ Partial Class FormMain
         Me.ListViewGossipMenuOption.Location = New System.Drawing.Point(3, 174)
         Me.ListViewGossipMenuOption.MultiSelect = False
         Me.ListViewGossipMenuOption.Name = "ListViewGossipMenuOption"
-        Me.ListViewGossipMenuOption.Size = New System.Drawing.Size(721, 181)
+        Me.ListViewGossipMenuOption.Size = New System.Drawing.Size(975, 181)
         Me.ListViewGossipMenuOption.TabIndex = 12
         Me.ToolTip1.SetToolTip(Me.ListViewGossipMenuOption, "Hit's on table quest_template")
         Me.ListViewGossipMenuOption.UseCompatibleStateImageBehavior = False
@@ -332,7 +329,7 @@ Partial Class FormMain
         Me.ListViewCreature.Location = New System.Drawing.Point(3, 33)
         Me.ListViewCreature.MultiSelect = False
         Me.ListViewCreature.Name = "ListViewCreature"
-        Me.ListViewCreature.Size = New System.Drawing.Size(721, 318)
+        Me.ListViewCreature.Size = New System.Drawing.Size(975, 318)
         Me.ListViewCreature.TabIndex = 12
         Me.ToolTip1.SetToolTip(Me.ListViewCreature, "Hit's on table quest_template")
         Me.ListViewCreature.UseCompatibleStateImageBehavior = False
@@ -352,19 +349,27 @@ Partial Class FormMain
         Me.ColumnHeaderCreatureSubName.Text = "SubName"
         Me.ColumnHeaderCreatureSubName.Width = 250
         '
+        'ColumnHeaderCreatureLevel
+        '
+        Me.ColumnHeaderCreatureLevel.Text = "Level"
+        '
+        'ColumnHeaderCreatureGossip
+        '
+        Me.ColumnHeaderCreatureGossip.Text = "Gossip"
+        '
         'ListViewQuest
         '
         Me.ListViewQuest.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ListViewQuest.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderQuestId, Me.ColumnHeaderQuestTitle, Me.ColumnHeaderQuestInvolvedObjects})
+        Me.ListViewQuest.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderQuestId, Me.ColumnHeaderQuestTitle, Me.ColumnHeaderQuestLitleLoc, Me.ColumnHeaderQuestInvolvedObjects})
         Me.ListViewQuest.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ListViewQuest.FullRowSelect = True
         Me.ListViewQuest.GridLines = True
         Me.ListViewQuest.Location = New System.Drawing.Point(3, 33)
         Me.ListViewQuest.MultiSelect = False
         Me.ListViewQuest.Name = "ListViewQuest"
-        Me.ListViewQuest.Size = New System.Drawing.Size(721, 318)
+        Me.ListViewQuest.Size = New System.Drawing.Size(970, 326)
         Me.ListViewQuest.TabIndex = 12
         Me.ToolTip1.SetToolTip(Me.ListViewQuest, "Hit's on table quest_template")
         Me.ListViewQuest.UseCompatibleStateImageBehavior = False
@@ -379,6 +384,11 @@ Partial Class FormMain
         '
         Me.ColumnHeaderQuestTitle.Text = "Title"
         Me.ColumnHeaderQuestTitle.Width = 250
+        '
+        'ColumnHeaderQuestLitleLoc
+        '
+        Me.ColumnHeaderQuestLitleLoc.Text = "Title Locale"
+        Me.ColumnHeaderQuestLitleLoc.Width = 250
         '
         'ColumnHeaderQuestInvolvedObjects
         '
@@ -396,7 +406,7 @@ Partial Class FormMain
         Me.TabControl1.Location = New System.Drawing.Point(0, 24)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(735, 384)
+        Me.TabControl1.Size = New System.Drawing.Size(989, 392)
         Me.TabControl1.TabIndex = 2
         '
         'TabPageQuest
@@ -406,7 +416,7 @@ Partial Class FormMain
         Me.TabPageQuest.Controls.Add(Me.ListViewQuest)
         Me.TabPageQuest.Location = New System.Drawing.Point(4, 22)
         Me.TabPageQuest.Name = "TabPageQuest"
-        Me.TabPageQuest.Size = New System.Drawing.Size(727, 358)
+        Me.TabPageQuest.Size = New System.Drawing.Size(976, 366)
         Me.TabPageQuest.TabIndex = 2
         Me.TabPageQuest.Text = "Quest"
         Me.TabPageQuest.UseVisualStyleBackColor = True
@@ -418,7 +428,7 @@ Partial Class FormMain
         Me.TextBoxSearchQuest.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.TextBoxSearchQuest.Location = New System.Drawing.Point(115, 7)
         Me.TextBoxSearchQuest.Name = "TextBoxSearchQuest"
-        Me.TextBoxSearchQuest.Size = New System.Drawing.Size(604, 20)
+        Me.TextBoxSearchQuest.Size = New System.Drawing.Size(853, 20)
         Me.TextBoxSearchQuest.TabIndex = 14
         '
         'Label1
@@ -438,7 +448,7 @@ Partial Class FormMain
         Me.TabPageCreature.Location = New System.Drawing.Point(4, 22)
         Me.TabPageCreature.Name = "TabPageCreature"
         Me.TabPageCreature.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPageCreature.Size = New System.Drawing.Size(727, 358)
+        Me.TabPageCreature.Size = New System.Drawing.Size(981, 366)
         Me.TabPageCreature.TabIndex = 0
         Me.TabPageCreature.Text = "Creature"
         Me.TabPageCreature.UseVisualStyleBackColor = True
@@ -450,7 +460,7 @@ Partial Class FormMain
         Me.TextBoxSearchCreature.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.TextBoxSearchCreature.Location = New System.Drawing.Point(121, 7)
         Me.TextBoxSearchCreature.Name = "TextBoxSearchCreature"
-        Me.TextBoxSearchCreature.Size = New System.Drawing.Size(598, 20)
+        Me.TextBoxSearchCreature.Size = New System.Drawing.Size(852, 20)
         Me.TextBoxSearchCreature.TabIndex = 14
         '
         'Label2
@@ -470,7 +480,7 @@ Partial Class FormMain
         Me.TabPageGameObject.Location = New System.Drawing.Point(4, 22)
         Me.TabPageGameObject.Name = "TabPageGameObject"
         Me.TabPageGameObject.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPageGameObject.Size = New System.Drawing.Size(727, 358)
+        Me.TabPageGameObject.Size = New System.Drawing.Size(981, 366)
         Me.TabPageGameObject.TabIndex = 1
         Me.TabPageGameObject.Text = "GameObject"
         Me.TabPageGameObject.UseVisualStyleBackColor = True
@@ -482,7 +492,7 @@ Partial Class FormMain
         Me.TextBoxSearchGameObject.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.TextBoxSearchGameObject.Location = New System.Drawing.Point(146, 7)
         Me.TextBoxSearchGameObject.Name = "TextBoxSearchGameObject"
-        Me.TextBoxSearchGameObject.Size = New System.Drawing.Size(573, 20)
+        Me.TextBoxSearchGameObject.Size = New System.Drawing.Size(827, 20)
         Me.TextBoxSearchGameObject.TabIndex = 11
         '
         'Label3
@@ -501,7 +511,7 @@ Partial Class FormMain
         Me.TabPageItem.Controls.Add(Me.ListViewItem)
         Me.TabPageItem.Location = New System.Drawing.Point(4, 22)
         Me.TabPageItem.Name = "TabPageItem"
-        Me.TabPageItem.Size = New System.Drawing.Size(727, 358)
+        Me.TabPageItem.Size = New System.Drawing.Size(981, 366)
         Me.TabPageItem.TabIndex = 3
         Me.TabPageItem.Text = "Item"
         Me.TabPageItem.UseVisualStyleBackColor = True
@@ -513,7 +523,7 @@ Partial Class FormMain
         Me.TextBoxSearchItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.TextBoxSearchItem.Location = New System.Drawing.Point(107, 7)
         Me.TextBoxSearchItem.Name = "TextBoxSearchItem"
-        Me.TextBoxSearchItem.Size = New System.Drawing.Size(612, 20)
+        Me.TextBoxSearchItem.Size = New System.Drawing.Size(866, 20)
         Me.TextBoxSearchItem.TabIndex = 11
         '
         'Label4
@@ -533,7 +543,7 @@ Partial Class FormMain
         Me.TabPageGossip.Controls.Add(Me.ListViewGossipMenuNpcText)
         Me.TabPageGossip.Location = New System.Drawing.Point(4, 22)
         Me.TabPageGossip.Name = "TabPageGossip"
-        Me.TabPageGossip.Size = New System.Drawing.Size(727, 358)
+        Me.TabPageGossip.Size = New System.Drawing.Size(981, 366)
         Me.TabPageGossip.TabIndex = 4
         Me.TabPageGossip.Text = "Gossip"
         Me.TabPageGossip.UseVisualStyleBackColor = True
@@ -545,7 +555,7 @@ Partial Class FormMain
         Me.TextBoxSearchGossip.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.TextBoxSearchGossip.Location = New System.Drawing.Point(114, 7)
         Me.TextBoxSearchGossip.Name = "TextBoxSearchGossip"
-        Me.TextBoxSearchGossip.Size = New System.Drawing.Size(605, 20)
+        Me.TextBoxSearchGossip.Size = New System.Drawing.Size(859, 20)
         Me.TextBoxSearchGossip.TabIndex = 11
         '
         'Label5
@@ -560,19 +570,16 @@ Partial Class FormMain
         'Timer1
         '
         '
-        'ColumnHeaderCreatureLevel
+        'ColumnHeaderGameObjectData
         '
-        Me.ColumnHeaderCreatureLevel.Text = "Level"
-        '
-        'ColumnHeaderCreatureGossip
-        '
-        Me.ColumnHeaderCreatureGossip.Text = "Gossip"
+        Me.ColumnHeaderGameObjectData.Text = "Data0, Data1, Data(n...)"
+        Me.ColumnHeaderGameObjectData.Width = 250
         '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(735, 430)
+        Me.ClientSize = New System.Drawing.Size(989, 438)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.MenuStrip1)
@@ -625,7 +632,6 @@ Partial Class FormMain
     Friend WithEvents TextBoxSearchGameObject As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents ListViewGameObject As ListView
-    Friend WithEvents ColumnHeaderGameObjectGuid As ColumnHeader
     Friend WithEvents ColumnHeaderGameObjectEntry As ColumnHeader
     Friend WithEvents ColumnHeaderGameObjectName As ColumnHeader
     Friend WithEvents TabPageItem As TabPage
@@ -660,4 +666,6 @@ Partial Class FormMain
     Friend WithEvents Timer1 As Timer
     Friend WithEvents ColumnHeaderCreatureLevel As ColumnHeader
     Friend WithEvents ColumnHeaderCreatureGossip As ColumnHeader
+    Friend WithEvents ColumnHeaderQuestLitleLoc As ColumnHeader
+    Friend WithEvents ColumnHeaderGameObjectData As ColumnHeader
 End Class

@@ -96,23 +96,132 @@ Public Class FormMain
 
 #Region " Quest Search"
 
-    Private Sub TextBoxSearchQuest_TextChanged(sender As Object, e As EventArgs) Handles TextBoxSearchQuest.TextChanged
-
-    End Sub
-
     Private Sub TextBoxSearchQuest_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TextBoxSearchQuest.KeyPress
         If e.KeyChar = Chr(13) Then
+            Dim idList As New List(Of UInteger)
             If IsNumeric(TextBoxSearchQuest.Text) Then
                 Dim id As Integer = TextBoxSearchQuest.Text
-
+                Dim qt As TableQuestTemplateItem = _tableManager.StorageQuestTemplate.SearchId(id)
+                Dim lq As TableLocalesQuestItem = _tableManager.StorageLocalesQuest.SearchId(id)
+                If IsNothing(qt) = False Then
+                    idList.Add(qt.Id)
+                End If
+                If IsNothing(lq) = False Then
+                    If idList.Contains(lq.Id) = False Then
+                        idList.Add(lq.Id)
+                    End If
+                End If
             Else
+                Dim s1 As String = TextBoxSearchQuest.Text.Trim
+                If String.IsNullOrWhiteSpace(s1) Then Exit Sub
+                Dim q1() As TableQuestTemplateItem = _tableManager.StorageQuestTemplate.SearchFromTitlePart(s1)
+                Dim q2() As TableLocalesQuestItem = _tableManager.StorageLocalesQuest.SearchFromTitlePart(s1, _locale)
+                If IsNothing(q1) = False Then
+                    For Each qt As TableQuestTemplateItem In q1
+                        If idList.Contains(qt.Id) = False Then
+                            idList.Add(qt.Id)
+                        End If
+                    Next
+                End If
+                If IsNothing(q2) = False Then
+                    For Each qt As TableLocalesQuestItem In q2
+                        If idList.Contains(qt.Id) = False Then
+                            idList.Add(qt.Id)
+                        End If
+                    Next
+                End If
 
             End If
+            ShowListViewSearchQuest(idList.ToArray)
         End If
     End Sub
 
     Private Sub ShowListViewSearchQuest(ids() As UInteger)
+        ListViewQuest.Items.Clear()
+        For Each id As UInteger In ids
+            Dim qti As TableQuestTemplateItem = _tableManager.StorageQuestTemplate.GetItem(id)
+            Dim lqi As TableLocalesQuestItem = _tableManager.StorageLocalesQuest.GetItem(id)
+            Dim questGiverNameList As New List(Of String)
+            Dim qs1() As TableAreatriggerQuestenderItem = _tableManager.StorageAreatriggerQuestender.SearchWithQuest(id)
+            Dim qs2() As TableAreatriggerQueststarterItem = _tableManager.StorageAreatriggerQueststarter.SearchWithQuest(id)
+            Dim qs3() As TableCreatureQuestenderItem = _tableManager.StorageCreatureQuestender.SearchWithQuest(id)
+            Dim qs4() As TableCreatureQueststarterItem = _tableManager.StorageCreatureQueststarter.SearchWithQuest(id)
+            Dim qs5() As TableGameobjectQuestenderItem = _tableManager.StorageGameobjectQuestender.SearchWithQuest(id)
+            Dim qs6() As TableGameobjectQueststarterItem = _tableManager.StorageGameobjectQueststarter.SearchWithQuest(id)
+            '
+            Dim lvi As New ListViewItem(id)
+            If IsNothing(qti) Then
+                lvi.SubItems.Add("")
+            Else
+                lvi.SubItems.Add(qti.Title)
+            End If
+            If IsNothing(lqi) Then
+                lvi.SubItems.Add("")
+            Else
+                lvi.SubItems.Add(lqi.Title(_locale))
+            End If
+            ' finds there Area or Sector Names???  Maybe in Hotfixes???
+            If IsNothing(qs3) = False Then
+                For Each qi As TableCreatureQuestenderItem In qs3
+                    Dim ci As TableCreatureTemplateItem = _tableManager.StorageCreatureTemplate.GetItem(qi.id)
+                    If IsNothing(ci) = False Then
+                        If questGiverNameList.Contains(ci.name) = False Then
+                            questGiverNameList.Add(ci.name)
+                        End If
+                    End If
+                Next
+            End If
+            If IsNothing(qs4) = False Then
+                For Each qi As TableCreatureQueststarterItem In qs4
+                    Dim ci As TableCreatureTemplateItem = _tableManager.StorageCreatureTemplate.GetItem(qi.id)
+                    If IsNothing(ci) = False Then
+                        If questGiverNameList.Contains(ci.name) = False Then
+                            questGiverNameList.Add(ci.name)
+                        End If
+                    End If
+                Next
+            End If
+            If IsNothing(qs5) = False Then
+                For Each qi As TableGameobjectQuestenderItem In qs5
+                    Dim ci As TableGameobjectTemplateItem = _tableManager.StorageGameobjectTemplate.GetItem(qi.id)
+                    If IsNothing(ci) = False Then
+                        If questGiverNameList.Contains(ci.name) = False Then
+                            questGiverNameList.Add(ci.name)
+                        End If
+                    End If
+                Next
+            End If
+            If IsNothing(qs6) = False Then
+                For Each qi As TableGameobjectQueststarterItem In qs6
+                    Dim ci As TableGameobjectTemplateItem = _tableManager.StorageGameobjectTemplate.GetItem(qi.id)
+                    If IsNothing(ci) = False Then
+                        If questGiverNameList.Contains(ci.name) = False Then
+                            questGiverNameList.Add(ci.name)
+                        End If
+                    End If
+                Next
+            End If
+            Dim s1 As String = ""
+            Dim ko As Boolean = False
+            For Each s2 As String In questGiverNameList
+                If ko Then s1 &= ", "
+                ko = True
+                s1 &= s2
+            Next
+            lvi.SubItems.Add(s1)
+            ListViewQuest.Items.Add(lvi)
+        Next
+    End Sub
 
+    Private Sub ListViewQuest_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ListViewQuest.MouseDoubleClick
+        Dim lv As ListView = sender
+        Dim slvic As ListView.SelectedListViewItemCollection = lv.SelectedItems
+        If slvic.Count = 0 Then Exit Sub
+        Dim entry As UInteger
+        If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
+            Dim frm As New WoWQuestDialog_434(_databaseManager, _tableManager, entry, _locale)
+            frm.Show()
+        End If
     End Sub
 
 #End Region
@@ -121,11 +230,11 @@ Public Class FormMain
 
     Private Sub TextBoxSearchCreature_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TextBoxSearchCreature.KeyPress
         If e.KeyChar = Chr(13) Then
+            Dim idList As New List(Of UInteger)
             If IsNumeric(TextBoxSearchCreature.Text) Then
                 Dim id As Integer = TextBoxSearchCreature.Text
                 Dim cr1 As TableCreatureItem = _tableManager.StorageCreature.SearchGuid(id)
                 Dim cr2() As TableCreatureItem = _tableManager.StorageCreature.SearchWithId(id)
-                Dim idList As New List(Of UInteger)
                 If IsNothing(cr1) = False Then
                     idList.Add(cr1.id)
                 End If
@@ -143,11 +252,11 @@ Public Class FormMain
                         idList.Add(ct1.entry)
                     End If
                 End If
-                ShowListViewSearchCreature(idList.ToArray)
             Else
-                Dim c1() As TableCreatureTemplateItem = _tableManager.StorageCreatureTemplate.SearchFromNamePart(TextBoxSearchCreature.Text)
-                Dim c2() As TableLocalesCreatureItem = _tableManager.StorageLocalesCreature.SearchFromNamePart(TextBoxSearchCreature.Text)
-                Dim idList As New List(Of UInteger)
+                Dim s1 As String = TextBoxSearchCreature.Text.Trim
+                If String.IsNullOrWhiteSpace(s1) Then Exit Sub
+                Dim c1() As TableCreatureTemplateItem = _tableManager.StorageCreatureTemplate.SearchFromNamePart(s1)
+                Dim c2() As TableLocalesCreatureItem = _tableManager.StorageLocalesCreature.SearchFromNamePart(s1)
                 If IsNothing(c1) = False Then
                     For Each ct As TableCreatureTemplateItem In c1
                         idList.Add(ct.entry)
@@ -158,8 +267,8 @@ Public Class FormMain
                         idList.Add(ct.entry)
                     Next
                 End If
-                ShowListViewSearchCreature(idList.ToArray)
             End If
+            ShowListViewSearchCreature(idList.ToArray)
         End If
     End Sub
 
@@ -167,8 +276,9 @@ Public Class FormMain
         ListViewCreature.Items.Clear()
         For Each entry As UInteger In ids
             Dim cti As TableCreatureTemplateItem = _tableManager.StorageCreatureTemplate.GetItem(entry)
+            Dim loc As TableLocalesCreatureItem = _tableManager.StorageLocalesCreature.GetItem(entry)
             If IsNothing(cti) = False Then
-                Dim lvi As ListViewItem = cti.GetGetListViewForCreatureTemplateSearch
+                Dim lvi As ListViewItem = cti.GetListViewForCreatureTemplateSearch(loc.Name(_locale))
                 ListViewCreature.Items.Add(lvi)
             End If
         Next
@@ -189,31 +299,69 @@ Public Class FormMain
 
 #Region " GameObject Search"
 
-    Private Sub TextBoxSearchGameObject_TextChanged(sender As Object, e As EventArgs) Handles TextBoxSearchGameObject.TextChanged
-
-    End Sub
-
     Private Sub TextBoxSearchGameObject_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TextBoxSearchGameObject.KeyPress
         If e.KeyChar = Chr(13) Then
+            Dim idList As New List(Of UInteger)
             If IsNumeric(TextBoxSearchGameObject.Text) Then
-
+                Dim id As Integer = TextBoxSearchCreature.Text
+                Dim gt1 As TableGameobjectItem = _tableManager.StorageGameobject.SearchGuid(id)
+                Dim gt2() As TableGameobjectItem = _tableManager.StorageGameobject.SearchWithId(id)
+                Dim gt3 As TableGameobjectTemplateItem = _tableManager.StorageGameobjectTemplate.SearchEntry(id)
+                If IsNothing(gt1) = False Then
+                    idList.Add(gt1.id)
+                End If
+                If IsNothing(gt2) = False Then
+                    For Each ct As TableGameobjectItem In gt2
+                        If idList.Count > 100 Then Exit For
+                        If idList.Contains(ct.id) = False Then
+                            idList.Add(ct.id)
+                        End If
+                    Next
+                End If
+                If IsNothing(gt3) = False Then
+                    If idList.Contains(gt3.entry) = False Then
+                        idList.Add(gt3.entry)
+                    End If
+                End If
             Else
-
+                Dim s1 As String = TextBoxSearchGameObject.Text.Trim
+                If String.IsNullOrWhiteSpace(s1) Then Exit Sub
+                Dim c1() As TableGameobjectTemplateItem = _tableManager.StorageGameobjectTemplate.SearchFromNamePart(s1)
+                Dim c2() As TableLocalesGameobjectItem = _tableManager.StorageLocalesGameobject.SearchFromNamePart(s1, _locale)
+                If IsNothing(c1) = False Then
+                    For Each ct As TableGameobjectTemplateItem In c1
+                        idList.Add(ct.entry)
+                    Next
+                End If
+                If IsNothing(c2) = False Then
+                    For Each ct As TableLocalesGameobjectItem In c2
+                        idList.Add(ct.entry)
+                    Next
+                End If
             End If
+            ShowListViewSearchGameObject(idList.ToArray)
         End If
     End Sub
 
     Private Sub ShowListViewSearchGameObject(ids() As UInteger)
+        ListViewGameObject.Items.Clear()
+        For Each entry As UInteger In ids
+            Dim cti As TableGameobjectTemplateItem = _tableManager.StorageGameobjectTemplate.GetItem(entry)
+            Dim loc As TableLocalesGameobjectItem = _tableManager.StorageLocalesGameobject.GetItem(entry)
+            If IsNothing(cti) = False Then
+                Dim lvi As ListViewItem = cti.GetListViewForGameObjectTemplateSearch(loc.Name(_locale))
+                ListViewGameObject.Items.Add(lvi)
+            End If
+        Next
+    End Sub
+
+    Private Sub ListViewGameObject_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ListViewGameObject.MouseDoubleClick
 
     End Sub
 
 #End Region
 
 #Region " Item Search"
-
-    Private Sub TextBoxSearchItem_TextChanged(sender As Object, e As EventArgs) Handles TextBoxSearchItem.TextChanged
-
-    End Sub
 
     Private Sub TextBoxSearchItem_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TextBoxSearchItem.KeyPress
         If e.KeyChar = Chr(13) Then
@@ -228,13 +376,14 @@ Public Class FormMain
     Private Sub ShowListViewSearchItem(ids() As UInteger)
 
     End Sub
+
+    Private Sub ListViewItem_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ListViewItem.MouseDoubleClick
+
+    End Sub
+
 #End Region
 
 #Region " Gossip Search"
-
-    Private Sub TextBoxSearchGossip_TextChanged(sender As Object, e As EventArgs) Handles TextBoxSearchGossip.TextChanged
-
-    End Sub
 
     Private Sub TextBoxSearchGossip_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TextBoxSearchGossip.KeyPress
         If e.KeyChar = Chr(13) Then
@@ -253,6 +402,15 @@ Public Class FormMain
     Private Sub ShowListViewSearchGossipMenuOption(gossipIds() As UInteger)
 
     End Sub
+
+    Private Sub ListViewGossipMenuNpcText_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ListViewGossipMenuNpcText.MouseDoubleClick
+
+    End Sub
+
+    Private Sub ListViewGossipMenuOption_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ListViewGossipMenuOption.MouseDoubleClick
+
+    End Sub
+
 
 #End Region
 

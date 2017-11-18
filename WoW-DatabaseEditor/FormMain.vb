@@ -356,7 +356,14 @@ Public Class FormMain
     End Sub
 
     Private Sub ListViewGameObject_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ListViewGameObject.MouseDoubleClick
-
+        Dim lv As ListView = sender
+        Dim slvic As ListView.SelectedListViewItemCollection = lv.SelectedItems
+        If slvic.Count = 0 Then Exit Sub
+        Dim entry As UInteger
+        If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
+            'Dim frm As New WoWGameObjectDialog_434(_databaseManager, _tableManager, entry, _locale)
+            'frm.Show()
+        End If
     End Sub
 
 #End Region
@@ -365,11 +372,13 @@ Public Class FormMain
 
     Private Sub TextBoxSearchItem_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TextBoxSearchItem.KeyPress
         If e.KeyChar = Chr(13) Then
+            Dim idList As New List(Of UInteger)
             If IsNumeric(TextBoxSearchItem.Text) Then
 
             Else
 
             End If
+            ShowListViewSearchItem(idList.ToArray)
         End If
     End Sub
 
@@ -387,11 +396,14 @@ Public Class FormMain
 
     Private Sub TextBoxSearchGossip_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TextBoxSearchGossip.KeyPress
         If e.KeyChar = Chr(13) Then
+            Dim idList As New List(Of UInteger)
             If IsNumeric(TextBoxSearchGossip.Text) Then
 
             Else
 
             End If
+            ShowListViewSearchGossipMenu(idList.ToArray)
+            ShowListViewSearchGossipMenuOption(idList.ToArray)
         End If
     End Sub
 
@@ -402,15 +414,6 @@ Public Class FormMain
     Private Sub ShowListViewSearchGossipMenuOption(gossipIds() As UInteger)
 
     End Sub
-
-    Private Sub ListViewGossipMenuNpcText_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ListViewGossipMenuNpcText.MouseDoubleClick
-
-    End Sub
-
-    Private Sub ListViewGossipMenuOption_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ListViewGossipMenuOption.MouseDoubleClick
-
-    End Sub
-
 
 #End Region
 

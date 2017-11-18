@@ -38,6 +38,7 @@ Partial Class FormMain
         Me.ListViewGameObject = New System.Windows.Forms.ListView()
         Me.ColumnHeaderGameObjectEntry = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderGameObjectName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderGameOvjectNameLocale = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderGameObjectSubName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderGameObjectData = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ListViewItem = New System.Windows.Forms.ListView()
@@ -60,6 +61,7 @@ Partial Class FormMain
         Me.ListViewCreature = New System.Windows.Forms.ListView()
         Me.ColumnHeaderCreatureEntry = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderCreatureName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderCreatureNameLoc = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderCreatureSubName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderCreatureLevel = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderCreatureGossip = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -85,8 +87,6 @@ Partial Class FormMain
         Me.TextBoxSearchGossip = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.ColumnHeaderCreatureNameLoc = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderGameOvjectNameLocale = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -196,6 +196,11 @@ Partial Class FormMain
         '
         Me.ColumnHeaderGameObjectName.Text = "Name"
         Me.ColumnHeaderGameObjectName.Width = 250
+        '
+        'ColumnHeaderGameOvjectNameLocale
+        '
+        Me.ColumnHeaderGameOvjectNameLocale.Text = "Name Locale"
+        Me.ColumnHeaderGameOvjectNameLocale.Width = 250
         '
         'ColumnHeaderGameObjectSubName
         '
@@ -351,6 +356,11 @@ Partial Class FormMain
         Me.ColumnHeaderCreatureName.Text = "Name"
         Me.ColumnHeaderCreatureName.Width = 250
         '
+        'ColumnHeaderCreatureNameLoc
+        '
+        Me.ColumnHeaderCreatureNameLoc.Text = "Locale Name"
+        Me.ColumnHeaderCreatureNameLoc.Width = 250
+        '
         'ColumnHeaderCreatureSubName
         '
         Me.ColumnHeaderCreatureSubName.Text = "SubName"
@@ -423,7 +433,7 @@ Partial Class FormMain
         Me.TabPageQuest.Controls.Add(Me.ListViewQuest)
         Me.TabPageQuest.Location = New System.Drawing.Point(4, 22)
         Me.TabPageQuest.Name = "TabPageQuest"
-        Me.TabPageQuest.Size = New System.Drawing.Size(981, 366)
+        Me.TabPageQuest.Size = New System.Drawing.Size(1023, 366)
         Me.TabPageQuest.TabIndex = 2
         Me.TabPageQuest.Text = "Quest"
         Me.TabPageQuest.UseVisualStyleBackColor = True
@@ -455,7 +465,7 @@ Partial Class FormMain
         Me.TabPageCreature.Location = New System.Drawing.Point(4, 22)
         Me.TabPageCreature.Name = "TabPageCreature"
         Me.TabPageCreature.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPageCreature.Size = New System.Drawing.Size(981, 366)
+        Me.TabPageCreature.Size = New System.Drawing.Size(1023, 366)
         Me.TabPageCreature.TabIndex = 0
         Me.TabPageCreature.Text = "Creature"
         Me.TabPageCreature.UseVisualStyleBackColor = True
@@ -518,7 +528,7 @@ Partial Class FormMain
         Me.TabPageItem.Controls.Add(Me.ListViewItem)
         Me.TabPageItem.Location = New System.Drawing.Point(4, 22)
         Me.TabPageItem.Name = "TabPageItem"
-        Me.TabPageItem.Size = New System.Drawing.Size(981, 366)
+        Me.TabPageItem.Size = New System.Drawing.Size(1023, 366)
         Me.TabPageItem.TabIndex = 3
         Me.TabPageItem.Text = "Item"
         Me.TabPageItem.UseVisualStyleBackColor = True
@@ -550,7 +560,7 @@ Partial Class FormMain
         Me.TabPageGossip.Controls.Add(Me.ListViewGossipMenuNpcText)
         Me.TabPageGossip.Location = New System.Drawing.Point(4, 22)
         Me.TabPageGossip.Name = "TabPageGossip"
-        Me.TabPageGossip.Size = New System.Drawing.Size(981, 366)
+        Me.TabPageGossip.Size = New System.Drawing.Size(1023, 366)
         Me.TabPageGossip.TabIndex = 4
         Me.TabPageGossip.Text = "Gossip"
         Me.TabPageGossip.UseVisualStyleBackColor = True
@@ -576,16 +586,6 @@ Partial Class FormMain
         '
         'Timer1
         '
-        '
-        'ColumnHeaderCreatureNameLoc
-        '
-        Me.ColumnHeaderCreatureNameLoc.Text = "Locale Name"
-        Me.ColumnHeaderCreatureNameLoc.Width = 250
-        '
-        'ColumnHeaderGameOvjectNameLocale
-        '
-        Me.ColumnHeaderGameOvjectNameLocale.Text = "Name Locale"
-        Me.ColumnHeaderGameOvjectNameLocale.Width = 250
         '
         'FormMain
         '

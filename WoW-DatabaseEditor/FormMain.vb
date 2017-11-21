@@ -101,8 +101,8 @@ Public Class FormMain
             Dim idList As New List(Of UInteger)
             If IsNumeric(TextBoxSearchQuest.Text) Then
                 Dim id As Integer = TextBoxSearchQuest.Text
-                Dim qt As TableQuestTemplateItem = _tableManager.StorageQuestTemplate.SearchId(id)
-                Dim lq As TableLocalesQuestItem = _tableManager.StorageLocalesQuest.SearchId(id)
+                Dim qt As TableQuestTemplateItem = _tableManager.StorageQuestTemplate.GetItem(id)
+                Dim lq As TableLocalesQuestItem = _tableManager.StorageLocalesQuest.GetItem(id)
                 If IsNothing(qt) = False Then
                     idList.Add(qt.Id)
                 End If
@@ -233,7 +233,7 @@ Public Class FormMain
             Dim idList As New List(Of UInteger)
             If IsNumeric(TextBoxSearchCreature.Text) Then
                 Dim id As Integer = TextBoxSearchCreature.Text
-                Dim cr1 As TableCreatureItem = _tableManager.StorageCreature.SearchGuid(id)
+                Dim cr1 As TableCreatureItem = _tableManager.StorageCreature.GetItem(id)
                 Dim cr2() As TableCreatureItem = _tableManager.StorageCreature.SearchWithId(id)
                 If IsNothing(cr1) = False Then
                     idList.Add(cr1.id)
@@ -246,7 +246,7 @@ Public Class FormMain
                         End If
                     Next
                 End If
-                Dim ct1 As TableCreatureTemplateItem = _tableManager.StorageCreatureTemplate.SearchEntry(id)
+                Dim ct1 As TableCreatureTemplateItem = _tableManager.StorageCreatureTemplate.GetItem(id)
                 If IsNothing(ct1) = False Then
                     If idList.Contains(ct1.entry) = False Then
                         idList.Add(ct1.entry)
@@ -304,9 +304,9 @@ Public Class FormMain
             Dim idList As New List(Of UInteger)
             If IsNumeric(TextBoxSearchGameObject.Text) Then
                 Dim id As Integer = TextBoxSearchCreature.Text
-                Dim gt1 As TableGameobjectItem = _tableManager.StorageGameobject.SearchGuid(id)
+                Dim gt1 As TableGameobjectItem = _tableManager.StorageGameobject.GetItem(id)
                 Dim gt2() As TableGameobjectItem = _tableManager.StorageGameobject.SearchWithId(id)
-                Dim gt3 As TableGameobjectTemplateItem = _tableManager.StorageGameobjectTemplate.SearchEntry(id)
+                Dim gt3 As TableGameobjectTemplateItem = _tableManager.StorageGameobjectTemplate.GetItem(id)
                 If IsNothing(gt1) = False Then
                     idList.Add(gt1.id)
                 End If
@@ -374,20 +374,58 @@ Public Class FormMain
         If e.KeyChar = Chr(13) Then
             Dim idList As New List(Of UInteger)
             If IsNumeric(TextBoxSearchItem.Text) Then
-
+                Dim id As Integer = TextBoxSearchItem.Text
+                Dim it1 As TableItemTemplateItem = _tableManager.StorageItemTemplate.GetItem(id)
+                Dim it2 As TableLocalesItemItem = _tableManager.StorageLocalesItem.GetItem(id)
+                If IsNothing(it1) = False Then
+                    idList.Add(it1.entry)
+                End If
+                If IsNothing(it2) = False Then
+                    If idList.Contains(it2.entry) = False Then
+                        idList.Add(it2.entry)
+                    End If
+                End If
             Else
-
+                Dim s1 As String = TextBoxSearchItem.Text.Trim
+                If String.IsNullOrWhiteSpace(s1) Then Exit Sub
+                Dim it1() As TableItemTemplateItem = _tableManager.StorageItemTemplate.SearchFromNamePart(s1)
+                Dim it2() As TableLocalesItemItem = _tableManager.StorageLocalesItem.SearchFromNamePart(s1, _locale)                
+                If IsNothing(it1) = False Then
+                    For Each it As TableItemTemplateItem In it1
+                        idList.Add(it.entry)
+                    Next
+                End If
+                If IsNothing(it2) = False Then
+                    For Each it As TableLocalesItemItem In it2
+                        idList.Add(it.entry)
+                    Next
+                End If
             End If
             ShowListViewSearchItem(idList.ToArray)
         End If
     End Sub
 
     Private Sub ShowListViewSearchItem(ids() As UInteger)
-
+        ListViewItem.Items.Clear()
+        For Each entry As UInteger In ids
+            Dim cti As TableItemTemplateItem = _tableManager.StorageItemTemplate.GetItem(entry)
+            Dim loc As TableLocalesItemItem = _tableManager.StorageLocalesItem.GetItem(entry)
+            If IsNothing(cti) = False Then
+                Dim lvi As ListViewItem = cti.GetListViewForNameSearch(loc.Name(_locale))
+                ListViewItem.Items.Add(lvi)
+            End If
+        Next
     End Sub
 
     Private Sub ListViewItem_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ListViewItem.MouseDoubleClick
-
+        Dim lv As ListView = sender
+        Dim slvic As ListView.SelectedListViewItemCollection = lv.SelectedItems
+        If slvic.Count = 0 Then Exit Sub
+        Dim entry As UInteger
+        If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
+            'Dim frm As New WoWItemDialog_434(_databaseManager, _tableManager, entry, _locale)
+            'frm.Show()
+        End If
     End Sub
 
 #End Region
@@ -398,6 +436,10 @@ Public Class FormMain
         If e.KeyChar = Chr(13) Then
             Dim idList As New List(Of UInteger)
             If IsNumeric(TextBoxSearchGossip.Text) Then
+                Dim id As Integer = TextBoxSearchGossip.Text
+                Dim gm1 As TableGossipMenuItem = _tableManager.StorageGossipMenu.GetItem(id)
+                Dim gm2() As TableGossipMenuOptionItem = _tableManager.StorageGossipMenuOption.SearchWithMenu_id(id)
+                Stop
 
             Else
 

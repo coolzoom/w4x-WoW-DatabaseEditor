@@ -440,9 +440,51 @@ Public Class FormMain
                 Dim gm1 As TableGossipMenuItem = _tableManager.StorageGossipMenu.GetItem(id)
                 Dim gm2() As TableGossipMenuOptionItem = _tableManager.StorageGossipMenuOption.SearchWithMenu_id(id)
                 Stop
-
+                If IsNothing(gm1) = False Then
+                    idList.Add(gm1.entry)
+                End If
+                If IsNothing(gm2) = False Then
+                    For Each gm As TableGossipMenuOptionItem In gm2
+                        If idList.Contains(gm.menu_id) = False Then
+                            idList.Add(gm.menu_id)
+                        End If
+                    Next
+                End If
             Else
-
+                Dim s1 As String = TextBoxSearchItem.Text.Trim
+                If String.IsNullOrWhiteSpace(s1) Then Exit Sub
+                Dim it1() As TableGossipMenuOptionItem = _tableManager.StorageGossipMenuOption.SearchFromOptionTextPart(s1)
+                Dim it2() As TableGossipMenuOptionItem = _tableManager.StorageGossipMenuOption.SearchFromBoxTextPart(s1)
+                Dim it3() As TableLocalesGossipMenuOptionItem = _tableManager.StorageLocalesGossipMenuOption.SearchFromOptionTextPart(s1, _locale)
+                Dim it4() As TableLocalesGossipMenuOptionItem = _tableManager.StorageLocalesGossipMenuOption.SearchFromBoxTextPart(s1, _locale)
+                If IsNothing(it1) = False Then
+                    For Each item As TableGossipMenuOptionItem In it1
+                        If idList.Contains(item.menu_id) = False Then
+                            idList.Add(item.menu_id)
+                        End If
+                    Next
+                End If
+                If IsNothing(it2) = False Then
+                    For Each item As TableGossipMenuOptionItem In it2
+                        If idList.Contains(item.menu_id) = False Then
+                            idList.Add(item.menu_id)
+                        End If
+                    Next
+                End If
+                If IsNothing(it3) = False Then
+                    For Each item As TableLocalesGossipMenuOptionItem In it3
+                        If idList.Contains(item.menu_id) = False Then
+                            idList.Add(item.menu_id)
+                        End If
+                    Next
+                End If
+                If IsNothing(it4) = False Then
+                    For Each item As TableLocalesGossipMenuOptionItem In it4
+                        If idList.Contains(item.menu_id) = False Then
+                            idList.Add(item.menu_id)
+                        End If
+                    Next
+                End If
             End If
             ShowListViewSearchGossipMenu(idList.ToArray)
             ShowListViewSearchGossipMenuOption(idList.ToArray)
@@ -450,11 +492,11 @@ Public Class FormMain
     End Sub
 
     Private Sub ShowListViewSearchGossipMenu(gossipIds() As UInteger)
-
+        Stop
     End Sub
 
     Private Sub ShowListViewSearchGossipMenuOption(gossipIds() As UInteger)
-
+        Stop
     End Sub
 
 #End Region

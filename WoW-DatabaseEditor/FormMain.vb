@@ -6,20 +6,19 @@ Imports ClassLibWoWTableManager
 Public Class FormMain
     Private _locale As WoWClientLocale = WoWClientLocale.deDE ' select in what language the table text rows are shown
     Private _databaseManager As WoWDatabaseManager ' hold the store of all database properties
-    Private _defaultDatabaseItem As WoWDatabaseItem
-    Private _compareDatabaseItem As WoWDatabaseItem
+    Private _selectedDatabaseItem As WoWDatabaseItem
     Private _tableManager As WoWTableManager ' holds all table data
 
 #Region " Main Form"
 
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         _databaseManager = New WoWDatabaseManager
-        _defaultDatabaseItem = _databaseManager.GetDefaultWoWDatabaseItem
-        _compareDatabaseItem = _databaseManager.GetCompareWoWDatabaseItem
-        _tableManager = New WoWTableManager(_defaultDatabaseItem, _locale)
+        _selectedDatabaseItem = _databaseManager.GetDefaultWoWDatabaseItem
+        _tableManager = New WoWTableManager(_selectedDatabaseItem, _locale)
         ResizeGossip()
         ShowStatusBar()
         MenuStrip1.Enabled = False
+        TabControl1.Enabled = False
         StatusStrip1.Enabled = False
         Timer1.Interval = 5000
         Timer1.Start()
@@ -30,6 +29,7 @@ Public Class FormMain
         If _tableManager.CheckForFinishLoadAllTables() Then
             MenuStrip1.Enabled = True
             StatusStrip1.Enabled = True
+            TabControl1.Enabled = True
         Else
             Timer1.Interval = 500
             Timer1.Start()
@@ -47,18 +47,29 @@ Public Class FormMain
             .ButtonOKText = "OK",
             .DatabaseManager = _databaseManager
         }
-        If frm.ShowDialog = DialogResult.OK Then            
-            _defaultDatabaseItem = _databaseManager.GetDefaultWoWDatabaseItem
-            _compareDatabaseItem = _databaseManager.GetCompareWoWDatabaseItem
+        If frm.ShowDialog = DialogResult.OK Then
+            Stop
+            ShowStatusBar()
+        End If
+    End Sub
+
+    Private Sub SelectDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectDatabaseToolStripMenuItem.Click
+        Dim frm As New WoWDatabaseDialog With {
+           .Text = .Text & ": Select Current Server Database",
+           .ButtonOKText = "Select",
+           .DatabaseManager = _databaseManager
+       }
+        If frm.ShowDialog = DialogResult.OK Then
+            _selectedDatabaseItem = frm.SelectedWoWDatabaseItem
             ShowStatusBar()
         End If
     End Sub
 
     Private Sub ShowStatusBar()
         Dim s1 As String = ""
-        If IsNothing(_defaultDatabaseItem) = False AndAlso _databaseManager.Count > 0 Then
-            s1 = "Host: " & _defaultDatabaseItem.ConnectionInfoString & "  "
-            s1 &= "Database: " & _defaultDatabaseItem.CoreName & "  "
+        If IsNothing(_selectedDatabaseItem) = False AndAlso _databaseManager.Count > 0 Then
+            s1 = "Host: " & _selectedDatabaseItem.ConnectionInfoString & "  "
+            s1 &= "Database: " & _selectedDatabaseItem.CoreName & "  "
             s1 &= "Locale: " & _locale.ToString & "  "
         End If
         ToolStripStatusLabel1.Text = s1
@@ -66,17 +77,76 @@ Public Class FormMain
 
     Private Sub FormMain_Resize(sender As Object, e As EventArgs) Handles Me.Resize
         Select Case TabControl1.SelectedTab.Text
+            Case "Quest"
+                ResizeQuest()
+            Case "Creature"
+                ResizeCreature()
+            Case "GameObject"
+                ResizeGameObject()
+            Case "Item"
+                ResizeItem()
             Case "Gossip"
                 ResizeGossip()
         End Select
     End Sub
 
+    Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl1.SelectedIndexChanged
+        Select Case TabControl1.SelectedTab.Text
+            Case "Quest"
+                ResizeQuest()
+            Case "Creature"
+                ResizeCreature()
+            Case "GameObject"
+                ResizeGameObject()
+            Case "Item"
+                ResizeItem()
+            Case "Gossip"
+                ResizeGossip()
+        End Select
+    End Sub
+
+    Private Sub ResizeQuest()
+        Dim w1 As Integer = TabControl1.Width - 14
+        Dim h1 As Integer = TabControl1.Height - ListViewQuest.Top - 30
+        TextBoxSearchQuest.Width = w1 - TextBoxSearchQuest.Left
+        ListViewQuest.Width = w1
+        ListViewQuest.Height = h1
+    End Sub
+
+    Private Sub ResizeCreature()
+        Dim w1 As Integer = TabControl1.Width - 14
+        Dim h1 As Integer = TabControl1.Height - ListViewQuest.Top - 30
+        TextBoxSearchCreature.Width = w1 - TextBoxSearchCreature.Left
+        ListViewCreature.Width = w1
+        ListViewCreature.Height = h1
+    End Sub
+
+    Private Sub ResizeGameObject()
+        Dim w1 As Integer = TabControl1.Width - 14
+        Dim h1 As Integer = TabControl1.Height - ListViewQuest.Top - 30
+        TextBoxSearchGameObject.Width = w1 - TextBoxSearchGameObject.Left
+        ListViewGameObject.Width = w1
+        ListViewGameObject.Height = h1
+    End Sub
+
+    Private Sub ResizeItem()
+        Dim w1 As Integer = TabControl1.Width - 14
+        Dim h1 As Integer = TabControl1.Height - ListViewQuest.Top - 30
+        TextBoxSearchItem.Width = w1 - TextBoxSearchItem.Left
+        ListViewItem.Width = w1
+        ListViewItem.Height = h1
+    End Sub
+
     Private Sub ResizeGossip()
-        Dim h1 As Integer = TabControl1.Height - ListViewGossipMenuNpcText.Top - 31
+        Dim w1 As Integer = TabControl1.Width - 14
+        Dim h1 As Integer = TabControl1.Height - ListViewGossipMenuNpcText.Top - 30
         Dim h2 As Integer = h1 \ 2
+        TextBoxSearchGossip.Width = w1 - TextBoxSearchGossip.Left
+        ListViewGossipMenuNpcText.Width = w1
         ListViewGossipMenuNpcText.Height = h2
         ListViewGossipMenuOption.Top = ListViewGossipMenuNpcText.Top + ListViewGossipMenuNpcText.Height + 3
         ListViewGossipMenuOption.Height = h2
+        ListViewGossipMenuOption.Width = w1
     End Sub
 
     Private Sub LocaleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LocaleToolStripMenuItem.Click
@@ -219,7 +289,7 @@ Public Class FormMain
         If slvic.Count = 0 Then Exit Sub
         Dim entry As UInteger
         If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
-            Dim frm As New WoWQuestDialog_434(_databaseManager, _tableManager, entry, _locale)
+            Dim frm As New WoWQuestDialog_434(_databaseManager, _tableManager, _selectedDatabaseItem, entry, _locale)
             frm.Show()
         End If
     End Sub
@@ -290,7 +360,7 @@ Public Class FormMain
         If slvic.Count = 0 Then Exit Sub
         Dim entry As UInteger
         If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
-            Dim frm As New WoWCreatureDialog_434(_databaseManager, _tableManager, entry, _locale)
+            Dim frm As New WoWCreatureDialog_434(_databaseManager, _tableManager, _selectedDatabaseItem, entry, _locale)
             frm.Show()
         End If
     End Sub
@@ -361,8 +431,8 @@ Public Class FormMain
         If slvic.Count = 0 Then Exit Sub
         Dim entry As UInteger
         If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
-            'Dim frm As New WoWGameObjectDialog_434(_databaseManager, _tableManager, entry, _locale)
-            'frm.Show()
+            Dim frm As New WoWGameObjectDialog_434(_databaseManager, _tableManager, _selectedDatabaseItem, entry, _locale)
+            frm.Show()
         End If
     End Sub
 
@@ -423,7 +493,7 @@ Public Class FormMain
         If slvic.Count = 0 Then Exit Sub
         Dim entry As UInteger
         If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
-            'Dim frm As New WoWItemDialog_434(_databaseManager, _tableManager, entry, _locale)
+            'Dim frm As New WoWItemDialog_434(_databaseManager, _tableManager, _selectedDatabaseItem, entry, _locale)
             'frm.Show()
         End If
     End Sub
@@ -438,8 +508,7 @@ Public Class FormMain
             If IsNumeric(TextBoxSearchGossip.Text) Then
                 Dim id As Integer = TextBoxSearchGossip.Text
                 Dim gm1 As TableGossipMenuItem = _tableManager.StorageGossipMenu.GetItem(id)
-                Dim gm2() As TableGossipMenuOptionItem = _tableManager.StorageGossipMenuOption.SearchWithMenu_id(id)
-                Stop
+                Dim gm2() As TableGossipMenuOptionItem = _tableManager.StorageGossipMenuOption.SearchWithMenu_id(id)                
                 If IsNothing(gm1) = False Then
                     idList.Add(gm1.entry)
                 End If
@@ -492,10 +561,37 @@ Public Class FormMain
     End Sub
 
     Private Sub ShowListViewSearchGossipMenu(gossipIds() As UInteger)
+        ListViewGossipMenuNpcText.Items.Clear()
+        For Each menuId As UInteger In gossipIds
+            Dim gmi() As TableGossipMenuItem = _tableManager.StorageGossipMenu.SearchWithEntry(menuId)
+            If IsNothing(gmi) = False Then
+                For Each item As TableGossipMenuItem In gmi
+                    Dim npc1 As TableNpcTextItem = _tableManager.StorageNpcText.GetItem(item.text_id)
+                    Dim npc2 As TableLocalesNpcTextItem = _tableManager.StorageLocalesNpcText.GetItem(item.text_id)
+                    Stop
+
+                Next
+            End If
+        Next
+
+    End Sub
+
+    Private Sub ShowListViewSearchGossipMenuOption(gossipIds() As UInteger)        
+        ListViewGossipMenuOption.Items.Clear()
+        For Each menuId As UInteger In gossipIds
+            Dim gmi() As TableGossipMenuOptionItem = _tableManager.StorageGossipMenuOption.SearchWithMenu_id(menuId)
+            Dim lgi() As TableLocalesGossipMenuOptionItem = _tableManager.StorageLocalesGossipMenuOption.SearchWithMenu_id(menuId)
+            Stop
+
+        Next
+
+    End Sub
+
+    Private Sub ListViewGossipMenuNpcText_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ListViewGossipMenuNpcText.MouseDoubleClick
         Stop
     End Sub
 
-    Private Sub ShowListViewSearchGossipMenuOption(gossipIds() As UInteger)
+    Private Sub ListViewGossipMenuOption_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ListViewGossipMenuOption.MouseDoubleClick
         Stop
     End Sub
 

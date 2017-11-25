@@ -26,6 +26,7 @@ Partial Class FormMain
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PropertiesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SelectDatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LocaleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
         Me.QuitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -108,7 +109,7 @@ Partial Class FormMain
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PropertiesToolStripMenuItem, Me.LocaleToolStripMenuItem, Me.ToolStripMenuItem1, Me.QuitToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PropertiesToolStripMenuItem, Me.SelectDatabaseToolStripMenuItem, Me.LocaleToolStripMenuItem, Me.ToolStripMenuItem1, Me.QuitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "File"
@@ -116,24 +117,30 @@ Partial Class FormMain
         'PropertiesToolStripMenuItem
         '
         Me.PropertiesToolStripMenuItem.Name = "PropertiesToolStripMenuItem"
-        Me.PropertiesToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
+        Me.PropertiesToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
         Me.PropertiesToolStripMenuItem.Text = "Properties"
+        '
+        'SelectDatabaseToolStripMenuItem
+        '
+        Me.SelectDatabaseToolStripMenuItem.Name = "SelectDatabaseToolStripMenuItem"
+        Me.SelectDatabaseToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.SelectDatabaseToolStripMenuItem.Text = "Select Database"
         '
         'LocaleToolStripMenuItem
         '
         Me.LocaleToolStripMenuItem.Name = "LocaleToolStripMenuItem"
-        Me.LocaleToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
+        Me.LocaleToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
         Me.LocaleToolStripMenuItem.Text = "Locale"
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(124, 6)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(153, 6)
         '
         'QuitToolStripMenuItem
         '
         Me.QuitToolStripMenuItem.Name = "QuitToolStripMenuItem"
-        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
+        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
         Me.QuitToolStripMenuItem.Text = "Quit"
         '
         'WorkToolStripMenuItem
@@ -597,7 +604,7 @@ Partial Class FormMain
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "FormMain"
-        Me.Text = "WoW Database Editor: ArkCura NG 434 (c) 2017 GPN39F"
+        Me.Text = "WoW Database Editor: ArkCore NG 434 (c) 2017 GPN39F"
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.StatusStrip1.ResumeLayout(False)
@@ -682,4 +689,5 @@ Partial Class FormMain
     Friend WithEvents ColumnHeaderGameObjectData As ColumnHeader
     Friend WithEvents ColumnHeaderGameOvjectNameLocale As ColumnHeader
     Friend WithEvents ColumnHeaderCreatureNameLoc As ColumnHeader
+    Friend WithEvents SelectDatabaseToolStripMenuItem As ToolStripMenuItem
 End Class

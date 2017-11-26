@@ -373,7 +373,7 @@ Public Class FormMain
         If e.KeyChar = Chr(13) Then
             Dim idList As New List(Of UInteger)
             If IsNumeric(TextBoxSearchGameObject.Text) Then
-                Dim id As Integer = TextBoxSearchCreature.Text
+                Dim id As Integer = TextBoxSearchGameObject.Text
                 Dim gt1 As TableGameobjectItem = _tableManager.StorageGameobject.GetItem(id)
                 Dim gt2() As TableGameobjectItem = _tableManager.StorageGameobject.SearchWithId(id)
                 Dim gt3 As TableGameobjectTemplateItem = _tableManager.StorageGameobjectTemplate.GetItem(id)
@@ -493,8 +493,8 @@ Public Class FormMain
         If slvic.Count = 0 Then Exit Sub
         Dim entry As UInteger
         If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
-            'Dim frm As New WoWItemDialog_434(_databaseManager, _tableManager, _selectedDatabaseItem, entry, _locale)
-            'frm.Show()
+            Dim frm As New WoWItemDialog_434(_databaseManager, _tableManager, _selectedDatabaseItem, entry, _locale)
+            frm.Show()
         End If
     End Sub
 

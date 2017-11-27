@@ -51,7 +51,6 @@ Partial Class FormMain
         Me.ColumnHeaderNpcTextId = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderNpcText = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderNpcBroadcastId = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderNpcSound = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderNpcEmote = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ListViewGossipMenuOption = New System.Windows.Forms.ListView()
         Me.ColumnHeaderGossipOptionId = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -88,6 +87,12 @@ Partial Class FormMain
         Me.TextBoxSearchGossip = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.ColumnHeaderNpcLocaleText = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderGossipOptionBroadcast = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderGossipOptionBoxMoney = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderGossipOptionBoxText = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderGossipOptionLocaleText = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderGossipOptionLocaleBoxText = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -256,7 +261,7 @@ Partial Class FormMain
         Me.ListViewGossipMenuNpcText.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ListViewGossipMenuNpcText.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderGossipId, Me.ColumnHeaderNpcTextId, Me.ColumnHeaderNpcText, Me.ColumnHeaderNpcBroadcastId, Me.ColumnHeaderNpcSound, Me.ColumnHeaderNpcEmote})
+        Me.ListViewGossipMenuNpcText.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderGossipId, Me.ColumnHeaderNpcTextId, Me.ColumnHeaderNpcText, Me.ColumnHeaderNpcBroadcastId, Me.ColumnHeaderNpcEmote, Me.ColumnHeaderNpcLocaleText})
         Me.ListViewGossipMenuNpcText.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ListViewGossipMenuNpcText.FullRowSelect = True
         Me.ListViewGossipMenuNpcText.GridLines = True
@@ -289,10 +294,6 @@ Partial Class FormMain
         Me.ColumnHeaderNpcBroadcastId.Text = "NpcBroadcastId"
         Me.ColumnHeaderNpcBroadcastId.Width = 100
         '
-        'ColumnHeaderNpcSound
-        '
-        Me.ColumnHeaderNpcSound.Text = "SoundID"
-        '
         'ColumnHeaderNpcEmote
         '
         Me.ColumnHeaderNpcEmote.Text = "EmoteID"
@@ -302,7 +303,7 @@ Partial Class FormMain
         Me.ListViewGossipMenuOption.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ListViewGossipMenuOption.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderGossipOptionId, Me.ColumnHeaderGossipOptionIndex, Me.ColumnHeaderGossipOptionText, Me.ColumnHeaderGossipOptionIcon, Me.ColumnHeaderGossipOptionNpcFlag})
+        Me.ListViewGossipMenuOption.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderGossipOptionId, Me.ColumnHeaderGossipOptionIndex, Me.ColumnHeaderGossipOptionText, Me.ColumnHeaderGossipOptionLocaleText, Me.ColumnHeaderGossipOptionBroadcast, Me.ColumnHeaderGossipOptionIcon, Me.ColumnHeaderGossipOptionNpcFlag, Me.ColumnHeaderGossipOptionBoxMoney, Me.ColumnHeaderGossipOptionBoxText, Me.ColumnHeaderGossipOptionLocaleBoxText})
         Me.ListViewGossipMenuOption.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ListViewGossipMenuOption.FullRowSelect = True
         Me.ListViewGossipMenuOption.GridLines = True
@@ -325,8 +326,8 @@ Partial Class FormMain
         '
         'ColumnHeaderGossipOptionText
         '
-        Me.ColumnHeaderGossipOptionText.Text = "Text"
-        Me.ColumnHeaderGossipOptionText.Width = 250
+        Me.ColumnHeaderGossipOptionText.Text = "Option-Text"
+        Me.ColumnHeaderGossipOptionText.Width = 150
         '
         'ColumnHeaderGossipOptionIcon
         '
@@ -594,6 +595,36 @@ Partial Class FormMain
         'Timer1
         '
         '
+        'ColumnHeaderNpcLocaleText
+        '
+        Me.ColumnHeaderNpcLocaleText.Text = "Locale Npc Text"
+        Me.ColumnHeaderNpcLocaleText.Width = 250
+        '
+        'ColumnHeaderGossipOptionBroadcast
+        '
+        Me.ColumnHeaderGossipOptionBroadcast.Text = "Broadcast"
+        Me.ColumnHeaderGossipOptionBroadcast.Width = 80
+        '
+        'ColumnHeaderGossipOptionBoxMoney
+        '
+        Me.ColumnHeaderGossipOptionBoxMoney.Text = "Box-Money"
+        Me.ColumnHeaderGossipOptionBoxMoney.Width = 70
+        '
+        'ColumnHeaderGossipOptionBoxText
+        '
+        Me.ColumnHeaderGossipOptionBoxText.Text = "Box-Text"
+        Me.ColumnHeaderGossipOptionBoxText.Width = 150
+        '
+        'ColumnHeaderGossipOptionLocaleText
+        '
+        Me.ColumnHeaderGossipOptionLocaleText.Text = "Locale Option-Text"
+        Me.ColumnHeaderGossipOptionLocaleText.Width = 150
+        '
+        'ColumnHeaderGossipOptionLocaleBoxText
+        '
+        Me.ColumnHeaderGossipOptionLocaleBoxText.Text = "Locale Box-Text"
+        Me.ColumnHeaderGossipOptionLocaleBoxText.Width = 150
+        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -678,7 +709,6 @@ Partial Class FormMain
     Friend WithEvents GameObjectToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ColumnHeaderCreatureSubName As ColumnHeader
     Friend WithEvents ColumnHeaderGameObjectSubName As ColumnHeader
-    Friend WithEvents ColumnHeaderNpcSound As ColumnHeader
     Friend WithEvents ColumnHeaderNpcEmote As ColumnHeader
     Friend WithEvents ColumnHeaderGossipOptionIcon As ColumnHeader
     Friend WithEvents ColumnHeaderGossipOptionNpcFlag As ColumnHeader
@@ -690,4 +720,10 @@ Partial Class FormMain
     Friend WithEvents ColumnHeaderGameOvjectNameLocale As ColumnHeader
     Friend WithEvents ColumnHeaderCreatureNameLoc As ColumnHeader
     Friend WithEvents SelectDatabaseToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ColumnHeaderNpcLocaleText As ColumnHeader
+    Friend WithEvents ColumnHeaderGossipOptionLocaleText As ColumnHeader
+    Friend WithEvents ColumnHeaderGossipOptionBroadcast As ColumnHeader
+    Friend WithEvents ColumnHeaderGossipOptionBoxMoney As ColumnHeader
+    Friend WithEvents ColumnHeaderGossipOptionBoxText As ColumnHeader
+    Friend WithEvents ColumnHeaderGossipOptionLocaleBoxText As ColumnHeader
 End Class

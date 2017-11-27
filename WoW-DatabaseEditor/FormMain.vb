@@ -568,31 +568,78 @@ Public Class FormMain
                 For Each item As TableGossipMenuItem In gmi
                     Dim npc1 As TableNpcTextItem = _tableManager.StorageNpcText.GetItem(item.text_id)
                     Dim npc2 As TableLocalesNpcTextItem = _tableManager.StorageLocalesNpcText.GetItem(item.text_id)
-                    Stop
-
+                    Dim lvi As New ListViewItem(menuId)
+                    lvi.SubItems.Add(item.text_id)
+                    If IsNothing(npc1) Then
+                        lvi.SubItems.Add("")
+                        lvi.SubItems.Add("")
+                        lvi.SubItems.Add("")
+                    Else
+                        lvi.SubItems.Add(npc1.NpcText(0))
+                        lvi.SubItems.Add(npc1.BroadcastTextID(0))
+                        lvi.SubItems.Add(npc1.em0(0))
+                    End If
+                    If IsNothing(npc2) Then
+                        lvi.SubItems.Add("")
+                    Else
+                        lvi.SubItems.Add(npc2.NpcText(0, _locale))
+                    End If
+                    ListViewGossipMenuNpcText.Items.Add(lvi)
                 Next
             End If
         Next
-
     End Sub
 
     Private Sub ShowListViewSearchGossipMenuOption(gossipIds() As UInteger)        
         ListViewGossipMenuOption.Items.Clear()
         For Each menuId As UInteger In gossipIds
             Dim gmi() As TableGossipMenuOptionItem = _tableManager.StorageGossipMenuOption.SearchWithMenu_id(menuId)
-            Dim lgi() As TableLocalesGossipMenuOptionItem = _tableManager.StorageLocalesGossipMenuOption.SearchWithMenu_id(menuId)
-            Stop
+            If IsNothing(gmi) = False Then
+                For Each item As TableGossipMenuOptionItem In gmi
+                    Dim lgmo As TableLocalesGossipMenuOptionItem = _tableManager.StorageLocalesGossipMenuOption.GetItem(item.GetKey)
+                    Dim lvi As New ListViewItem(item.menu_id)
+                    lvi.SubItems.Add(item.id)
+                    lvi.SubItems.Add(item.option_text)
+                    If IsNothing(lgmo) Then
+                        lvi.SubItems.Add("")
+                    Else
+                        lvi.SubItems.Add(lgmo.OptionText(_locale))
+                    End If
+                    lvi.SubItems.Add(item.OptionBroadcastTextID)
+                    lvi.SubItems.Add(item.option_icon)
+                    lvi.SubItems.Add(item.npc_option_npcflag)
+                    lvi.SubItems.Add(item.box_money)
+                    lvi.SubItems.Add(item.box_text)
+                    If IsNothing(lgmo) Then
+                        lvi.SubItems.Add("")
+                    Else
+                        lvi.SubItems.Add(lgmo.BoxText(_locale))
+                    End If
+                    ListViewGossipMenuOption.Items.Add(lvi)
+                Next
+            End If
 
         Next
-
     End Sub
 
     Private Sub ListViewGossipMenuNpcText_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ListViewGossipMenuNpcText.MouseDoubleClick
-        Stop
+        Dim lv As ListView = sender
+        Dim slvic As ListView.SelectedListViewItemCollection = lv.SelectedItems
+        If slvic.Count = 0 Then Exit Sub
+        Dim lvi As ListViewItem = slvic.Item(0)
+        Dim menuId As UInteger = lvi.SubItems(0).Text
+        Dim frm As New WoWGossipMenuDialog_434(_databaseManager, _tableManager, _selectedDatabaseItem, menuId, _locale)
+        frm.Show()
     End Sub
 
-    Private Sub ListViewGossipMenuOption_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ListViewGossipMenuOption.MouseDoubleClick
-        Stop
+    Private Sub ListViewGossipMenuOption_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ListViewGossipMenuOption.MouseDoubleClick        
+        Dim lv As ListView = sender
+        Dim slvic As ListView.SelectedListViewItemCollection = lv.SelectedItems
+        If slvic.Count = 0 Then Exit Sub
+        Dim lvi As ListViewItem = slvic.Item(0)
+        Dim menuId As UInteger = lvi.SubItems(0).Text
+        Dim frm As New WoWGossipMenuDialog_434(_databaseManager, _tableManager, _selectedDatabaseItem, menuId, _locale)
+        frm.Show()
     End Sub
 
 #End Region

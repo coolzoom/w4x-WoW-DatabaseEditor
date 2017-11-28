@@ -16,6 +16,11 @@ Public Class FormMain
         _selectedDatabaseItem = _databaseManager.GetDefaultWoWDatabaseItem
         _tableManager = New WoWTableManager(_selectedDatabaseItem, _locale)
         ResizeGossip()
+
+        LoadQuestInfoDictionary()
+        LoadQuestSortDictionary()
+        LoadAreaTableDictionary()
+
         ShowStatusBar()
         MenuStrip1.Enabled = False
         TabControl1.Enabled = False

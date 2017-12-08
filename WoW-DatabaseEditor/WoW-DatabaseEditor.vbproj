@@ -125,13 +125,13 @@
       <Project>{5ef517d8-4882-4845-9f79-385c7db34495}</Project>
       <Name>ClassLibWoWDatabaseManager</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\WoWTableDialog\ClassLibWoWTableDialog\ClassLibWoWTableDialog.vbproj">
-      <Project>{e23d3b37-5c8d-4376-8042-bc3b9b9ba92f}</Project>
-      <Name>ClassLibWoWTableDialog</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WoWTableManager\ClassLibWoWTableManager\ClassLibWoWTableManager.vbproj">
+    <ProjectReference Include="..\..\WoWTableManager434\ClassLibWoWTableManager\ClassLibWoWTableManager434.vbproj">
       <Project>{0b2efa15-00a3-4148-a014-bef0be31c3fd}</Project>
-      <Name>ClassLibWoWTableManager</Name>
+      <Name>ClassLibWoWTableManager434</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WoWTableManager725\ClassLibWoWTableManager\ClassLibWoWTableManager725.vbproj">
+      <Project>{51d29d25-3e5c-4614-9a34-f3c190f89182}</Project>
+      <Name>ClassLibWoWTableManager725</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

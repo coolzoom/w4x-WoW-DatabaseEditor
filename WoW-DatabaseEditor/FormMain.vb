@@ -1,37 +1,26 @@
 ﻿
 Imports ClassLibWoWDatabaseManager
-Imports ClassLibWoWTableDialog
-Imports ClassLibWoWTableManager
 
 Public Class FormMain
     Private _locale As WoWClientLocale = WoWClientLocale.deDE ' select in what language the table text rows are shown
     Private _databaseManager As WoWDatabaseManager ' hold the store of all database properties
     Private _selectedDatabaseItem As WoWDatabaseItem
-    Private _tableManager As WoWTableManager ' holds all table data
+    Private _tableManager As New SortedDictionary(Of String, Object)
+    Private _selectedTableManager As Object ' WoWTableManager can be 434 or 700' holds all table data
 
 #Region " Main Form"
 
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         _databaseManager = New WoWDatabaseManager
         _selectedDatabaseItem = _databaseManager.GetDefaultWoWDatabaseItem
-        _tableManager = New WoWTableManager(_selectedDatabaseItem, _locale)
+        SelectTableManager()
         ResizeGossip()
-
-        LoadQuestInfoDictionary()
-        LoadQuestSortDictionary()
-        LoadAreaTableDictionary()
-
         ShowStatusBar()
-        MenuStrip1.Enabled = False
-        TabControl1.Enabled = False
-        StatusStrip1.Enabled = False
-        Timer1.Interval = 5000
-        Timer1.Start()
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Timer1.Stop()
-        If _tableManager.CheckForFinishLoadAllTables() Then
+        If _selectedTableManager.CheckForFinishLoadAllTables() Then
             MenuStrip1.Enabled = True
             StatusStrip1.Enabled = True
             TabControl1.Enabled = True
@@ -58,7 +47,7 @@ Public Class FormMain
         End If
     End Sub
 
-    Private Sub SelectDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectDatabaseToolStripMenuItem.Click
+    Private Sub SelectCurrentDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectDatabaseToolStripMenuItem.Click
         Dim frm As New WoWDatabaseDialog With {
            .Text = .Text & ": Select Current Server Database",
            .ButtonOKText = "Select",
@@ -66,8 +55,30 @@ Public Class FormMain
        }
         If frm.ShowDialog = DialogResult.OK Then
             _selectedDatabaseItem = frm.SelectedWoWDatabaseItem
+            If _tableManager.ContainsKey(_selectedDatabaseItem.Key) Then
+                _selectedTableManager = _tableManager(_selectedDatabaseItem.Key)
+            Else
+                SelectTableManager()
+            End If
             ShowStatusBar()
         End If
+    End Sub
+
+    Private Sub SelectTableManager()
+        Select Case _selectedDatabaseItem.ClientVersion.ToString
+            Case "V_4_3_4"
+                _selectedTableManager = New ClassLibWoWTableManager434.WoWTableManager(_selectedDatabaseItem, _locale)
+            Case "V_7_2_5"
+                _selectedTableManager = New ClassLibWoWTableManager725.WoWTableManager(_selectedDatabaseItem, _locale)
+            Case Else
+                Throw New Exception("ClientVersion not implemented")
+        End Select
+        _tableManager.Add(_selectedTableManager.GetKey, _selectedTableManager)
+        MenuStrip1.Enabled = False
+        TabControl1.Enabled = False
+        StatusStrip1.Enabled = False
+        Timer1.Interval = 5000
+        Timer1.Start()
     End Sub
 
     Private Sub ShowStatusBar()
@@ -176,8 +187,8 @@ Public Class FormMain
             Dim idList As New List(Of UInteger)
             If IsNumeric(TextBoxSearchQuest.Text) Then
                 Dim id As Integer = TextBoxSearchQuest.Text
-                Dim qt As TableQuestTemplateItem = _tableManager.StorageQuestTemplate.GetItem(id)
-                Dim lq As TableLocalesQuestItem = _tableManager.StorageLocalesQuest.GetItem(id)
+                Dim qt As Object = _selectedTableManager.StorageQuestTemplate.GetItem(id)
+                Dim lq As Object = _selectedTableManager.StorageLocalesQuest.GetItem(id)
                 If IsNothing(qt) = False Then
                     idList.Add(qt.Id)
                 End If
@@ -189,17 +200,17 @@ Public Class FormMain
             Else
                 Dim s1 As String = TextBoxSearchQuest.Text.Trim
                 If String.IsNullOrWhiteSpace(s1) Then Exit Sub
-                Dim q1() As TableQuestTemplateItem = _tableManager.StorageQuestTemplate.SearchFromTitlePart(s1)
-                Dim q2() As TableLocalesQuestItem = _tableManager.StorageLocalesQuest.SearchFromTitlePart(s1, _locale)
+                Dim q1() As Object = _selectedTableManager.StorageQuestTemplate.SearchFromTitlePart(s1)
+                Dim q2() As Object = _selectedTableManager.StorageLocalesQuest.SearchFromTitlePart(s1, _locale)
                 If IsNothing(q1) = False Then
-                    For Each qt As TableQuestTemplateItem In q1
+                    For Each qt As Object In q1
                         If idList.Contains(qt.Id) = False Then
                             idList.Add(qt.Id)
                         End If
                     Next
                 End If
                 If IsNothing(q2) = False Then
-                    For Each qt As TableLocalesQuestItem In q2
+                    For Each qt As Object In q2
                         If idList.Contains(qt.Id) = False Then
                             idList.Add(qt.Id)
                         End If
@@ -214,15 +225,15 @@ Public Class FormMain
     Private Sub ShowListViewSearchQuest(ids() As UInteger)
         ListViewQuest.Items.Clear()
         For Each id As UInteger In ids
-            Dim qti As TableQuestTemplateItem = _tableManager.StorageQuestTemplate.GetItem(id)
-            Dim lqi As TableLocalesQuestItem = _tableManager.StorageLocalesQuest.GetItem(id)
+            Dim qti As Object = _selectedTableManager.StorageQuestTemplate.GetItem(id)
+            Dim lqi As Object = _selectedTableManager.StorageLocalesQuest.GetItem(id)
             Dim questGiverNameList As New List(Of String)
-            Dim qs1() As TableAreatriggerQuestenderItem = _tableManager.StorageAreatriggerQuestender.SearchWithQuest(id)
-            Dim qs2() As TableAreatriggerQueststarterItem = _tableManager.StorageAreatriggerQueststarter.SearchWithQuest(id)
-            Dim qs3() As TableCreatureQuestenderItem = _tableManager.StorageCreatureQuestender.SearchWithQuest(id)
-            Dim qs4() As TableCreatureQueststarterItem = _tableManager.StorageCreatureQueststarter.SearchWithQuest(id)
-            Dim qs5() As TableGameobjectQuestenderItem = _tableManager.StorageGameobjectQuestender.SearchWithQuest(id)
-            Dim qs6() As TableGameobjectQueststarterItem = _tableManager.StorageGameobjectQueststarter.SearchWithQuest(id)
+            Dim qs1() As Object = _selectedTableManager.StorageAreatriggerQuestender.SearchWithQuest(id)
+            Dim qs2() As Object = _selectedTableManager.StorageAreatriggerQueststarter.SearchWithQuest(id)
+            Dim qs3() As Object = _selectedTableManager.StorageCreatureQuestender.SearchWithQuest(id)
+            Dim qs4() As Object = _selectedTableManager.StorageCreatureQueststarter.SearchWithQuest(id)
+            Dim qs5() As Object = _selectedTableManager.StorageGameobjectQuestender.SearchWithQuest(id)
+            Dim qs6() As Object = _selectedTableManager.StorageGameobjectQueststarter.SearchWithQuest(id)
             '
             Dim lvi As New ListViewItem(id)
             If IsNothing(qti) Then
@@ -237,8 +248,8 @@ Public Class FormMain
             End If
             ' finds there Area or Sector Names???  Maybe in Hotfixes???
             If IsNothing(qs3) = False Then
-                For Each qi As TableCreatureQuestenderItem In qs3
-                    Dim ci As TableCreatureTemplateItem = _tableManager.StorageCreatureTemplate.GetItem(qi.id)
+                For Each qi As Object In qs3
+                    Dim ci As Object = _selectedTableManager.StorageCreatureTemplate.GetItem(qi.id)
                     If IsNothing(ci) = False Then
                         If questGiverNameList.Contains(ci.name) = False Then
                             questGiverNameList.Add(ci.name)
@@ -247,8 +258,8 @@ Public Class FormMain
                 Next
             End If
             If IsNothing(qs4) = False Then
-                For Each qi As TableCreatureQueststarterItem In qs4
-                    Dim ci As TableCreatureTemplateItem = _tableManager.StorageCreatureTemplate.GetItem(qi.id)
+                For Each qi As Object In qs4
+                    Dim ci As Object = _selectedTableManager.StorageCreatureTemplate.GetItem(qi.id)
                     If IsNothing(ci) = False Then
                         If questGiverNameList.Contains(ci.name) = False Then
                             questGiverNameList.Add(ci.name)
@@ -257,8 +268,8 @@ Public Class FormMain
                 Next
             End If
             If IsNothing(qs5) = False Then
-                For Each qi As TableGameobjectQuestenderItem In qs5
-                    Dim ci As TableGameobjectTemplateItem = _tableManager.StorageGameobjectTemplate.GetItem(qi.id)
+                For Each qi As Object In qs5
+                    Dim ci As Object = _selectedTableManager.StorageGameobjectTemplate.GetItem(qi.id)
                     If IsNothing(ci) = False Then
                         If questGiverNameList.Contains(ci.name) = False Then
                             questGiverNameList.Add(ci.name)
@@ -267,8 +278,8 @@ Public Class FormMain
                 Next
             End If
             If IsNothing(qs6) = False Then
-                For Each qi As TableGameobjectQueststarterItem In qs6
-                    Dim ci As TableGameobjectTemplateItem = _tableManager.StorageGameobjectTemplate.GetItem(qi.id)
+                For Each qi As Object In qs6
+                    Dim ci As Object = _selectedTableManager.StorageGameobjectTemplate.GetItem(qi.id)
                     If IsNothing(ci) = False Then
                         If questGiverNameList.Contains(ci.name) = False Then
                             questGiverNameList.Add(ci.name)
@@ -294,7 +305,7 @@ Public Class FormMain
         If slvic.Count = 0 Then Exit Sub
         Dim entry As UInteger
         If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
-            Dim frm As New WoWQuestDialog_434(_databaseManager, _tableManager, _selectedDatabaseItem, entry, _locale)
+            Dim frm As New ClassLibWoWTableManager434.WoWQuestDialog_434(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
             frm.Show()
         End If
     End Sub
@@ -308,20 +319,20 @@ Public Class FormMain
             Dim idList As New List(Of UInteger)
             If IsNumeric(TextBoxSearchCreature.Text) Then
                 Dim id As Integer = TextBoxSearchCreature.Text
-                Dim cr1 As TableCreatureItem = _tableManager.StorageCreature.GetItem(id)
-                Dim cr2() As TableCreatureItem = _tableManager.StorageCreature.SearchWithId(id)
+                Dim cr1 As Object = _selectedTableManager.StorageCreature.GetItem(id)
+                Dim cr2() As Object = _selectedTableManager.StorageCreature.SearchWithId(id)
                 If IsNothing(cr1) = False Then
                     idList.Add(cr1.id)
                 End If
                 If IsNothing(cr2) = False Then
-                    For Each cr As TableCreatureItem In cr2
+                    For Each cr As Object In cr2
                         If idList.Count > 100 Then Exit For
                         If idList.Contains(cr.id) = False Then
                             idList.Add(cr.id)
                         End If
                     Next
                 End If
-                Dim ct1 As TableCreatureTemplateItem = _tableManager.StorageCreatureTemplate.GetItem(id)
+                Dim ct1 As Object = _selectedTableManager.StorageCreatureTemplate.GetItem(id)
                 If IsNothing(ct1) = False Then
                     If idList.Contains(ct1.entry) = False Then
                         idList.Add(ct1.entry)
@@ -330,15 +341,15 @@ Public Class FormMain
             Else
                 Dim s1 As String = TextBoxSearchCreature.Text.Trim
                 If String.IsNullOrWhiteSpace(s1) Then Exit Sub
-                Dim c1() As TableCreatureTemplateItem = _tableManager.StorageCreatureTemplate.SearchFromNamePart(s1)
-                Dim c2() As TableLocalesCreatureItem = _tableManager.StorageLocalesCreature.SearchFromNamePart(s1)
+                Dim c1() As Object = _selectedTableManager.StorageCreatureTemplate.SearchFromNamePart(s1)
+                Dim c2() As Object = _selectedTableManager.StorageLocalesCreature.SearchFromNamePart(s1)
                 If IsNothing(c1) = False Then
-                    For Each ct As TableCreatureTemplateItem In c1
+                    For Each ct As Object In c1
                         idList.Add(ct.entry)
                     Next
                 End If
                 If IsNothing(c2) = False Then
-                    For Each ct As TableLocalesCreatureItem In c2
+                    For Each ct As Object In c2
                         idList.Add(ct.entry)
                     Next
                 End If
@@ -350,8 +361,8 @@ Public Class FormMain
     Private Sub ShowListViewSearchCreature(ids() As UInteger)
         ListViewCreature.Items.Clear()
         For Each entry As UInteger In ids
-            Dim cti As TableCreatureTemplateItem = _tableManager.StorageCreatureTemplate.GetItem(entry)
-            Dim loc As TableLocalesCreatureItem = _tableManager.StorageLocalesCreature.GetItem(entry)
+            Dim cti As Object = _selectedTableManager.StorageCreatureTemplate.GetItem(entry)
+            Dim loc As Object = _selectedTableManager.StorageLocalesCreature.GetItem(entry)
             If IsNothing(cti) = False Then
                 Dim lvi As ListViewItem = cti.GetListViewForCreatureTemplateSearch(loc.Name(_locale))
                 ListViewCreature.Items.Add(lvi)
@@ -365,7 +376,8 @@ Public Class FormMain
         If slvic.Count = 0 Then Exit Sub
         Dim entry As UInteger
         If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
-            Dim frm As New WoWCreatureDialog_434(_databaseManager, _tableManager, _selectedDatabaseItem, entry, _locale)
+            Stop
+            Dim frm As New ClassLibWoWTableManager434.WoWCreatureDialog_434(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
             frm.Show()
         End If
     End Sub
@@ -379,14 +391,14 @@ Public Class FormMain
             Dim idList As New List(Of UInteger)
             If IsNumeric(TextBoxSearchGameObject.Text) Then
                 Dim id As Integer = TextBoxSearchGameObject.Text
-                Dim gt1 As TableGameobjectItem = _tableManager.StorageGameobject.GetItem(id)
-                Dim gt2() As TableGameobjectItem = _tableManager.StorageGameobject.SearchWithId(id)
-                Dim gt3 As TableGameobjectTemplateItem = _tableManager.StorageGameobjectTemplate.GetItem(id)
+                Dim gt1 As Object = _selectedTableManager.StorageGameobject.GetItem(id)
+                Dim gt2() As Object = _selectedTableManager.StorageGameobject.SearchWithId(id)
+                Dim gt3 As Object = _selectedTableManager.StorageGameobjectTemplate.GetItem(id)
                 If IsNothing(gt1) = False Then
                     idList.Add(gt1.id)
                 End If
                 If IsNothing(gt2) = False Then
-                    For Each ct As TableGameobjectItem In gt2
+                    For Each ct As Object In gt2
                         If idList.Count > 100 Then Exit For
                         If idList.Contains(ct.id) = False Then
                             idList.Add(ct.id)
@@ -401,15 +413,15 @@ Public Class FormMain
             Else
                 Dim s1 As String = TextBoxSearchGameObject.Text.Trim
                 If String.IsNullOrWhiteSpace(s1) Then Exit Sub
-                Dim c1() As TableGameobjectTemplateItem = _tableManager.StorageGameobjectTemplate.SearchFromNamePart(s1)
-                Dim c2() As TableLocalesGameobjectItem = _tableManager.StorageLocalesGameobject.SearchFromNamePart(s1, _locale)
+                Dim c1() As Object = _selectedTableManager.StorageGameobjectTemplate.SearchFromNamePart(s1)
+                Dim c2() As Object = _selectedTableManager.StorageLocalesGameobject.SearchFromNamePart(s1, _locale)
                 If IsNothing(c1) = False Then
-                    For Each ct As TableGameobjectTemplateItem In c1
+                    For Each ct As Object In c1
                         idList.Add(ct.entry)
                     Next
                 End If
                 If IsNothing(c2) = False Then
-                    For Each ct As TableLocalesGameobjectItem In c2
+                    For Each ct As Object In c2
                         idList.Add(ct.entry)
                     Next
                 End If
@@ -421,8 +433,8 @@ Public Class FormMain
     Private Sub ShowListViewSearchGameObject(ids() As UInteger)
         ListViewGameObject.Items.Clear()
         For Each entry As UInteger In ids
-            Dim cti As TableGameobjectTemplateItem = _tableManager.StorageGameobjectTemplate.GetItem(entry)
-            Dim loc As TableLocalesGameobjectItem = _tableManager.StorageLocalesGameobject.GetItem(entry)
+            Dim cti As Object = _selectedTableManager.StorageGameobjectTemplate.GetItem(entry)
+            Dim loc As Object = _selectedTableManager.StorageLocalesGameobject.GetItem(entry)
             If IsNothing(cti) = False Then
                 Dim lvi As ListViewItem = cti.GetListViewForGameObjectTemplateSearch(loc.Name(_locale))
                 ListViewGameObject.Items.Add(lvi)
@@ -436,7 +448,8 @@ Public Class FormMain
         If slvic.Count = 0 Then Exit Sub
         Dim entry As UInteger
         If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
-            Dim frm As New WoWGameObjectDialog_434(_databaseManager, _tableManager, _selectedDatabaseItem, entry, _locale)
+            Stop
+            Dim frm As New ClassLibWoWTableManager434.WoWGameObjectDialog_434(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
             frm.Show()
         End If
     End Sub
@@ -450,8 +463,8 @@ Public Class FormMain
             Dim idList As New List(Of UInteger)
             If IsNumeric(TextBoxSearchItem.Text) Then
                 Dim id As Integer = TextBoxSearchItem.Text
-                Dim it1 As TableItemTemplateItem = _tableManager.StorageItemTemplate.GetItem(id)
-                Dim it2 As TableLocalesItemItem = _tableManager.StorageLocalesItem.GetItem(id)
+                Dim it1 As Object = _selectedTableManager.StorageItemTemplate.GetItem(id)
+                Dim it2 As Object = _selectedTableManager.StorageLocalesItem.GetItem(id)
                 If IsNothing(it1) = False Then
                     idList.Add(it1.entry)
                 End If
@@ -463,15 +476,15 @@ Public Class FormMain
             Else
                 Dim s1 As String = TextBoxSearchItem.Text.Trim
                 If String.IsNullOrWhiteSpace(s1) Then Exit Sub
-                Dim it1() As TableItemTemplateItem = _tableManager.StorageItemTemplate.SearchFromNamePart(s1)
-                Dim it2() As TableLocalesItemItem = _tableManager.StorageLocalesItem.SearchFromNamePart(s1, _locale)                
+                Dim it1() As Object = _selectedTableManager.StorageItemTemplate.SearchFromNamePart(s1)
+                Dim it2() As Object = _selectedTableManager.StorageLocalesItem.SearchFromNamePart(s1, _locale)
                 If IsNothing(it1) = False Then
-                    For Each it As TableItemTemplateItem In it1
+                    For Each it As Object In it1
                         idList.Add(it.entry)
                     Next
                 End If
                 If IsNothing(it2) = False Then
-                    For Each it As TableLocalesItemItem In it2
+                    For Each it As Object In it2
                         idList.Add(it.entry)
                     Next
                 End If
@@ -483,8 +496,8 @@ Public Class FormMain
     Private Sub ShowListViewSearchItem(ids() As UInteger)
         ListViewItem.Items.Clear()
         For Each entry As UInteger In ids
-            Dim cti As TableItemTemplateItem = _tableManager.StorageItemTemplate.GetItem(entry)
-            Dim loc As TableLocalesItemItem = _tableManager.StorageLocalesItem.GetItem(entry)
+            Dim cti As Object = _selectedTableManager.StorageItemTemplate.GetItem(entry)
+            Dim loc As Object = _selectedTableManager.StorageLocalesItem.GetItem(entry)
             If IsNothing(cti) = False Then
                 Dim lvi As ListViewItem = cti.GetListViewForNameSearch(loc.Name(_locale))
                 ListViewItem.Items.Add(lvi)
@@ -498,7 +511,8 @@ Public Class FormMain
         If slvic.Count = 0 Then Exit Sub
         Dim entry As UInteger
         If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
-            Dim frm As New WoWItemDialog_434(_databaseManager, _tableManager, _selectedDatabaseItem, entry, _locale)
+            Stop
+            Dim frm As New ClassLibWoWTableManager434.WoWItemDialog_434(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
             frm.Show()
         End If
     End Sub
@@ -512,13 +526,13 @@ Public Class FormMain
             Dim idList As New List(Of UInteger)
             If IsNumeric(TextBoxSearchGossip.Text) Then
                 Dim id As Integer = TextBoxSearchGossip.Text
-                Dim gm1 As TableGossipMenuItem = _tableManager.StorageGossipMenu.GetItem(id)
-                Dim gm2() As TableGossipMenuOptionItem = _tableManager.StorageGossipMenuOption.SearchWithMenu_id(id)                
+                Dim gm1 As Object = _selectedTableManager.StorageGossipMenu.GetItem(id)
+                Dim gm2() As Object = _selectedTableManager.StorageGossipMenuOption.SearchWithMenu_id(id)
                 If IsNothing(gm1) = False Then
                     idList.Add(gm1.entry)
                 End If
                 If IsNothing(gm2) = False Then
-                    For Each gm As TableGossipMenuOptionItem In gm2
+                    For Each gm As Object In gm2
                         If idList.Contains(gm.menu_id) = False Then
                             idList.Add(gm.menu_id)
                         End If
@@ -527,33 +541,33 @@ Public Class FormMain
             Else
                 Dim s1 As String = TextBoxSearchItem.Text.Trim
                 If String.IsNullOrWhiteSpace(s1) Then Exit Sub
-                Dim it1() As TableGossipMenuOptionItem = _tableManager.StorageGossipMenuOption.SearchFromOptionTextPart(s1)
-                Dim it2() As TableGossipMenuOptionItem = _tableManager.StorageGossipMenuOption.SearchFromBoxTextPart(s1)
-                Dim it3() As TableLocalesGossipMenuOptionItem = _tableManager.StorageLocalesGossipMenuOption.SearchFromOptionTextPart(s1, _locale)
-                Dim it4() As TableLocalesGossipMenuOptionItem = _tableManager.StorageLocalesGossipMenuOption.SearchFromBoxTextPart(s1, _locale)
+                Dim it1() As Object = _selectedTableManager.StorageGossipMenuOption.SearchFromOptionTextPart(s1)
+                Dim it2() As Object = _selectedTableManager.StorageGossipMenuOption.SearchFromBoxTextPart(s1)
+                Dim it3() As Object = _selectedTableManager.StorageLocalesGossipMenuOption.SearchFromOptionTextPart(s1, _locale)
+                Dim it4() As Object = _selectedTableManager.StorageLocalesGossipMenuOption.SearchFromBoxTextPart(s1, _locale)
                 If IsNothing(it1) = False Then
-                    For Each item As TableGossipMenuOptionItem In it1
+                    For Each item As Object In it1
                         If idList.Contains(item.menu_id) = False Then
                             idList.Add(item.menu_id)
                         End If
                     Next
                 End If
                 If IsNothing(it2) = False Then
-                    For Each item As TableGossipMenuOptionItem In it2
+                    For Each item As Object In it2
                         If idList.Contains(item.menu_id) = False Then
                             idList.Add(item.menu_id)
                         End If
                     Next
                 End If
                 If IsNothing(it3) = False Then
-                    For Each item As TableLocalesGossipMenuOptionItem In it3
+                    For Each item As Object In it3
                         If idList.Contains(item.menu_id) = False Then
                             idList.Add(item.menu_id)
                         End If
                     Next
                 End If
                 If IsNothing(it4) = False Then
-                    For Each item As TableLocalesGossipMenuOptionItem In it4
+                    For Each item As Object In it4
                         If idList.Contains(item.menu_id) = False Then
                             idList.Add(item.menu_id)
                         End If
@@ -568,11 +582,11 @@ Public Class FormMain
     Private Sub ShowListViewSearchGossipMenu(gossipIds() As UInteger)
         ListViewGossipMenuNpcText.Items.Clear()
         For Each menuId As UInteger In gossipIds
-            Dim gmi() As TableGossipMenuItem = _tableManager.StorageGossipMenu.SearchWithEntry(menuId)
+            Dim gmi() As Object = _selectedTableManager.StorageGossipMenu.SearchWithEntry(menuId)
             If IsNothing(gmi) = False Then
-                For Each item As TableGossipMenuItem In gmi
-                    Dim npc1 As TableNpcTextItem = _tableManager.StorageNpcText.GetItem(item.text_id)
-                    Dim npc2 As TableLocalesNpcTextItem = _tableManager.StorageLocalesNpcText.GetItem(item.text_id)
+                For Each item As Object In gmi
+                    Dim npc1 As Object = _selectedTableManager.StorageNpcText.GetItem(item.text_id)
+                    Dim npc2 As Object = _selectedTableManager.StorageLocalesNpcText.GetItem(item.text_id)
                     Dim lvi As New ListViewItem(menuId)
                     lvi.SubItems.Add(item.text_id)
                     If IsNothing(npc1) Then
@@ -598,11 +612,11 @@ Public Class FormMain
     Private Sub ShowListViewSearchGossipMenuOption(gossipIds() As UInteger)        
         ListViewGossipMenuOption.Items.Clear()
         For Each menuId As UInteger In gossipIds
-            Dim gmi() As TableGossipMenuOptionItem = _tableManager.StorageGossipMenuOption.SearchWithMenu_id(menuId)
+            Dim gmi() As Object = _selectedTableManager.StorageGossipMenuOption.SearchWithMenu_id(menuId)
             If IsNothing(gmi) = False Then
-                For Each item As TableGossipMenuOptionItem In gmi
-                    Dim lgmo As TableLocalesGossipMenuOptionItem = _tableManager.StorageLocalesGossipMenuOption.GetItem(item.GetKey)
-                    Dim lvi As New ListViewItem(item.menu_id)
+                For Each item As Object In gmi
+                    Dim lgmo As Object = _selectedTableManager.StorageLocalesGossipMenuOption.GetItem(item.GetKey)
+                    Dim lvi As New ListViewItem(item.menu_id.ToString)
                     lvi.SubItems.Add(item.id)
                     lvi.SubItems.Add(item.option_text)
                     If IsNothing(lgmo) Then
@@ -633,7 +647,8 @@ Public Class FormMain
         If slvic.Count = 0 Then Exit Sub
         Dim lvi As ListViewItem = slvic.Item(0)
         Dim menuId As UInteger = lvi.SubItems(0).Text
-        Dim frm As New WoWGossipMenuDialog_434(_databaseManager, _tableManager, _selectedDatabaseItem, menuId, _locale)
+        Stop
+        Dim frm As New ClassLibWoWTableManager434.WoWGossipMenuDialog_434(_databaseManager, _selectedTableManager, _selectedDatabaseItem, menuId, _locale)
         frm.Show()
     End Sub
 
@@ -643,7 +658,8 @@ Public Class FormMain
         If slvic.Count = 0 Then Exit Sub
         Dim lvi As ListViewItem = slvic.Item(0)
         Dim menuId As UInteger = lvi.SubItems(0).Text
-        Dim frm As New WoWGossipMenuDialog_434(_databaseManager, _tableManager, _selectedDatabaseItem, menuId, _locale)
+        Stop
+        Dim frm As New ClassLibWoWTableManager434.WoWGossipMenuDialog_434(_databaseManager, _selectedTableManager, _selectedDatabaseItem, menuId, _locale)
         frm.Show()
     End Sub
 

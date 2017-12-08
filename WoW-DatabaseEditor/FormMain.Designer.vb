@@ -52,12 +52,18 @@ Partial Class FormMain
         Me.ColumnHeaderNpcText = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderNpcBroadcastId = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderNpcEmote = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderNpcLocaleText = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ListViewGossipMenuOption = New System.Windows.Forms.ListView()
         Me.ColumnHeaderGossipOptionId = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderGossipOptionIndex = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderGossipOptionText = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderGossipOptionLocaleText = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderGossipOptionBroadcast = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderGossipOptionIcon = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderGossipOptionNpcFlag = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderGossipOptionBoxMoney = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderGossipOptionBoxText = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderGossipOptionLocaleBoxText = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ListViewCreature = New System.Windows.Forms.ListView()
         Me.ColumnHeaderCreatureEntry = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderCreatureName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -87,12 +93,6 @@ Partial Class FormMain
         Me.TextBoxSearchGossip = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.ColumnHeaderNpcLocaleText = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderGossipOptionBroadcast = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderGossipOptionBoxMoney = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderGossipOptionBoxText = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderGossipOptionLocaleText = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderGossipOptionLocaleBoxText = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -122,30 +122,30 @@ Partial Class FormMain
         'PropertiesToolStripMenuItem
         '
         Me.PropertiesToolStripMenuItem.Name = "PropertiesToolStripMenuItem"
-        Me.PropertiesToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.PropertiesToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
         Me.PropertiesToolStripMenuItem.Text = "Properties"
         '
         'SelectDatabaseToolStripMenuItem
         '
         Me.SelectDatabaseToolStripMenuItem.Name = "SelectDatabaseToolStripMenuItem"
-        Me.SelectDatabaseToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
-        Me.SelectDatabaseToolStripMenuItem.Text = "Select Database"
+        Me.SelectDatabaseToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
+        Me.SelectDatabaseToolStripMenuItem.Text = "Select current Database"
         '
         'LocaleToolStripMenuItem
         '
         Me.LocaleToolStripMenuItem.Name = "LocaleToolStripMenuItem"
-        Me.LocaleToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.LocaleToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
         Me.LocaleToolStripMenuItem.Text = "Locale"
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(153, 6)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(194, 6)
         '
         'QuitToolStripMenuItem
         '
         Me.QuitToolStripMenuItem.Name = "QuitToolStripMenuItem"
-        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
         Me.QuitToolStripMenuItem.Text = "Quit"
         '
         'WorkToolStripMenuItem
@@ -298,6 +298,11 @@ Partial Class FormMain
         '
         Me.ColumnHeaderNpcEmote.Text = "EmoteID"
         '
+        'ColumnHeaderNpcLocaleText
+        '
+        Me.ColumnHeaderNpcLocaleText.Text = "Locale Npc Text"
+        Me.ColumnHeaderNpcLocaleText.Width = 250
+        '
         'ListViewGossipMenuOption
         '
         Me.ListViewGossipMenuOption.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -329,6 +334,16 @@ Partial Class FormMain
         Me.ColumnHeaderGossipOptionText.Text = "Option-Text"
         Me.ColumnHeaderGossipOptionText.Width = 150
         '
+        'ColumnHeaderGossipOptionLocaleText
+        '
+        Me.ColumnHeaderGossipOptionLocaleText.Text = "Locale Option-Text"
+        Me.ColumnHeaderGossipOptionLocaleText.Width = 150
+        '
+        'ColumnHeaderGossipOptionBroadcast
+        '
+        Me.ColumnHeaderGossipOptionBroadcast.Text = "Broadcast"
+        Me.ColumnHeaderGossipOptionBroadcast.Width = 80
+        '
         'ColumnHeaderGossipOptionIcon
         '
         Me.ColumnHeaderGossipOptionIcon.Text = "Icon"
@@ -336,6 +351,21 @@ Partial Class FormMain
         'ColumnHeaderGossipOptionNpcFlag
         '
         Me.ColumnHeaderGossipOptionNpcFlag.Text = "NpcFlag"
+        '
+        'ColumnHeaderGossipOptionBoxMoney
+        '
+        Me.ColumnHeaderGossipOptionBoxMoney.Text = "Box-Money"
+        Me.ColumnHeaderGossipOptionBoxMoney.Width = 70
+        '
+        'ColumnHeaderGossipOptionBoxText
+        '
+        Me.ColumnHeaderGossipOptionBoxText.Text = "Box-Text"
+        Me.ColumnHeaderGossipOptionBoxText.Width = 150
+        '
+        'ColumnHeaderGossipOptionLocaleBoxText
+        '
+        Me.ColumnHeaderGossipOptionLocaleBoxText.Text = "Locale Box-Text"
+        Me.ColumnHeaderGossipOptionLocaleBoxText.Width = 150
         '
         'ListViewCreature
         '
@@ -594,36 +624,6 @@ Partial Class FormMain
         '
         'Timer1
         '
-        '
-        'ColumnHeaderNpcLocaleText
-        '
-        Me.ColumnHeaderNpcLocaleText.Text = "Locale Npc Text"
-        Me.ColumnHeaderNpcLocaleText.Width = 250
-        '
-        'ColumnHeaderGossipOptionBroadcast
-        '
-        Me.ColumnHeaderGossipOptionBroadcast.Text = "Broadcast"
-        Me.ColumnHeaderGossipOptionBroadcast.Width = 80
-        '
-        'ColumnHeaderGossipOptionBoxMoney
-        '
-        Me.ColumnHeaderGossipOptionBoxMoney.Text = "Box-Money"
-        Me.ColumnHeaderGossipOptionBoxMoney.Width = 70
-        '
-        'ColumnHeaderGossipOptionBoxText
-        '
-        Me.ColumnHeaderGossipOptionBoxText.Text = "Box-Text"
-        Me.ColumnHeaderGossipOptionBoxText.Width = 150
-        '
-        'ColumnHeaderGossipOptionLocaleText
-        '
-        Me.ColumnHeaderGossipOptionLocaleText.Text = "Locale Option-Text"
-        Me.ColumnHeaderGossipOptionLocaleText.Width = 150
-        '
-        'ColumnHeaderGossipOptionLocaleBoxText
-        '
-        Me.ColumnHeaderGossipOptionLocaleBoxText.Text = "Locale Box-Text"
-        Me.ColumnHeaderGossipOptionLocaleBoxText.Width = 150
         '
         'FormMain
         '

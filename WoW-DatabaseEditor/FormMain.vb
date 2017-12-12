@@ -309,8 +309,21 @@ Public Class FormMain
         If slvic.Count = 0 Then Exit Sub
         Dim entry As UInteger
         If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
-            Dim frm As New ClassLibWoWTableManager_a434.WoWQuestDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
-            frm.Show()
+            Select Case _selectedDatabaseItem.ClientVersion.ToString
+                Case "V_4_3_4"
+                    If _selectedDatabaseItem.CoreName = "Trinity" Then
+                        Dim frm As New ClassLibWoWTableManager_t434.WoWQuestDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
+                        frm.Show()
+                    Else
+                        Dim frm As New ClassLibWoWTableManager_a434.WoWQuestDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
+                        frm.Show()
+                    End If
+                Case "V_7_2_5"
+                    Dim frm As New ClassLibWoWTableManager_t725.WoWQuestDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
+                    frm.Show()
+                Case Else
+                    Throw New Exception("ClientVersion not implemented")
+            End Select
         End If
     End Sub
 
@@ -381,8 +394,21 @@ Public Class FormMain
         Dim entry As UInteger
         If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
             Stop
-            Dim frm As New ClassLibWoWTableManager_a434.WoWCreatureDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
-            frm.Show()
+            Select Case _selectedDatabaseItem.ClientVersion.ToString
+                Case "V_4_3_4"
+                    If _selectedDatabaseItem.CoreName = "Trinity" Then
+                        Dim frm As New ClassLibWoWTableManager_t434.WoWCreatureDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
+                        frm.Show()
+                    Else
+                        Dim frm As New ClassLibWoWTableManager_a434.WoWCreatureDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
+                        frm.Show()
+                    End If
+                Case "V_7_2_5"
+                    Dim frm As New ClassLibWoWTableManager_t725.WoWCreatureDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
+                    frm.Show()
+                Case Else
+                    Throw New Exception("ClientVersion not implemented")
+            End Select
         End If
     End Sub
 
@@ -453,8 +479,21 @@ Public Class FormMain
         Dim entry As UInteger
         If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
             Stop
-            Dim frm As New ClassLibWoWTableManager_a434.WoWGameObjectDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
-            frm.Show()
+            Select Case _selectedDatabaseItem.ClientVersion.ToString
+                Case "V_4_3_4"
+                    If _selectedDatabaseItem.CoreName = "Trinity" Then
+                        Dim frm As New ClassLibWoWTableManager_t434.WoWGameObjectDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
+                        frm.Show()
+                    Else
+                        Dim frm As New ClassLibWoWTableManager_a434.WoWGameObjectDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
+                        frm.Show()
+                    End If
+                Case "V_7_2_5"
+                    Dim frm As New ClassLibWoWTableManager_t725.WoWGameObjectDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
+                    frm.Show()
+                Case Else
+                    Throw New Exception("ClientVersion not implemented")
+            End Select
         End If
     End Sub
 
@@ -516,8 +555,23 @@ Public Class FormMain
         Dim entry As UInteger
         If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
             Stop
-            Dim frm As New ClassLibWoWTableManager_a434.WoWItemDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
-            frm.Show()
+            Select Case _selectedDatabaseItem.ClientVersion.ToString
+                Case "V_4_3_4"
+                    If _selectedDatabaseItem.CoreName = "Trinity" Then
+                        Throw New Exception("ClientVersion not implemented")
+                        'Dim frm As New ClassLibWoWTableManager_t434.WoWItemDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
+                        'frm.Show()
+                    Else
+                        Dim frm As New ClassLibWoWTableManager_a434.WoWItemDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
+                        frm.Show()
+                    End If
+                Case "V_7_2_5"
+                    Throw New Exception("ClientVersion not implemented")
+                    'Dim frm As New ClassLibWoWTableManager_t725.WoWItemDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
+                    'frm.Show()
+                Case Else
+                    Throw New Exception("ClientVersion not implemented")
+            End Select
         End If
     End Sub
 
@@ -652,19 +706,45 @@ Public Class FormMain
         Dim lvi As ListViewItem = slvic.Item(0)
         Dim menuId As UInteger = lvi.SubItems(0).Text
         Stop
-        Dim frm As New ClassLibWoWTableManager_a434.WoWGossipMenuDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, menuId, _locale)
-        frm.Show()
+        Select Case _selectedDatabaseItem.ClientVersion.ToString
+            Case "V_4_3_4"
+                If _selectedDatabaseItem.CoreName = "Trinity" Then
+                    Dim frm As New ClassLibWoWTableManager_t434.WoWGossipMenuDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, menuId, _locale)
+                    frm.Show()
+                Else
+                    Dim frm As New ClassLibWoWTableManager_a434.WoWGossipMenuDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, menuId, _locale)
+                    frm.Show()
+                End If
+            Case "V_7_2_5"
+                Dim frm As New ClassLibWoWTableManager_t725.WoWGossipMenuDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, menuId, _locale)
+                frm.Show()
+            Case Else
+                Throw New Exception("ClientVersion not implemented")
+        End Select
     End Sub
 
-    Private Sub ListViewGossipMenuOption_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ListViewGossipMenuOption.MouseDoubleClick        
+    Private Sub ListViewGossipMenuOption_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ListViewGossipMenuOption.MouseDoubleClick
         Dim lv As ListView = sender
         Dim slvic As ListView.SelectedListViewItemCollection = lv.SelectedItems
         If slvic.Count = 0 Then Exit Sub
         Dim lvi As ListViewItem = slvic.Item(0)
         Dim menuId As UInteger = lvi.SubItems(0).Text
         Stop
-        Dim frm As New ClassLibWoWTableManager_a434.WoWGossipMenuDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, menuId, _locale)
-        frm.Show()
+        Select Case _selectedDatabaseItem.ClientVersion.ToString
+            Case "V_4_3_4"
+                If _selectedDatabaseItem.CoreName = "Trinity" Then
+                    Dim frm As New ClassLibWoWTableManager_t434.WoWGossipMenuDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, menuId, _locale)
+                    frm.Show()
+                Else
+                    Dim frm As New ClassLibWoWTableManager_a434.WoWGossipMenuDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, menuId, _locale)
+                    frm.Show()
+                End If
+            Case "V_7_2_5"
+                Dim frm As New ClassLibWoWTableManager_t725.WoWGossipMenuDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, menuId, _locale)
+                frm.Show()
+            Case Else
+                Throw New Exception("ClientVersion not implemented")
+        End Select
     End Sub
 
 #End Region

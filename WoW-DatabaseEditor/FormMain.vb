@@ -67,9 +67,13 @@ Public Class FormMain
     Private Sub SelectTableManager()
         Select Case _selectedDatabaseItem.ClientVersion.ToString
             Case "V_4_3_4"
-                _selectedTableManager = New ClassLibWoWTableManager434.WoWTableManager(_selectedDatabaseItem, _locale)
+                If _selectedDatabaseItem.CoreName = "Trinity" Then
+                    _selectedTableManager = New ClassLibWoWTableManager_t434.WoWTableManager(_selectedDatabaseItem, _locale)
+                Else
+                    _selectedTableManager = New ClassLibWoWTableManager_a434.WoWTableManager(_selectedDatabaseItem, _locale)
+                End If
             Case "V_7_2_5"
-                _selectedTableManager = New ClassLibWoWTableManager725.WoWTableManager(_selectedDatabaseItem, _locale)
+                _selectedTableManager = New ClassLibWoWTableManager_t725.WoWTableManager(_selectedDatabaseItem, _locale)
             Case Else
                 Throw New Exception("ClientVersion not implemented")
         End Select
@@ -305,7 +309,7 @@ Public Class FormMain
         If slvic.Count = 0 Then Exit Sub
         Dim entry As UInteger
         If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
-            Dim frm As New ClassLibWoWTableManager434.WoWQuestDialog_434(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
+            Dim frm As New ClassLibWoWTableManager_a434.WoWQuestDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
             frm.Show()
         End If
     End Sub
@@ -377,7 +381,7 @@ Public Class FormMain
         Dim entry As UInteger
         If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
             Stop
-            Dim frm As New ClassLibWoWTableManager434.WoWCreatureDialog_434(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
+            Dim frm As New ClassLibWoWTableManager_a434.WoWCreatureDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
             frm.Show()
         End If
     End Sub
@@ -449,7 +453,7 @@ Public Class FormMain
         Dim entry As UInteger
         If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
             Stop
-            Dim frm As New ClassLibWoWTableManager434.WoWGameObjectDialog_434(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
+            Dim frm As New ClassLibWoWTableManager_a434.WoWGameObjectDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
             frm.Show()
         End If
     End Sub
@@ -512,7 +516,7 @@ Public Class FormMain
         Dim entry As UInteger
         If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
             Stop
-            Dim frm As New ClassLibWoWTableManager434.WoWItemDialog_434(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
+            Dim frm As New ClassLibWoWTableManager_a434.WoWItemDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _locale)
             frm.Show()
         End If
     End Sub
@@ -648,7 +652,7 @@ Public Class FormMain
         Dim lvi As ListViewItem = slvic.Item(0)
         Dim menuId As UInteger = lvi.SubItems(0).Text
         Stop
-        Dim frm As New ClassLibWoWTableManager434.WoWGossipMenuDialog_434(_databaseManager, _selectedTableManager, _selectedDatabaseItem, menuId, _locale)
+        Dim frm As New ClassLibWoWTableManager_a434.WoWGossipMenuDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, menuId, _locale)
         frm.Show()
     End Sub
 
@@ -659,7 +663,7 @@ Public Class FormMain
         Dim lvi As ListViewItem = slvic.Item(0)
         Dim menuId As UInteger = lvi.SubItems(0).Text
         Stop
-        Dim frm As New ClassLibWoWTableManager434.WoWGossipMenuDialog_434(_databaseManager, _selectedTableManager, _selectedDatabaseItem, menuId, _locale)
+        Dim frm As New ClassLibWoWTableManager_a434.WoWGossipMenuDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, menuId, _locale)
         frm.Show()
     End Sub
 

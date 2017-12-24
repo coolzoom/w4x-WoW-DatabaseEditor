@@ -42,7 +42,6 @@ Public Class FormMain
             .DatabaseManager = _databaseManager
         }
         If frm.ShowDialog = DialogResult.OK Then
-            Stop
             ShowStatusBar()
         End If
     End Sub
@@ -378,10 +377,32 @@ Public Class FormMain
     Private Sub ShowListViewSearchCreature(ids() As UInteger)
         ListViewCreature.Items.Clear()
         For Each entry As UInteger In ids
-            Dim cti As Object = _selectedTableManager.StorageCreatureTemplate.GetItem(entry)
-            Dim loc As Object = _selectedTableManager.StorageLocalesCreature.GetItem(entry)
+            Dim cti, loc As Object
+            Dim loc2 As String = ""
+            If _selectedDatabaseItem.CoreName = "Trinity" Then
+                cti = _selectedTableManager.StorageCreatureTemplate.GetItem(entry)
+                Select Case _selectedDatabaseItem.ClientVersion
+                    Case WoWClientVersionNumbers.V_4_3_4
+                        loc = _selectedTableManager.StorageCreatureTemplateLocale.GetItem(ClassLibWoWTableManager_t434.TableCreatureTemplateLocaleItem.GetKey(entry, _locale.ToString))
+                        If IsNothing(loc) = False Then
+                            loc2 = loc.name
+                        End If
+                    Case WoWClientVersionNumbers.V_7_2_5
+                        loc = _selectedTableManager.StorageCreatureTemplateLocale.GetItem(ClassLibWoWTableManager_t725.TableCreatureTemplateLocaleItem.GetKey(entry, _locale.ToString))
+                        If IsNothing(loc) = False Then
+                            loc2 = loc.name
+                        End If
+                    Case Else
+                        Throw New Exception("Version not avaible")
+                End Select
+            Else
+                cti = _selectedTableManager.StorageCreatureTemplate.GetItem(entry)
+                loc = _selectedTableManager.StorageLocalesCreature.GetItem(entry)
+                Stop
+            End If
+
             If IsNothing(cti) = False Then
-                Dim lvi As ListViewItem = cti.GetListViewForCreatureTemplateSearch(loc.Name(_locale))
+                Dim lvi As ListViewItem = cti.GetListViewForCreatureTemplateSearch(loc2)
                 ListViewCreature.Items.Add(lvi)
             End If
         Next
@@ -393,7 +414,6 @@ Public Class FormMain
         If slvic.Count = 0 Then Exit Sub
         Dim entry As UInteger
         If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
-            Stop
             Select Case _selectedDatabaseItem.ClientVersion.ToString
                 Case "V_4_3_4"
                     If _selectedDatabaseItem.CoreName = "Trinity" Then

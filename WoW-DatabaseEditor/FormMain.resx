@@ -129,4 +129,27 @@
   <metadata name="Timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>348, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="PictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAEoAAAAVCAYAAADhCHhTAAAABGdBTUEAALGPC/xhBQAAA8BJREFUWEft
+        ltlLVFEcx/0T/BN86iEqpoWIghp8sGwhK4si1FsP0WJh+waOmBWlToaaWTRjWqFmY9liC8zQRtkyGkZk
+        0lgSRSkaUdFDzK/z/V3P6dy8OjrWQ4wHPtzffs79es9g3GCLyidTLNH32kNfqrm7mejre6JvHwbn53cT
+        u9z/wNd3RB8fD08wLv7cRvTjU2zS0xpZLFOkl0LhjtjmS/vAYrFIXU1CKKHoKOLLCvYXi0VqrxC/SQ9H
+        RE5RmYWAv9627l/Q++aObXxEtOZbxYIT/ugfEf5b1RQ3eU0/jF0Hbev/Jr6LlZSSmWubGxHPC34LxSJd
+        n0vh0BkKv2+MGndZMQvjqSpnv6e9gZzGHo4F71WrOv+NKnIVHuH6UMsFFYeNHPowAzWwZV6P4wkf+Hwe
+        3gN7yXnYT+6hzxg2z/azNiwWC9U4j8JNWyj87lLUGDtyTVHuVqmYr66cY66CAkuNI3Ubxc/cwMj6lA3Z
+        5gtn7Oa8tJHraatT9YjJnPtYEdsSz+lSBra+B/rlmYbM21oKB1ZQ+MYCTairSUKs2aaCneejwpG6lQ+o
+        x/zXTnDMlX+IPBVH2c7KyeNc6Ekl+8b2HEs/6uDHz1yv5gVve3gGnvCdGTtVDnHY2EvORB45uae7tJD9
+        YfEg09REoISihllEV5wMF7wWB3pzdljwAdN3WGLuEvMlPN5CSllnXsPQo1O2PbAdqeKrtskFA+VkbMtm
+        PyF5k6UWMfiw5X6IuQ4f4B74sOXciLw6TiS+JKkHo4Sqn050SQPJ+2LzF+LKhLwR8V/u+1qyXSrW03qS
+        EuZs5C8DtjPdvE4yH/SXsG9s3duvX/fRixmOJZvJV13I6LUyB9t1aJ+aCVuCeXLfAWlxEd0xrDpIlFA+
+        iDUIN8U9HYQjruXm4TetpMDxJVRftJQc81dxDDnUIAffe3AZ9TYsJOdSg33Uy37k9HnwkYeNfvSlpKWr
+        XPPpxWwjhj69Vs4x1qRxH3xbGpPs31lHCXVuPFFd9BirFvEBdeJnrKacrGRV03tmIjnmmmLJvDc70dLf
+        XDrN1tf7EhIz+Blwz6COU1NUHD2ozVq7QMWA3CNqqseZQsl/EahmTNQ0F0+iQP5UC3Z1QNb2Vo7tFxvI
+        B/A7TkzgPmkjjqfu6zF9j6iRImGxUGeniPso/oKj/KZGaKILhcVi+dPEL76476OY/CmSXCzW01yiYN4o
+        A4kkF4v10kv0ujY2aauILJJcLBbobCTqCkamu8XELve/0HnNfOehiqQvJViM0PfaNisu7hf3RhNbPFXh
+        EwAAAABJRU5ErkJggg==
+</value>
+  </data>
 </root>

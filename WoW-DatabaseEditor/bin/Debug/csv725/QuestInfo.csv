@@ -1,49 +1,50 @@
-"1","Group","0","0","0"
-"21","Class","0","0","0"
-"41","PvP","0","0","0"
-"62","Raid","0","0","0"
-"81","Dungeon","0","0","0"
-"82","World Event","0","0","0"
-"83","Legendary","0","0","0"
-"84","Escort","0","0","0"
-"85","Heroic","0","0","0"
-"88","Raid (10)","0","0","0"
-"89","Raid (25)","0","0","0"
-"98","Scenario","0","0","0"
-"102","Account","0","0","0"
-"104","Side Quest","0","0","0"
-"107","Artifact","0","0","0"
-"109","World Quest","0","2","0"
-"110","Epic World Quest","0","2","12"
-"111","Elite World Quest","0","2","2"
-"112","Epic Elite World Quest","0","2","14"
-"113","PvP World Quest","0","3","0"
-"114","First Aid World Quest","129","1","0"
-"115","Battle Pet World Quest","0","4","0"
-"116","Blacksmithing World Quest","164","1","0"
-"117","Leatherworking World Quest","165","1","0"
-"118","Alchemy World Quest","171","1","0"
-"119","Herbalism World Quest","182","1","0"
-"120","Mining World Quest","186","1","0"
-"121","Tailoring World Quest","197","1","0"
-"122","Engineering World Quest","202","1","0"
-"123","Enchanting World Quest","333","1","0"
-"124","Skinning World Quest","393","1","0"
-"125","Jewelcrafting World Quest","755","1","0"
-"126","Inscription World Quest","773","1","0"
-"128","Emissary Quest","0","5","16"
-"129","Archaeology World Quest","794","1","0"
-"130","Fishing World Quest","356","1","0"
-"131","Cooking World Quest","185","1","0"
-"135","Rare World Quest","0","2","1"
-"136","Rare Elite World Quest","0","2","11"
-"137","Dungeon World Quest","0","6","11"
-"139","Legion Invasion World Quest","0","7","40"
-"140","Rated Reward","0","3","16"
-"141","Raid World Quest","0","8","10"
-"142","Legion Invasion Elite World Quest","0","7","10"
-"143","Legionfall Contribution","0","9","16"
-"144","Legionfall World Quest","0","2","78"
-"145","Legionfall Dungeon World Quest","0","6","75"
-"146","Legion Invasion World Quest Wrapper","0","11","0"
-"148","Pickpocketing","0","0","0"
+0;None
+1;Group
+21;Class
+41;PvP
+62;Raid
+81;Dungeon
+82;World Event
+83;Legendary
+84;Escort
+85;Heroic
+88;Raid (10)
+89;Raid (25)
+98;Scenario
+102;Account
+104;Side Quest
+107;Artifact
+109;World Quest
+110;Epic World Quest
+111;Elite World Quest
+112;Epic Elite World Quest
+113;PvP World Quest
+114;First Aid World Quest
+115;Battle Pet World Quest
+116;Blacksmithing World Quest
+117;Leatherworking World Quest
+118;Alchemy World Quest
+119;Herbalism World Quest
+120;Mining World Quest
+121;Tailoring World Quest
+122;Engineering World Quest
+123;Enchanting World Quest
+124;Skinning World Quest
+125;Jewelcrafting World Quest
+126;Inscription World Quest
+128;Emissary Quest
+129;Archaeology World Quest
+130;Fishing World Quest
+131;Cooking World Quest
+135;Rare World Quest
+136;Rare Elite World Quest
+137;Dungeon World Quest
+139;Legion Invasion World Quest
+140;Rated Reward
+141;Raid World Quest
+142;Legion Invasion Elite World Quest
+143;Legionfall Contribution
+144;Legionfall World Quest
+145;Legionfall Dungeon World Quest
+146;Legion Invasion World Quest Wrapper
+148;Pickpocketing

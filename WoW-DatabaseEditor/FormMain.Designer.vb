@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormMain
     Inherits System.Windows.Forms.Form
 
     'Das Formular überschreibt den Löschvorgang, um die Komponentenliste zu bereinigen.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,9 +20,8 @@ Partial Class FormMain
     'Hinweis: Die folgende Prozedur ist für den Windows Form-Designer erforderlich.
     'Das Bearbeiten ist mit dem Windows Form-Designer möglich.  
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMain))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -34,9 +33,10 @@ Partial Class FormMain
         Me.WorkToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CreatureToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GameObjectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip()
         Me.ListViewGameObject = New System.Windows.Forms.ListView()
         Me.ColumnHeaderGameObjectEntry = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderGameObjectName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -77,6 +77,7 @@ Partial Class FormMain
         Me.ColumnHeaderQuestTitle = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderQuestLitleLoc = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderQuestInvolvedObjects = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPageQuest = New System.Windows.Forms.TabPage()
         Me.TextBoxSearchQuest = New System.Windows.Forms.TextBox()
@@ -93,17 +94,16 @@ Partial Class FormMain
         Me.TabPageGossip = New System.Windows.Forms.TabPage()
         Me.TextBoxSearchGossip = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Timer1 = New System.Windows.Forms.Timer()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPageQuest.SuspendLayout()
         Me.TabPageCreature.SuspendLayout()
         Me.TabPageGameObject.SuspendLayout()
         Me.TabPageItem.SuspendLayout()
         Me.TabPageGossip.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuStrip1
@@ -153,7 +153,7 @@ Partial Class FormMain
         '
         'WorkToolStripMenuItem
         '
-        Me.WorkToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreatureToolStripMenuItem, Me.GameObjectToolStripMenuItem})
+        Me.WorkToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreatureToolStripMenuItem, Me.GameObjectToolStripMenuItem, Me.ToolStripMenuItem2})
         Me.WorkToolStripMenuItem.Name = "WorkToolStripMenuItem"
         Me.WorkToolStripMenuItem.Size = New System.Drawing.Size(47, 20)
         Me.WorkToolStripMenuItem.Text = "Work"
@@ -161,14 +161,19 @@ Partial Class FormMain
         'CreatureToolStripMenuItem
         '
         Me.CreatureToolStripMenuItem.Name = "CreatureToolStripMenuItem"
-        Me.CreatureToolStripMenuItem.Size = New System.Drawing.Size(140, 22)
+        Me.CreatureToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.CreatureToolStripMenuItem.Text = "Creature"
         '
         'GameObjectToolStripMenuItem
         '
         Me.GameObjectToolStripMenuItem.Name = "GameObjectToolStripMenuItem"
-        Me.GameObjectToolStripMenuItem.Size = New System.Drawing.Size(140, 22)
+        Me.GameObjectToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.GameObjectToolStripMenuItem.Text = "GameObject"
+        '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(149, 6)
         '
         'StatusStrip1
         '
@@ -453,6 +458,17 @@ Partial Class FormMain
         Me.ColumnHeaderQuestInvolvedObjects.Text = "Involved Objects"
         Me.ColumnHeaderQuestInvolvedObjects.Width = 250
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(953, 0)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(78, 24)
+        Me.PictureBox1.TabIndex = 10
+        Me.PictureBox1.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox1, "All donations are used to help fund the cost of running and improving arkania. ")
+        '
         'TabControl1
         '
         Me.TabControl1.Controls.Add(Me.TabPageQuest)
@@ -628,17 +644,6 @@ Partial Class FormMain
         'Timer1
         '
         '
-        'PictureBox1
-        '
-        Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(953, 0)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(78, 24)
-        Me.PictureBox1.TabIndex = 10
-        Me.PictureBox1.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PictureBox1, "All donations are used to help fund the cost of running and improving arkania. ")
-        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -655,6 +660,7 @@ Partial Class FormMain
         Me.MenuStrip1.PerformLayout()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabControl1.ResumeLayout(False)
         Me.TabPageQuest.ResumeLayout(False)
         Me.TabPageQuest.PerformLayout()
@@ -666,7 +672,6 @@ Partial Class FormMain
         Me.TabPageItem.PerformLayout()
         Me.TabPageGossip.ResumeLayout(False)
         Me.TabPageGossip.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -743,4 +748,5 @@ Partial Class FormMain
     Friend WithEvents ColumnHeaderGossipOptionBoxText As ColumnHeader
     Friend WithEvents ColumnHeaderGossipOptionLocaleBoxText As ColumnHeader
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents ToolStripMenuItem2 As ToolStripSeparator
 End Class

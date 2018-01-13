@@ -22,6 +22,7 @@ Partial Class FormMain
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMain))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -34,9 +35,11 @@ Partial Class FormMain
         Me.CreatureToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GameObjectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.T1ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.T2ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.ListViewGameObject = New System.Windows.Forms.ListView()
         Me.ColumnHeaderGameObjectEntry = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderGameObjectName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -94,7 +97,7 @@ Partial Class FormMain
         Me.TabPageGossip = New System.Windows.Forms.TabPage()
         Me.TextBoxSearchGossip = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.Timer1 = New System.Windows.Forms.Timer()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -153,7 +156,7 @@ Partial Class FormMain
         '
         'WorkToolStripMenuItem
         '
-        Me.WorkToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreatureToolStripMenuItem, Me.GameObjectToolStripMenuItem, Me.ToolStripMenuItem2})
+        Me.WorkToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreatureToolStripMenuItem, Me.GameObjectToolStripMenuItem, Me.ToolStripMenuItem2, Me.T1ToolStripMenuItem, Me.T2ToolStripMenuItem})
         Me.WorkToolStripMenuItem.Name = "WorkToolStripMenuItem"
         Me.WorkToolStripMenuItem.Size = New System.Drawing.Size(47, 20)
         Me.WorkToolStripMenuItem.Text = "Work"
@@ -174,6 +177,18 @@ Partial Class FormMain
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
         Me.ToolStripMenuItem2.Size = New System.Drawing.Size(149, 6)
+        '
+        'T1ToolStripMenuItem
+        '
+        Me.T1ToolStripMenuItem.Name = "T1ToolStripMenuItem"
+        Me.T1ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.T1ToolStripMenuItem.Text = "t1"
+        '
+        'T2ToolStripMenuItem
+        '
+        Me.T2ToolStripMenuItem.Name = "T2ToolStripMenuItem"
+        Me.T2ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.T2ToolStripMenuItem.Text = "t2"
         '
         'StatusStrip1
         '
@@ -749,4 +764,6 @@ Partial Class FormMain
     Friend WithEvents ColumnHeaderGossipOptionLocaleBoxText As ColumnHeader
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents ToolStripMenuItem2 As ToolStripSeparator
+    Friend WithEvents T1ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents T2ToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -1666,3 +1666,9 @@ WoW-DatabaseEditor/bin/Release/csvDefault/SpellItemEnchantment.csv
 WoW-DatabaseEditor/bin/Release/csvDefault/SpellTrigger.csv
 WoW-DatabaseEditor/bin/Release/csvDefault/trainer_type.csv
 WoW-DatabaseEditor/bin/Release/csvDefault/useSpells.csv
+WoW-DatabaseEditor/bin/Debug/csv725/CreatureNpcFlags.csv
+WoW-DatabaseEditor/bin/Debug/csvDefault/QuestObjectiveFlags.csv
+WoW-DatabaseEditor/bin/Debug/csvDefault/QuestObjectiveType.csv
+WoW-DatabaseEditor/bin/Release/csv725/CreatureNpcFlags.csv
+WoW-DatabaseEditor/bin/Release/csvDefault/QuestObjectiveFlags.csv
+WoW-DatabaseEditor/bin/Release/csvDefault/QuestObjectiveType.csv

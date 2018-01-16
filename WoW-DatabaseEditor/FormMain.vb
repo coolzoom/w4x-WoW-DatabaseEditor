@@ -4,11 +4,6 @@ Imports ClassLibWoWDatabaseManager.WowModuleHelpers
 Imports System.Text
 
 Public Class FormMain
-    Private _defaultLocale As WoWClientLocale = WoWClientLocale.deDE ' select in what language the table text rows are shown
-    Private _databaseManager As WoWDatabaseManager ' hold the store of all database properties
-    Private _selectedDatabaseItem As WoWDatabaseItem
-    Private _tableManager As New SortedDictionary(Of String, Object)
-    Private _selectedTableManager As Object ' WoWTableManager can be 434 or 700' holds all table data
 
 #Region " Main Form"
 
@@ -552,9 +547,11 @@ Public Class FormMain
                             Throw New Exception("Client Version not supported")
                     End Select
                 Case Else
-                    Stop ' was ist hier mit locale???
                     cti = _selectedTableManager.StorageCreatureTemplate.GetItem(entry)
-                    ' loc = _selectedTableManager.StorageLocalesCreature.GetItem(ClassLibWoWTableManager_a434.TableLocalesCreatureItem.GetKey(entry, _defaultLocale)) 
+                    loc = _selectedTableManager.StorageLocalesCreature.GetItem(entry)
+                    If IsNothing(loc) = False Then
+                        _locName = loc.Name(_defaultLocale)
+                    End If
             End Select
             If IsNothing(cti) = False Then
                 Dim lvi As ListViewItem = cti.GetListViewForCreatureTemplateSearch(_locName)
@@ -971,6 +968,8 @@ Public Class FormMain
 
 #End Region
 
+#Region " Admin Test Area"
+
     Private Sub T1ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles T1ToolStripMenuItem.Click
         CreateStructPrivateVarAndProperties()
     End Sub
@@ -1019,6 +1018,14 @@ Public Class FormMain
                 sb1.AppendLine(String.Format("private _{0} as {1}", _name, _type))
             End If
         Next
+        sb1.AppendLine()
+        sb1.AppendLine("private _isNew as Boolean")
+        sb1.AppendLine("private _isChanged as Boolean")
+        sb1.AppendLine()
+        sb1.AppendLine("Public Sub New()")
+        sb1.AppendLine("End Sub")
+        sb1.AppendLine()
+
         If sb1.Length > 0 Then
             My.Computer.Clipboard.SetText(sb1.ToString)
             SendInfoBoxClipboard()
@@ -1028,6 +1035,9 @@ Public Class FormMain
     Private Sub CreateStructProperties()
         Dim nts As List(Of String()) = GetNavicatTableStructData()
         Dim sb1 As New StringBuilder
+        sb1.AppendLine()
+        sb1.AppendLine(String.Format("#Region {0} Properties{0}", Chr(34)))
+        sb1.AppendLine()
         For Each v1() As String In nts
             If v1.Length = 17 Then
                 Dim _name As String = v1(0)
@@ -1040,17 +1050,45 @@ Public Class FormMain
                 sb1.AppendLine(String.Format("Return _{0}", _name))
                 sb1.AppendLine("End Get")
                 sb1.AppendLine(String.Format("Set(value As {0})", _type))
+                sb1.AppendLine(String.Format("If _{0} <> value Then", _name))
                 sb1.AppendLine(String.Format("_{0} = value", _name))
+                sb1.AppendLine("_isChanged = True")
+                sb1.AppendLine("End If")
                 sb1.AppendLine("End Set")
                 sb1.AppendLine("End Property")
                 sb1.AppendLine()
             End If
         Next
+        '
+        sb1.AppendLine("Public Property IsNew As Boolean")
+        sb1.AppendLine("Get")
+        sb1.AppendLine("Return _isNew")
+        sb1.AppendLine("End Get")
+        sb1.AppendLine("Set(value As Boolean)")
+        sb1.AppendLine("_isNew = value")
+        sb1.AppendLine("End Set")
+        sb1.AppendLine("End Property")
+        sb1.AppendLine()
+        '
+        sb1.AppendLine("Public Property IsChanged As Boolean")
+        sb1.AppendLine("Get")
+        sb1.AppendLine("Return _isChanged")
+        sb1.AppendLine("End Get")
+        sb1.AppendLine("Set(value As Boolean)")
+        sb1.AppendLine("_isChanged = value")
+        sb1.AppendLine("End Set")
+        sb1.AppendLine("End Property")
+        sb1.AppendLine()
+        sb1.AppendLine("#End Region")
+        sb1.AppendLine()
+        '
         If sb1.Length > 0 Then
             My.Computer.Clipboard.SetText(sb1.ToString)
             SendInfoBoxClipboard()
         End If
     End Sub
 
+
+#End Region
 
 End Class

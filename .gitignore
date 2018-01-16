@@ -1672,3 +1672,7 @@ WoW-DatabaseEditor/bin/Debug/csvDefault/QuestObjectiveType.csv
 WoW-DatabaseEditor/bin/Release/csv725/CreatureNpcFlags.csv
 WoW-DatabaseEditor/bin/Release/csvDefault/QuestObjectiveFlags.csv
 WoW-DatabaseEditor/bin/Release/csvDefault/QuestObjectiveType.csv
+WoW-DatabaseEditor/bin/Debug/csvDefault/npcSpellClickFlags.csv
+WoW-DatabaseEditor/bin/Debug/csvDefault/npcSpellClickType.csv
+WoW-DatabaseEditor/bin/Release/csvDefault/npcSpellClickFlags.csv
+WoW-DatabaseEditor/bin/Release/csvDefault/npcSpellClickType.csv

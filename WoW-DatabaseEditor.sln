@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "WoW-DatabaseEditor", "WoW-DatabaseEditor\WoW-DatabaseEditor.vbproj", "{69C4C82C-B066-4F6F-84A6-D2B79B891C7A}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ClassLibWoWTableManager_t434", "..\WoWTableManager_t434\ClassLibWoWTableManager\ClassLibWoWTableManager_t434.vbproj", "{51D29D25-3E5C-4614-9A34-F3C190F89182}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ClassLibWoWTableManager_t725", "..\WoWTableManager_t725\ClassLibWoWTableManager\ClassLibWoWTableManager_t725.vbproj", "{3B3F99E0-163E-4CC6-A128-8ACA1D70C260}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ClassLibMySqlConnectionManager", "..\MySqlConnectionDialog\ClassLibMySqlConnectionManager\ClassLibMySqlConnectionManager.vbproj", "{6C99189E-746C-46E8-9C9C-76EE825E0660}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{3B3F99E0-163E-4CC6-A128-8ACA1D70C260}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B3F99E0-163E-4CC6-A128-8ACA1D70C260}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B3F99E0-163E-4CC6-A128-8ACA1D70C260}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C99189E-746C-46E8-9C9C-76EE825E0660}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C99189E-746C-46E8-9C9C-76EE825E0660}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C99189E-746C-46E8-9C9C-76EE825E0660}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C99189E-746C-46E8-9C9C-76EE825E0660}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

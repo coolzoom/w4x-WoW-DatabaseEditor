@@ -98,7 +98,6 @@ Partial Class FormMain
         Me.TextBoxSearchGossip = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.T3VarNameChangeToToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -157,7 +156,7 @@ Partial Class FormMain
         '
         'WorkToolStripMenuItem
         '
-        Me.WorkToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreatureToolStripMenuItem, Me.GameObjectToolStripMenuItem, Me.ToolStripMenuItem2, Me.T1ToolStripMenuItem, Me.T2ToolStripMenuItem, Me.T3VarNameChangeToToolStripMenuItem})
+        Me.WorkToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreatureToolStripMenuItem, Me.GameObjectToolStripMenuItem, Me.ToolStripMenuItem2, Me.T1ToolStripMenuItem, Me.T2ToolStripMenuItem})
         Me.WorkToolStripMenuItem.Name = "WorkToolStripMenuItem"
         Me.WorkToolStripMenuItem.Size = New System.Drawing.Size(47, 20)
         Me.WorkToolStripMenuItem.Text = "Work"
@@ -165,30 +164,30 @@ Partial Class FormMain
         'CreatureToolStripMenuItem
         '
         Me.CreatureToolStripMenuItem.Name = "CreatureToolStripMenuItem"
-        Me.CreatureToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
+        Me.CreatureToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.CreatureToolStripMenuItem.Text = "Creature"
         '
         'GameObjectToolStripMenuItem
         '
         Me.GameObjectToolStripMenuItem.Name = "GameObjectToolStripMenuItem"
-        Me.GameObjectToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
+        Me.GameObjectToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.GameObjectToolStripMenuItem.Text = "GameObject"
         '
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(205, 6)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(149, 6)
         '
         'T1ToolStripMenuItem
         '
         Me.T1ToolStripMenuItem.Name = "T1ToolStripMenuItem"
-        Me.T1ToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
+        Me.T1ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.T1ToolStripMenuItem.Text = "t1"
         '
         'T2ToolStripMenuItem
         '
         Me.T2ToolStripMenuItem.Name = "T2ToolStripMenuItem"
-        Me.T2ToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
+        Me.T2ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.T2ToolStripMenuItem.Text = "t2"
         '
         'StatusStrip1
@@ -660,12 +659,6 @@ Partial Class FormMain
         'Timer1
         '
         '
-        'T3VarNameChangeToToolStripMenuItem
-        '
-        Me.T3VarNameChangeToToolStripMenuItem.Name = "T3VarNameChangeToToolStripMenuItem"
-        Me.T3VarNameChangeToToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
-        Me.T3VarNameChangeToToolStripMenuItem.Text = "t3 (var name change to _)"
-        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -773,5 +766,4 @@ Partial Class FormMain
     Friend WithEvents ToolStripMenuItem2 As ToolStripSeparator
     Friend WithEvents T1ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents T2ToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents T3VarNameChangeToToolStripMenuItem As ToolStripMenuItem
 End Class

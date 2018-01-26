@@ -970,43 +970,33 @@ Public Class FormMain
 #Region " Admin Test Area"
 
     Private Sub T1ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles T1ToolStripMenuItem.Click
-        CreateStructPrivateVarAndProperties()
+        CreateStuctureClass()
     End Sub
 
     Private Sub T2ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles T2ToolStripMenuItem.Click
-        CreateStructProperties()
-    End Sub
+        Dim sb1 As New StringBuilder
 
-    Private Sub CreateStoragePropertiesToolStripMenuItemTest_Click(sender As Object, e As EventArgs)
-        Dim v1() As String = GetClipboardTextLines()
-        If v1.Length = 0 Then Exit Sub
-        Dim sb As New StringBuilder
-        For Each s1 As String In v1
-            If s1 <> String.Empty Then
-                Dim v2() As String = Split(s1.Trim, " ")
-                If v2.Length = 4 AndAlso v2(0) = "Private" Then
-                    Dim name As String = v2(3)
-                    Dim name_ As String = v2(1)
-                    sb.AppendLine(String.Format("Public Property {0} As Object Implements IWoWTableManager.{0}", name))
-                    sb.AppendLine("Get")
-                    sb.AppendLine(String.Format("Return {0}", name_))
-                    sb.AppendLine("End Get")
-                    sb.AppendLine("Set(value As Object)")
-                    sb.AppendLine(String.Format("{0} = value", name_))
-                    sb.AppendLine("End Set")
-                    sb.AppendLine("End Property")
-                    sb.AppendLine()
-                End If
-            End If
-        Next
-        If sb.Length > 0 Then
-            My.Computer.Clipboard.SetText(sb.ToString)
+        sb1.AppendLine(CreateVarNameChangeToUnderScorePart())
+
+        If sb1.Length > 0 Then
+            My.Computer.Clipboard.SetText(sb1.ToString.Replace(vbCrLf & vbCrLf, vbCrLf))
             SendInfoBoxClipboard()
         End If
     End Sub
 
-    Private Sub CreateStructPrivateVarAndProperties()
-        Dim nts As List(Of String()) = GetNavicatTableStructData()
+    Private Sub CreateStuctureClass()
+        Dim sb1 As New StringBuilder
+        Dim _navicatTableStruct As List(Of String()) = GetNavicatTableStructData()
+        sb1.AppendLine(CreateStructPrivateVarAndProperties(_navicatTableStruct))
+        sb1.AppendLine(CreateStructProperties(_navicatTableStruct))
+
+        If sb1.Length > 0 Then
+            My.Computer.Clipboard.SetText(sb1.ToString.Replace(vbCrLf & vbCrLf, vbCrLf))
+            SendInfoBoxClipboard()
+        End If
+    End Sub
+
+    Private Function CreateStructPrivateVarAndProperties(nts As List(Of String())) As String
         Dim sb1 As New StringBuilder
         For Each v1() As String In nts
             If v1.Length = 17 Then
@@ -1025,14 +1015,10 @@ Public Class FormMain
         sb1.AppendLine("End Sub")
         sb1.AppendLine()
 
-        If sb1.Length > 0 Then
-            My.Computer.Clipboard.SetText(sb1.ToString)
-            SendInfoBoxClipboard()
-        End If
-    End Sub
+        Return sb1.ToString
+    End Function
 
-    Private Sub CreateStructProperties()
-        Dim nts As List(Of String()) = GetNavicatTableStructData()
+    Private Function CreateStructProperties(nts As List(Of String())) As String
         Dim sb1 As New StringBuilder
         sb1.AppendLine()
         sb1.AppendLine(String.Format("#Region {0} Properties{0}", Chr(34)))
@@ -1081,20 +1067,20 @@ Public Class FormMain
         sb1.AppendLine("#End Region")
         sb1.AppendLine()
         '
-        If sb1.Length > 0 Then
-            My.Computer.Clipboard.SetText(sb1.ToString)
-            SendInfoBoxClipboard()
-        End If
-    End Sub
+        Return sb1.ToString
+    End Function
 
-    Private Sub T3VarNameChangeToToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles T3VarNameChangeToToolStripMenuItem.Click
+    Private Function CreateVarNameChangeToUnderScorePart() As String
         Dim tLines() As String = GetClipboardTextLines()
         Dim sb1 As New StringBuilder
 
         Dim varNames As New SortedDictionary(Of String, String)
 
         For Each tLine As String In tLines
-            Dim v1() As String = Split(tLine.Trim, " = ", 4)
+            Dim s2 As String = tLine.Trim
+            Dim s3 As String = s2.ToLower
+            Dim v1() As String = Split(s2, " = ", 4)
+            Dim v2() As String = Split(s3, " ", 3)
             If v1.Length = 2 AndAlso (InStr(v1(0), v1(1)) = 2 Or InStr(v1(1), v1(0)) = 2) Then
                 For i As Integer = 0 To 1
                     Select Case Mid(v1(i), 1, 1)  ' get leading char
@@ -1115,10 +1101,18 @@ Public Class FormMain
                 Dim vars() As String = GetHiddenVarNames(tLine, varNames.Keys.ToArray)
                 '
                 If vars.Length = 0 Then
+                    If v2(0) = "private" Or v2(0) = "public" Then
+                        If v2(1) = "sub" Or v2(1) = "function" Or v2(1) = "shared" Then
+                            sb1.AppendLine()
+                        End If
+                    End If
+                    If v2(0) = "#region" Or v2(0) = "#end" Then
+                        sb1.AppendLine()
+                    End If
                     sb1.AppendLine(tLine)
                 Else
                     Dim s1 As String = tLine
-                    Dim b1 As Boolean = (InStr(tLine, ".AppendFormat(") > 0)
+                    Dim b1 As Boolean = (InStr(tLine, ".AppendFormat(") > 0 Or InStr(tLine, "String.Format(") > 0)
                     Dim be2 As String = "", be3 As String = ""
                     For Each be1 As String In vars
                         Dim b2 As Boolean = (InStr(tLine.ToLower, Chr(34) & be1.ToLower & " ") > 0)
@@ -1136,11 +1130,8 @@ Public Class FormMain
             End If
         Next
 
-        If sb1.Length > 0 Then
-            My.Computer.Clipboard.SetText(sb1.ToString)
-            SendInfoBoxClipboard()
-        End If
-    End Sub
+        Return sb1.ToString
+    End Function
 
     Private Function GetHiddenVarNames(tLine As String, varNames() As String) As String()
         Dim r As New List(Of String)

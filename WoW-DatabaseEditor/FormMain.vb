@@ -1169,6 +1169,13 @@ Public Class FormMain
         Return r.ToArray
     End Function
 
+    Private Sub PhaseEditorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PhaseEditorToolStripMenuItem.Click
+        Dim frm As New PhaseEditor
+        If frm.ShowDialog = DialogResult.OK Then
+
+        End If
+    End Sub
+
 #End Region
 
 End Class

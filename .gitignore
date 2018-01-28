@@ -1676,3 +1676,7 @@ WoW-DatabaseEditor/bin/Debug/csvDefault/npcSpellClickFlags.csv
 WoW-DatabaseEditor/bin/Debug/csvDefault/npcSpellClickType.csv
 WoW-DatabaseEditor/bin/Release/csvDefault/npcSpellClickFlags.csv
 WoW-DatabaseEditor/bin/Release/csvDefault/npcSpellClickType.csv
+WoW-DatabaseEditor/bin/Debug/csvDefault/PhaseXPhaseGroup434.csv
+WoW-DatabaseEditor/bin/Debug/csvDefault/PhaseXPhaseGroup700.csv
+WoW-DatabaseEditor/bin/Release/csvDefault/PhaseXPhaseGroup434.csv
+WoW-DatabaseEditor/bin/Release/csvDefault/PhaseXPhaseGroup700.csv

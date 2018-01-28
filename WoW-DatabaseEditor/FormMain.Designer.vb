@@ -98,6 +98,9 @@ Partial Class FormMain
         Me.TextBoxSearchGossip = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.ComputingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PhaseEditorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripSeparator()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -156,7 +159,7 @@ Partial Class FormMain
         '
         'WorkToolStripMenuItem
         '
-        Me.WorkToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreatureToolStripMenuItem, Me.GameObjectToolStripMenuItem, Me.ToolStripMenuItem2, Me.T1ToolStripMenuItem, Me.T2ToolStripMenuItem})
+        Me.WorkToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreatureToolStripMenuItem, Me.GameObjectToolStripMenuItem, Me.ToolStripMenuItem3, Me.ComputingToolStripMenuItem, Me.ToolStripMenuItem2, Me.T1ToolStripMenuItem, Me.T2ToolStripMenuItem})
         Me.WorkToolStripMenuItem.Name = "WorkToolStripMenuItem"
         Me.WorkToolStripMenuItem.Size = New System.Drawing.Size(47, 20)
         Me.WorkToolStripMenuItem.Text = "Work"
@@ -659,6 +662,24 @@ Partial Class FormMain
         'Timer1
         '
         '
+        'ComputingToolStripMenuItem
+        '
+        Me.ComputingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PhaseEditorToolStripMenuItem})
+        Me.ComputingToolStripMenuItem.Name = "ComputingToolStripMenuItem"
+        Me.ComputingToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ComputingToolStripMenuItem.Text = "Computing"
+        '
+        'PhaseEditorToolStripMenuItem
+        '
+        Me.PhaseEditorToolStripMenuItem.Name = "PhaseEditorToolStripMenuItem"
+        Me.PhaseEditorToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.PhaseEditorToolStripMenuItem.Text = "Phase Editor"
+        '
+        'ToolStripMenuItem3
+        '
+        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(149, 6)
+        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -766,4 +787,7 @@ Partial Class FormMain
     Friend WithEvents ToolStripMenuItem2 As ToolStripSeparator
     Friend WithEvents T1ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents T2ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem3 As ToolStripSeparator
+    Friend WithEvents ComputingToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PhaseEditorToolStripMenuItem As ToolStripMenuItem
 End Class

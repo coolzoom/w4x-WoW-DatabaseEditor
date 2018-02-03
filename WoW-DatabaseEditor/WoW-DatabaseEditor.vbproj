@@ -51,15 +51,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\WoWDatabaseManager\ClassLibWoWDatabaseManager\bin\Debug\ClassLibWoWDatabaseManager.dll</HintPath>
     </Reference>
-    <Reference Include="ClassLibWoWTableManager_a434">
-      <HintPath>..\..\WoWTableManager_a434\ClassLibWoWTableManager\bin\Debug\ClassLibWoWTableManager_a434.dll</HintPath>
-    </Reference>
-    <Reference Include="ClassLibWoWTableManager_t434">
-      <HintPath>..\..\WoWTableManager_t434\ClassLibWoWTableManager\bin\Debug\ClassLibWoWTableManager_t434.dll</HintPath>
-    </Reference>
-    <Reference Include="ClassLibWoWTableManager_t725">
-      <HintPath>..\..\WoWTableManager_t725\ClassLibWoWTableManager\bin\Debug\ClassLibWoWTableManager_t725.dll</HintPath>
-    </Reference>
     <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />

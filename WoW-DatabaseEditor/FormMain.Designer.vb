@@ -34,9 +34,15 @@ Partial Class FormMain
         Me.WorkToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CreatureToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GameObjectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ComputingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PhaseEditorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.T1ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.T2ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AdminToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CreateStructToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FromNavicatTableDesignToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UpdateStructToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TableFunctionsToStructFunctionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
@@ -98,9 +104,6 @@ Partial Class FormMain
         Me.TextBoxSearchGossip = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.ComputingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PhaseEditorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripSeparator()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -114,7 +117,7 @@ Partial Class FormMain
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.WorkToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.WorkToolStripMenuItem, Me.AdminToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(1031, 24)
@@ -159,7 +162,7 @@ Partial Class FormMain
         '
         'WorkToolStripMenuItem
         '
-        Me.WorkToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreatureToolStripMenuItem, Me.GameObjectToolStripMenuItem, Me.ToolStripMenuItem3, Me.ComputingToolStripMenuItem, Me.ToolStripMenuItem2, Me.T1ToolStripMenuItem, Me.T2ToolStripMenuItem})
+        Me.WorkToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreatureToolStripMenuItem, Me.GameObjectToolStripMenuItem, Me.ToolStripMenuItem3, Me.ComputingToolStripMenuItem, Me.ToolStripMenuItem2})
         Me.WorkToolStripMenuItem.Name = "WorkToolStripMenuItem"
         Me.WorkToolStripMenuItem.Size = New System.Drawing.Size(47, 20)
         Me.WorkToolStripMenuItem.Text = "Work"
@@ -167,31 +170,70 @@ Partial Class FormMain
         'CreatureToolStripMenuItem
         '
         Me.CreatureToolStripMenuItem.Name = "CreatureToolStripMenuItem"
-        Me.CreatureToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CreatureToolStripMenuItem.Size = New System.Drawing.Size(140, 22)
         Me.CreatureToolStripMenuItem.Text = "Creature"
         '
         'GameObjectToolStripMenuItem
         '
         Me.GameObjectToolStripMenuItem.Name = "GameObjectToolStripMenuItem"
-        Me.GameObjectToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.GameObjectToolStripMenuItem.Size = New System.Drawing.Size(140, 22)
         Me.GameObjectToolStripMenuItem.Text = "GameObject"
+        '
+        'ToolStripMenuItem3
+        '
+        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(137, 6)
+        '
+        'ComputingToolStripMenuItem
+        '
+        Me.ComputingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PhaseEditorToolStripMenuItem})
+        Me.ComputingToolStripMenuItem.Name = "ComputingToolStripMenuItem"
+        Me.ComputingToolStripMenuItem.Size = New System.Drawing.Size(140, 22)
+        Me.ComputingToolStripMenuItem.Text = "Computing"
+        '
+        'PhaseEditorToolStripMenuItem
+        '
+        Me.PhaseEditorToolStripMenuItem.Name = "PhaseEditorToolStripMenuItem"
+        Me.PhaseEditorToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
+        Me.PhaseEditorToolStripMenuItem.Text = "Phase Editor"
         '
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(137, 6)
         '
-        'T1ToolStripMenuItem
+        'AdminToolStripMenuItem
         '
-        Me.T1ToolStripMenuItem.Name = "T1ToolStripMenuItem"
-        Me.T1ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.T1ToolStripMenuItem.Text = "t1"
+        Me.AdminToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreateStructToolStripMenuItem, Me.UpdateStructToolStripMenuItem})
+        Me.AdminToolStripMenuItem.Name = "AdminToolStripMenuItem"
+        Me.AdminToolStripMenuItem.Size = New System.Drawing.Size(55, 20)
+        Me.AdminToolStripMenuItem.Text = "Admin"
         '
-        'T2ToolStripMenuItem
+        'CreateStructToolStripMenuItem
         '
-        Me.T2ToolStripMenuItem.Name = "T2ToolStripMenuItem"
-        Me.T2ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.T2ToolStripMenuItem.Text = "t2"
+        Me.CreateStructToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FromNavicatTableDesignToolStripMenuItem})
+        Me.CreateStructToolStripMenuItem.Name = "CreateStructToolStripMenuItem"
+        Me.CreateStructToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CreateStructToolStripMenuItem.Text = "Create Struct"
+        '
+        'FromNavicatTableDesignToolStripMenuItem
+        '
+        Me.FromNavicatTableDesignToolStripMenuItem.Name = "FromNavicatTableDesignToolStripMenuItem"
+        Me.FromNavicatTableDesignToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+        Me.FromNavicatTableDesignToolStripMenuItem.Text = "From Table Design"
+        '
+        'UpdateStructToolStripMenuItem
+        '
+        Me.UpdateStructToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TableFunctionsToStructFunctionsToolStripMenuItem})
+        Me.UpdateStructToolStripMenuItem.Name = "UpdateStructToolStripMenuItem"
+        Me.UpdateStructToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.UpdateStructToolStripMenuItem.Text = "Update Struct"
+        '
+        'TableFunctionsToStructFunctionsToolStripMenuItem
+        '
+        Me.TableFunctionsToStructFunctionsToolStripMenuItem.Name = "TableFunctionsToStructFunctionsToolStripMenuItem"
+        Me.TableFunctionsToStructFunctionsToolStripMenuItem.Size = New System.Drawing.Size(260, 22)
+        Me.TableFunctionsToStructFunctionsToolStripMenuItem.Text = "Table Functions to Struct Functions"
         '
         'StatusStrip1
         '
@@ -662,24 +704,6 @@ Partial Class FormMain
         'Timer1
         '
         '
-        'ComputingToolStripMenuItem
-        '
-        Me.ComputingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PhaseEditorToolStripMenuItem})
-        Me.ComputingToolStripMenuItem.Name = "ComputingToolStripMenuItem"
-        Me.ComputingToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.ComputingToolStripMenuItem.Text = "Computing"
-        '
-        'PhaseEditorToolStripMenuItem
-        '
-        Me.PhaseEditorToolStripMenuItem.Name = "PhaseEditorToolStripMenuItem"
-        Me.PhaseEditorToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.PhaseEditorToolStripMenuItem.Text = "Phase Editor"
-        '
-        'ToolStripMenuItem3
-        '
-        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
-        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(149, 6)
-        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -785,9 +809,12 @@ Partial Class FormMain
     Friend WithEvents ColumnHeaderGossipOptionLocaleBoxText As ColumnHeader
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents ToolStripMenuItem2 As ToolStripSeparator
-    Friend WithEvents T1ToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents T2ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem3 As ToolStripSeparator
     Friend WithEvents ComputingToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PhaseEditorToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AdminToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CreateStructToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FromNavicatTableDesignToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents UpdateStructToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TableFunctionsToStructFunctionsToolStripMenuItem As ToolStripMenuItem
 End Class

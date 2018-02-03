@@ -67,19 +67,12 @@ Public Class FormMain
     End Sub
 
     Private Sub SelectTableManager()
-        Select Case _selectedDatabaseItem.CoreName
-            Case EServerCoreNames.Trinity.ToString, EServerCoreNames.ForgottenLand.ToString
-                Select Case _selectedDatabaseItem.ClientVersionNumber
-                    Case EClientVersionNumbers.V_4_3_4
-                        _selectedTableManager = New ClassLibWoWTableManager_t434.WoWTableManager(_selectedDatabaseItem, _defaultLocale)
-                    Case EClientVersionNumbers.V_7_x_x
-                        _selectedTableManager = New ClassLibWoWTableManager_t725.WoWTableManager(_selectedDatabaseItem, _defaultLocale)
-                    Case Else
-                        Throw New Exception("Client Version not supported")
-                End Select
-            Case Else ' arkcore or compatible
-                _selectedTableManager = New ClassLibWoWTableManager_a434.WoWTableManager(_selectedDatabaseItem, _defaultLocale)
-        End Select
+        _selectedTableManager = GetSelectTableManager(_selectedDatabaseItem)
+
+        If IsNothing(_selectedTableManager) Then
+            CreateNewSelectedTableManager()
+        End If
+
         If _tableManager.ContainsKey(_selectedTableManager.DbItem.GetKey) Then
             _tableManager.Item(_selectedTableManager.DbItem.GetKey) = _selectedTableManager
         Else
@@ -256,9 +249,6 @@ Public Class FormMain
                         idList.Add(quest)
                     End If
                 Next
-
-
-
             Else
                 Dim txtPart As String = TextBoxSearchQuest.Text.Trim
                 If String.IsNullOrWhiteSpace(txtPart) Then Exit Sub
@@ -303,24 +293,9 @@ Public Class FormMain
         Dim q1 As Object = Nothing
         Dim q2 As Object = Nothing
         For Each id As UInteger In ids
-            Select Case _selectedDatabaseItem.CoreName
-                Case EServerCoreNames.Trinity.ToString, EServerCoreNames.ForgottenLand.ToString
-                    Select Case _selectedDatabaseItem.ClientVersionNumber
-                        Case EClientVersionNumbers.V_4_3_4
-                            Dim locKey As String = ClassLibWoWTableManager_t434.TableQuestTemplateLocaleItem.GetKey(id, _defaultLocale.ToString)
-                            q1 = _selectedTableManager.StorageQuestTemplate.GetItem(id)
-                            q2 = _selectedTableManager.StorageQuestTemplateLocale.GetItem(locKey)
-                        Case EClientVersionNumbers.V_7_x_x, EClientVersionNumbers.V_7_x_x
-                            Dim locKey As String = ClassLibWoWTableManager_t725.TableQuestTemplateLocaleItem.GetKey(id, _defaultLocale.ToString)
-                            q1 = _selectedTableManager.StorageQuestTemplate.GetItem(id)
-                            q2 = _selectedTableManager.StorageQuestTemplateLocale.GetItem(locKey)
-                        Case Else
-                            Throw New Exception("Client Version not supported")
-                    End Select
-                Case Else
-                    q1 = _selectedTableManager.StorageQuestTemplate.GetItem(id)
-                    q2 = _selectedTableManager.StorageLocalesQuest.GetItem(id)
-            End Select
+
+            Stop ' 1
+
 
             Dim questGiverNameList As New List(Of String)
             Dim qs1() As Object = Nothing
@@ -454,22 +429,7 @@ Public Class FormMain
         If slvic.Count = 0 Then Exit Sub
         Dim entry As UInteger
         If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
-            Select Case _selectedDatabaseItem.CoreName
-                Case EServerCoreNames.Trinity.ToString, EServerCoreNames.ForgottenLand.ToString
-                    Select Case _selectedDatabaseItem.ClientVersionNumber
-                        Case EClientVersionNumbers.V_4_3_4
-                            Dim frm As New ClassLibWoWTableManager_t434.WoWQuestDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _defaultLocale)
-                            frm.Show()
-                        Case EClientVersionNumbers.V_7_x_x, EClientVersionNumbers.V_7_x_x
-                            Dim frm As New ClassLibWoWTableManager_t725.WoWQuestDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _defaultLocale)
-                            frm.Show()
-                        Case Else
-                            Throw New Exception("Client Version not supported")
-                    End Select
-                Case Else
-                    Dim frm As New ClassLibWoWTableManager_a434.WoWQuestDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _defaultLocale)
-                    frm.Show()
-            End Select
+            StartNewQuestTemplateDialog(_selectedDatabaseItem, entry)
         End If
     End Sub
 
@@ -524,37 +484,19 @@ Public Class FormMain
     Private Sub ShowListViewSearchCreature(ids() As UInteger)
         ListViewCreature.Items.Clear()
         For Each entry As UInteger In ids
-            Dim cti As Object = Nothing
-            Dim loc As Object = Nothing
-            Dim _locName As String = ""
-            Select Case _selectedDatabaseItem.CoreName
-                Case EServerCoreNames.Trinity.ToString, EServerCoreNames.ForgottenLand.ToString
-                    Select Case _selectedDatabaseItem.ClientVersionNumber
-                        Case EClientVersionNumbers.V_4_3_4
-                            cti = _selectedTableManager.StorageCreatureTemplate.GetItem(entry)
-                            loc = _selectedTableManager.StorageCreatureTemplateLocale.GetItem(ClassLibWoWTableManager_t434.TableCreatureTemplateLocaleItem.GetKey(entry, _defaultLocale.ToString))
-                            If IsNothing(loc) = False Then
-                                _locName = loc.name
-                            End If
-                        Case EClientVersionNumbers.V_7_x_x, EClientVersionNumbers.V_7_x_x
-                            cti = _selectedTableManager.StorageCreatureTemplate.GetItem(entry)
-                            loc = _selectedTableManager.StorageCreatureTemplateLocale.GetItem(ClassLibWoWTableManager_t725.TableCreatureTemplateLocaleItem.GetKey(entry, _defaultLocale.ToString))
-                            If IsNothing(loc) = False Then
-                                _locName = loc.name
-                            End If
-                        Case Else
-                            Throw New Exception("Client Version not supported")
-                    End Select
-                Case Else
-                    cti = _selectedTableManager.StorageCreatureTemplate.GetItem(entry)
-                    loc = _selectedTableManager.StorageLocalesCreature.GetItem(entry)
-                    If IsNothing(loc) = False Then
-                        _locName = loc.Name(_defaultLocale)
-                    End If
-            End Select
-            If IsNothing(cti) = False Then
-                Dim lvi As ListViewItem = cti.GetListViewForCreatureTemplateSearch(_locName)
-                ListViewCreature.Items.Add(lvi)
+            Dim localeName As String = ""
+            Dim localeKey As String = ""
+            Dim cti As Object = _selectedTableManager.StorageCreatureTemplate.GetItem(entry)
+            localeKey = cti.GetLocaleKey(_defaultLocale)
+            If localeKey.Length > 4 Then
+                Dim loc As Object = _selectedTableManager.StorageCreatureTemplateLocale.GetItem(localeKey)
+                If IsNothing(loc) = False Then
+                    localeName = loc.name
+                End If
+                If IsNothing(cti) = False Then
+                    Dim lvi As ListViewItem = cti.GetListViewForCreatureTemplateSearch(localeName)
+                    ListViewCreature.Items.Add(lvi)
+                End If
             End If
         Next
     End Sub
@@ -565,22 +507,7 @@ Public Class FormMain
         If slvic.Count = 0 Then Exit Sub
         Dim entry As UInteger
         If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
-            Select Case _selectedDatabaseItem.CoreName
-                Case EServerCoreNames.Trinity.ToString, EServerCoreNames.ForgottenLand.ToString
-                    Select Case _selectedDatabaseItem.ClientVersionNumber
-                        Case EClientVersionNumbers.V_4_3_4
-                            Dim frm As New ClassLibWoWTableManager_t434.WoWCreatureDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _defaultLocale)
-                            frm.Show()
-                        Case EClientVersionNumbers.V_7_x_x, EClientVersionNumbers.V_7_x_x
-                            Dim frm As New ClassLibWoWTableManager_t725.WoWCreatureDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _defaultLocale)
-                            frm.Show()
-                        Case Else
-                            Throw New Exception("Client Version not supported")
-                    End Select
-                Case Else
-                    Dim frm As New ClassLibWoWTableManager_a434.WoWCreatureDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _defaultLocale)
-                    frm.Show()
-            End Select
+            StartNewCreatureTemplateDialog(_selectedDatabaseItem, entry)
         End If
     End Sub
 
@@ -649,41 +576,20 @@ Public Class FormMain
 
     Private Sub ShowListViewSearchGameObject(ids() As UInteger)
         ListViewGameObject.Items.Clear()
-        Dim cti, loc As Object
-        Dim locKey As String
-        Dim locName As String = ""
         For Each entry As UInteger In ids
-            Select Case _selectedDatabaseItem.CoreName
-                Case EServerCoreNames.Trinity.ToString, EServerCoreNames.ForgottenLand.ToString
-                    Select Case _selectedDatabaseItem.ClientVersionNumber
-                        Case EClientVersionNumbers.V_4_3_4
-                            locKey = ClassLibWoWTableManager_t434.TableGameobjectTemplateLocaleItem.GetKey(entry, _defaultLocale.ToString)
-                            cti = _selectedTableManager.StorageGameobjectTemplate.GetItem(entry)
-                            loc = _selectedTableManager.StorageGameobjectTemplateLocale.GetItem(locKey)
-                            If IsNothing(loc) = False Then
-                                locName = loc.name
-                            End If
-                        Case EClientVersionNumbers.V_7_x_x, EClientVersionNumbers.V_7_x_x
-                            locKey = ClassLibWoWTableManager_t725.TableGameobjectTemplateLocaleItem.GetKey(entry, _defaultLocale.ToString)
-                            cti = _selectedTableManager.StorageGameobjectTemplate.GetItem(entry)
-                            loc = _selectedTableManager.StorageGameobjectTemplateLocale.GetItem(locKey)
-                            If IsNothing(loc) = False Then
-                                locName = loc.name
-                            End If
-                        Case Else
-                            Throw New Exception("Client Version not supported")
-                    End Select
-                Case Else
-                    locKey = entry
-                    cti = _selectedTableManager.StorageGameobjectTemplate.GetItem(entry)
-                    loc = _selectedTableManager.StorageLocalesGameobject.GetItem(entry)
-                    If IsNothing(loc) = False Then
-                        locName = loc.name(_defaultLocale)
-                    End If
-            End Select
-            If IsNothing(cti) = False Then
-                Dim lvi As ListViewItem = cti.GetListViewForGameObjectTemplateSearch(locName)
-                ListViewGameObject.Items.Add(lvi)
+            Dim localeName As String = ""
+            Dim localeKey As String = ""
+            Dim cti As Object = _selectedTableManager.StorageGameobjectTemplate.GetItem(entry)
+            localeKey = cti.GetLocaleKey(_defaultLocale)
+            If localeKey.Length > 4 Then
+                Dim loc As Object = _selectedTableManager.StorageGameobjectTemplateLocale.GetItem(localeKey)
+                If IsNothing(loc) = False Then
+                    localeName = loc.name
+                End If
+                If IsNothing(cti) = False Then
+                    Dim lvi As ListViewItem = cti.GetListViewForGameObjectTemplateSearch(localeName)
+                    ListViewGameObject.Items.Add(lvi)
+                End If
             End If
         Next
     End Sub
@@ -694,22 +600,7 @@ Public Class FormMain
         If slvic.Count = 0 Then Exit Sub
         Dim entry As UInteger
         If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
-            Select Case _selectedDatabaseItem.CoreName
-                Case EServerCoreNames.Trinity.ToString, EServerCoreNames.ForgottenLand.ToString
-                    Select Case _selectedDatabaseItem.ClientVersionNumber
-                        Case EClientVersionNumbers.V_4_3_4
-                            Dim frm As New ClassLibWoWTableManager_t434.WoWGameObjectDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _defaultLocale)
-                            frm.Show()
-                        Case EClientVersionNumbers.V_7_x_x, EClientVersionNumbers.V_7_x_x
-                            Dim frm As New ClassLibWoWTableManager_t725.WoWGameObjectDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _defaultLocale)
-                            frm.Show()
-                        Case Else
-                            Throw New Exception("Client Version not supported")
-                    End Select
-                Case Else
-                    Dim frm As New ClassLibWoWTableManager_a434.WoWGameObjectDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _defaultLocale)
-                    frm.Show()
-            End Select
+            StartNewGameObjectTemplateDialog(_selectedDatabaseItem, entry)
         End If
     End Sub
 
@@ -755,11 +646,19 @@ Public Class FormMain
     Private Sub ShowListViewSearchItem(ids() As UInteger)
         ListViewItem.Items.Clear()
         For Each entry As UInteger In ids
+            Dim localeName As String = ""
+            Dim localeKey As String = ""
             Dim cti As Object = _selectedTableManager.StorageItemTemplate.GetItem(entry)
-            Dim loc As Object = _selectedTableManager.StorageLocalesItem.GetItem(entry)
-            If IsNothing(cti) = False Then
-                Dim lvi As ListViewItem = cti.GetListViewForNameSearch(loc.Name(_defaultLocale))
-                ListViewItem.Items.Add(lvi)
+            localeKey = cti.GetLocaleKey(_defaultLocale)
+            If localeKey.Length > 4 Then
+                Dim loc As Object = _selectedTableManager.StorageLocalesItem.GetItem(entry)
+                If IsNothing(loc) = False Then
+                    localeName = loc.name
+                End If
+                If IsNothing(cti) = False Then
+                    Dim lvi As ListViewItem = cti.GetListViewForNameSearch(localeName)
+                    ListViewItem.Items.Add(lvi)
+                End If
             End If
         Next
     End Sub
@@ -770,20 +669,7 @@ Public Class FormMain
         If slvic.Count = 0 Then Exit Sub
         Dim entry As UInteger
         If UInteger.TryParse(slvic.Item(0).SubItems(0).Text, entry) Then
-            Select Case _selectedDatabaseItem.CoreName
-                Case EServerCoreNames.Trinity.ToString, EServerCoreNames.ForgottenLand.ToString
-                    Select Case _selectedDatabaseItem.ClientVersionNumber
-                        Case EClientVersionNumbers.V_4_3_4
-                            Throw New Exception("Items are used by DBC")
-                        Case EClientVersionNumbers.V_7_x_x, EClientVersionNumbers.V_7_x_x
-                            Throw New Exception("Items are used by DBC")
-                        Case Else
-                            Throw New Exception("Client Version not supported")
-                    End Select
-                Case Else
-                    Dim frm As New ClassLibWoWTableManager_a434.WoWItemDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, entry, _defaultLocale)
-                    frm.Show()
-            End Select
+            StartNewItemTemplateDialog(_selectedDatabaseItem, entry)
         End If
     End Sub
 
@@ -917,22 +803,7 @@ Public Class FormMain
         If slvic.Count = 0 Then Exit Sub
         Dim lvi As ListViewItem = slvic.Item(0)
         Dim menuId As UInteger = lvi.SubItems(0).Text
-        Select Case _selectedDatabaseItem.CoreName
-            Case EServerCoreNames.Trinity.ToString, EServerCoreNames.ForgottenLand.ToString
-                Select Case _selectedDatabaseItem.ClientVersionNumber
-                    Case EClientVersionNumbers.V_4_3_4
-                        Dim frm As New ClassLibWoWTableManager_t434.WoWGossipMenuDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, menuId, _defaultLocale)
-                        frm.Show()
-                    Case EClientVersionNumbers.V_7_x_x, EClientVersionNumbers.V_7_x_x
-                        Dim frm As New ClassLibWoWTableManager_t725.WoWGossipMenuDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, menuId, _defaultLocale)
-                        frm.Show()
-                    Case Else
-                        Throw New Exception("Client Version not supported")
-                End Select
-            Case Else
-                Dim frm As New ClassLibWoWTableManager_a434.WoWGossipMenuDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, menuId, _defaultLocale)
-                frm.Show()
-        End Select
+        StartNewGossipMenuDialog(_selectedDatabaseItem, menuId)
     End Sub
 
     Private Sub ListViewGossipMenuOption_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ListViewGossipMenuOption.MouseDoubleClick
@@ -941,22 +812,7 @@ Public Class FormMain
         If slvic.Count = 0 Then Exit Sub
         Dim lvi As ListViewItem = slvic.Item(0)
         Dim menuId As UInteger = lvi.SubItems(0).Text
-        Select Case _selectedDatabaseItem.CoreName
-            Case EServerCoreNames.Trinity.ToString, EServerCoreNames.ForgottenLand.ToString
-                Select Case _selectedDatabaseItem.ClientVersionNumber
-                    Case EClientVersionNumbers.V_4_3_4
-                        Dim frm As New ClassLibWoWTableManager_t434.WoWGossipMenuDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, menuId, _defaultLocale)
-                        frm.Show()
-                    Case EClientVersionNumbers.V_7_x_x, EClientVersionNumbers.V_7_x_x
-                        Dim frm As New ClassLibWoWTableManager_t725.WoWGossipMenuDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, menuId, _defaultLocale)
-                        frm.Show()
-                    Case Else
-                        Throw New Exception("Client Version not supported")
-                End Select
-            Case Else
-                Dim frm As New ClassLibWoWTableManager_a434.WoWGossipMenuDialog(_databaseManager, _selectedTableManager, _selectedDatabaseItem, menuId, _defaultLocale)
-                frm.Show()
-        End Select
+        StartNewGossipMenuOptionDialog(_selectedDatabaseItem, menuId)
     End Sub
 
     Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
@@ -964,16 +820,29 @@ Public Class FormMain
         System.Diagnostics.Process.Start(url)
     End Sub
 
+#End Region
+
+#Region " Work"
+
+    Private Sub PhaseEditorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PhaseEditorToolStripMenuItem.Click
+        Dim frm As New PhaseEditor
+        If frm.ShowDialog = DialogResult.OK Then
+
+        End If
+    End Sub
 
 #End Region
 
-#Region " Admin Test Area"
+#Region " Admin Create"
 
-    Private Sub T1ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles T1ToolStripMenuItem.Click
-        CreateStuctureClass()
+    Private Sub FromNavicatTableDesignToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FromNavicatTableDesignToolStripMenuItem.Click
+        Dim frm As New CreateTableStructure(_databaseManager, _selectedTableManager, _selectedDatabaseItem)
+        frm.ShowDialog()
     End Sub
 
-    Private Sub T2ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles T2ToolStripMenuItem.Click
+#Region " UpdateTableFunctionsToStructFunctions"
+
+    Private Sub UpdateTableFunctionsToStructFunctionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TableFunctionsToStructFunctionsToolStripMenuItem.Click
         Dim sb1 As New StringBuilder
 
         sb1.AppendLine(CreateVarNameChangeToUnderScorePart())
@@ -983,92 +852,6 @@ Public Class FormMain
             SendInfoBoxClipboard()
         End If
     End Sub
-
-    Private Sub CreateStuctureClass()
-        Dim sb1 As New StringBuilder
-        Dim _navicatTableStruct As List(Of String()) = GetNavicatTableStructData()
-        sb1.AppendLine(CreateStructPrivateVarAndProperties(_navicatTableStruct))
-        sb1.AppendLine(CreateStructProperties(_navicatTableStruct))
-
-        If sb1.Length > 0 Then
-            My.Computer.Clipboard.SetText(sb1.ToString.Replace(vbCrLf & vbCrLf, vbCrLf))
-            SendInfoBoxClipboard()
-        End If
-    End Sub
-
-    Private Function CreateStructPrivateVarAndProperties(nts As List(Of String())) As String
-        Dim sb1 As New StringBuilder
-        For Each v1() As String In nts
-            If v1.Length = 17 Then
-                Dim _name As String = v1(0)
-                Dim _fName As String = GetVarNameToFunctionName(_name)
-                Dim _type As String = TypeFromNavicatVarType(v1(1), v1(6)) ' type and unsigned
-                Dim _isPrimaryKey As Boolean = BoolFromNavicatBoolType(v1(15))
-                sb1.AppendLine(String.Format("private _{0} as {1}", _name, _type))
-            End If
-        Next
-        sb1.AppendLine()
-        sb1.AppendLine("private _isNew as Boolean")
-        sb1.AppendLine("private _isChanged as Boolean")
-        sb1.AppendLine()
-        sb1.AppendLine("Public Sub New()")
-        sb1.AppendLine("End Sub")
-        sb1.AppendLine()
-
-        Return sb1.ToString
-    End Function
-
-    Private Function CreateStructProperties(nts As List(Of String())) As String
-        Dim sb1 As New StringBuilder
-        sb1.AppendLine()
-        sb1.AppendLine(String.Format("#Region {0} Properties{0}", Chr(34)))
-        sb1.AppendLine()
-        For Each v1() As String In nts
-            If v1.Length = 17 Then
-                Dim _name As String = v1(0)
-                Dim _fName As String = GetVarNameToFunctionName(_name)
-                Dim _type As String = TypeFromNavicatVarType(v1(1), v1(6)) ' type and unsigned
-                Dim _isPrimaryKey As Boolean = BoolFromNavicatBoolType(v1(15))
-                '
-                sb1.AppendLine(String.Format("Public Property {0} As {1}", _fName, _type))
-                sb1.AppendLine("Get")
-                sb1.AppendLine(String.Format("Return _{0}", _name))
-                sb1.AppendLine("End Get")
-                sb1.AppendLine(String.Format("Set(value As {0})", _type))
-                sb1.AppendLine(String.Format("If _{0} <> value Then", _name))
-                sb1.AppendLine(String.Format("_{0} = value", _name))
-                sb1.AppendLine("_isChanged = True")
-                sb1.AppendLine("End If")
-                sb1.AppendLine("End Set")
-                sb1.AppendLine("End Property")
-                sb1.AppendLine()
-            End If
-        Next
-        '
-        sb1.AppendLine("Public Property IsNew As Boolean")
-        sb1.AppendLine("Get")
-        sb1.AppendLine("Return _isNew")
-        sb1.AppendLine("End Get")
-        sb1.AppendLine("Set(value As Boolean)")
-        sb1.AppendLine("_isNew = value")
-        sb1.AppendLine("End Set")
-        sb1.AppendLine("End Property")
-        sb1.AppendLine()
-        '
-        sb1.AppendLine("Public Property IsChanged As Boolean")
-        sb1.AppendLine("Get")
-        sb1.AppendLine("Return _isChanged")
-        sb1.AppendLine("End Get")
-        sb1.AppendLine("Set(value As Boolean)")
-        sb1.AppendLine("_isChanged = value")
-        sb1.AppendLine("End Set")
-        sb1.AppendLine("End Property")
-        sb1.AppendLine()
-        sb1.AppendLine("#End Region")
-        sb1.AppendLine()
-        '
-        Return sb1.ToString
-    End Function
 
     Private Function CreateVarNameChangeToUnderScorePart() As String
         Dim tLines() As String = GetClipboardTextLines()
@@ -1169,12 +952,8 @@ Public Class FormMain
         Return r.ToArray
     End Function
 
-    Private Sub PhaseEditorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PhaseEditorToolStripMenuItem.Click
-        Dim frm As New PhaseEditor
-        If frm.ShowDialog = DialogResult.OK Then
 
-        End If
-    End Sub
+#End Region
 
 #End Region
 
